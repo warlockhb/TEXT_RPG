@@ -5,6 +5,7 @@
 
 MonsterManager::MonsterManager()
 	: monster(nullptr)
+	, gen(std::random_device{}())
 {
 }
 
@@ -14,8 +15,26 @@ MonsterManager::~MonsterManager()
 
 void MonsterManager::CreateMonster()
 {
-	// 플레이어 레벨에 따라서 몬스터 생성.
-	// monster = new Monster()
+	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 3
+	int randomNum = dist(gen); // 랜덤 번호 생성
+
+	string monsterName = "";
+
+	if (randomNum == 0)
+		monsterName = "Troll";
+	else if (randomNum == 1)
+		monsterName = "Goblin";
+	else if (randomNum == 2)
+		monsterName = "Slime";
+	else if (randomNum == 3)
+		monsterName = "Skeleton";
+	else if (randomNum == 4)
+		monsterName = "Golem";
+	else if (randomNum == 5)
+		monsterName = "Zombie";
+
+	// 플레이어 레벨에 따라 몬스터 스테이터스 변경해주기.
+	monster = new Monster(monsterName, 100, 100);
 }
 
 void MonsterManager::DeleteMonster()
@@ -29,7 +48,8 @@ void MonsterManager::DeleteMonster()
 	}
 
 	// monster삭제
-
+	delete monster;
+	monster = nullptr;
 }
 
 string MonsterManager::GetName()

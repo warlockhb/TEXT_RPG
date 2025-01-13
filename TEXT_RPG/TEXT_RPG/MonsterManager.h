@@ -1,10 +1,12 @@
 #pragma once
 #include "Monster.h"
+#include <random>
 
 class MonsterManager
 {
 private:
 	Monster* monster;
+	std::mt19937 gen;		// random engine
 
 public:
 	MonsterManager();
