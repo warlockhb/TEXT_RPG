@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,59 +10,63 @@ class Equipment;
 class Character
 {
 private:
-	//½Ì±ÛÅæ
+	//ì‹±ê¸€í†¤
 	static Character* instance;
 
-	//¼öÄ¡ ÆÄ¶ó¹ÌÅÍ
-	string name;	
-	int level;		
-	int health;		
-	int maxhealth;	
-	int attack;		
-	int exp;
-	int maxExp;
-	int gold;
+	//ìˆ˜ì¹˜ íŒŒë¼ë¯¸í„°
+	string Name;	
+	int Level;		
+	int Health;		
+	int MaxHealth;	
+	int Attack;		
+	int Exp;
+	int MaxExp;
+	int Gold;
 	
-	//ÀÎº¥Åä¸®
-	vector<PassiveItem*> inventory;
-	size_t max_inventory_size = 7;
-	//ÀåºñÄ­
-	vector<Equipment*> equipment_inventory;
-	const size_t max_skill_size = 5;
+	//ì¸ë²¤í† ë¦¬
+	vector<PassiveItem*> Inventory;
+	size_t Max_Inventory_Size = 7;
+	//ì¥ë¹„ì¹¸
+	vector<Equipment*> Equipment_Inventory;
+	const size_t Max_Skill_Size = 5;
 
-	Character(string Name);
+	Character(string New_name);
 
 	Character(const Chracter&) = delete;
 	Character& operator = (const Character&) = delete;
 
 public:
-	//½Ì±ÛÅæ »ı¼º
-	static Character* getInstance(string name = "");
+	//ì‹±ê¸€í†¤ ìƒì„±
+	static Character* GetInstance(string name = "");
 
-	void displayStatus();
+	void DisPlayStatus();
 
-	void levelUp();
+	void LevelUp();
 
-	void useItem(int index);
+	void UseItem(int index);
 
-	void addItem(PassiveItem* item);
+	void AddItem(PassiveItem* item);
 
-	void removeItem(PassiveItem* item);
+	void RemoveItem(PassiveItem* item);
 
-	void skilluse(int index);
+	void SkillUse(int index);
 
-	void addskill(Equipment* skill);
+	void AddSkill(Equipment* skill);
 
-	void removeskill(Equipment* skill);
+	void RemoveSkill(Equipment* skill);
 
-	void byeInventory(int buycount);
+	void ByeInventory(int buycount);
 
-	int getgold() const;
+	int Getgold();
 
-	void minusgold(int buymoney);
+	void MinusGold(int buymoney);
 
-	void plusgold(int sellmoney);
+	void PlusGold(int sellmoney);
 
-	void setexp(int plusexp);
+	void SetExp(int plusexp);
+
+	void GetAttack();
+
+	void GetHealth();
 };
 

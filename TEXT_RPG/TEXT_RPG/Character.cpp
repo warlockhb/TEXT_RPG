@@ -1,197 +1,210 @@
-#include "Character.h"
+ï»¿#include "Character.h"
+em#include "Character.h"
 
 Character* Character::instance = nullptr;
 
-Character::Character(string Name)
+Character::Character(string New_name)
 {
-	this->name = Name;
-	this->level = 1;
-	this->maxhealth = 100;
-	this->health = maxhealth;
-	this->attack = 30;
-	this->exp = 0;
-	this->maxExp = 100;
-	this->gold = 0;
-	this->inventory.reserve(max_inventory_size);
-	this->equipment_inventory.reserve(max_skill_size);
+	this->Name = New_name;
+	this->Level = 1;
+	this->MaxHealth = 100;
+	this->Health = MaxHealth;
+	this->Attack = 30;
+	this->Exp = 0;
+	this->MaxExp = 100;
+	this->Gold = 0;
+	this->Inventory.reserve(Max_Inventory_Size);
+	this->Equipment_Inventory.reserve(Max_Skill_Size);
 }
 
-Character* Character::getInstance(string name)
+Character* Character::GetInstance(string name)
 {
 	if (instance == nullptr)
 	{
-		instance = new Chracter();
+		instance = new Character();
 	}
 
 	return instance;
 }
 
-//ÇÃ·¹ÀÌ¾î ½ºÅÈº¸¿©ÁÖ±â
-void Character::displayStatus()
+//í”Œë ˆì´ì–´ ìŠ¤íƒ¯ë³´ì—¬ì£¼ê¸°
+void Character::DisPlayStatus()
 {
 	cout << "=============================" << endl;
-	cout << "ÀÌ¸§ : " << name << endl;
-	cout << "·¹º§ : " << level << endl;
-	cout << "Ã¼·Â : " << health << "/" << maxhealth << endl;
-	cout << "°ø°İ·Â : " << attack << endl;
-	cout << "ÇöÀç °æÇèÄ¡ : " << exp << endl;
-	cout << "´ÙÀ½ ·¹º§±îÁöÀÇ °æÇèÄ¡ : " << maxExp - exp << endl;
-	cout << "º¸À¯ °ñµå : " << gold << endl;
+	cout << "ì´ë¦„ : " << Name << endl;
+	cout << "ë ˆë²¨ : " << Level << endl;
+	cout << "ì²´ë ¥ : " << Health << "/" << MaxHealth << endl;
+	cout << "ê³µê²©ë ¥ : " << Attack << endl;
+	cout << "í˜„ì¬ ê²½í—˜ì¹˜ : " << Exp << endl;
+	cout << "ë‹¤ìŒ ë ˆë²¨ê¹Œì§€ì˜ ê²½í—˜ì¹˜ : " << MaxExp - Exp << endl;
+	cout << "ë³´ìœ  ê³¨ë“œ : " << Gold << endl;
 	cout << "=============================" << endl;
 }
 
-void Character::levelUp()
+void Character::LevelUp()
 {
-	if (level < 10 && exp >= maxExp)
+	if (Level < 10 && exp >= maxExp)
 	{
-		this->level++;
-		this->maxhealth += level * 20;
-		this->health = maxhealth;
-		this->attack += level * 5;
-		this->exp = 0;
-		cout << "·¹º§ ¾÷!" << endl;
+		this->Level++;
+		this->MaxHealth += Level * 20;
+		this->Health = MaxHealth;
+		this->Attack += Level * 5;
+		this->Exp = 0;
+		cout << "ë ˆë²¨ ì—…!" << endl;
 	}
 
-	if (level >= 10)
+	if (Level >= 10)
 	{
-		cout << "ÃÖ´ë ·¹º§!" << endl;
+		cout << "ìµœëŒ€ ë ˆë²¨!" << endl;
 	}
 }
 
-void Character::useItem(int index)
+void Character::UseItem(int index)
 {
-	if (index < 0 || index >= inventory.size())
+	if (index < 0 || index >= Inventory.size())
 	{
-		cout << "Àß¸ø ÀÔ·ÂµÇ¾ú½À´Ï´Ù." << endl;
+		cout << "ì˜ëª» ì…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	}
 
-	PassiveItem* item = inventory[index];
-	//¾ÆÀÌÅÛ »ç¿ë
+	PassiveItem* item = Inventory[index];
+	//ì•„ì´í…œ ì‚¬ìš©
 	//item->use(this)?
 
 	delete item;
-	inventory.erase(inventory.begin() + index);
-	cout << "¾ÆÀÌÅÛÀ» »ç¿ëÇß½À´Ï´Ù!" << endl;
+	Inventory.erase(Inventory.begin() + index);
+	cout << "ì•„ì´í…œì„ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤!" << endl;
 }
 
-void Character::addItem(PassiveItem* item)
+void Character::AddItem(PassiveItem* item)
 {
-	if (inventory.size() < max_inventory_size)
+	if (Inventory.size() < Max_Inventory_Size)
 	{
-		inventory.push_back(item);
-		cout << "ÀÎº¥Åä¸®¿¡ ¾ÆÀÌÅÛÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù." << endl;
+		Inventory.push_back(item);
+		cout << "ì¸ë²¤í† ë¦¬ì— ì•„ì´í…œì´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	}
 	else
 	{
-		cout << "ÀÎº¥Åä¸®°¡ °¡µæÂ÷¼­, ¾ÆÀÌÅÛÀ» Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù." << endl;
+		cout << "ì¸ë²¤í† ë¦¬ê°€ ê°€ë“ì°¨ì„œ, ì•„ì´í…œì„ ì¶”ê°€í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
 	}
 }
 
-void Character::removeItem(PassiveItem* item)
+void Character::RemoveItem(PassiveItem* item)
 {
-	auto it = find(inventory.begin(), inventory.end(), item);
+	auto it = find(Inventory.begin(), Inventory.end(), item);
 
-	if (it != inventory.end())
+	if (it != Inventory.end())
 	{
-		inventory.erase(it);
+		Inventory.erase(it);
 	}
 }
 
-void Character::skilluse(int index)
+void Character::SkillUse(int index)
 {
-	if (index < 0 || index >= equipment_inventory.size())
+	if (index < 0 || index >= Equipment_Inventory.size())
 	{
-		cout << "Àß¸ø ÀÔ·ÂµÇ¾ú½À´Ï´Ù." << endl;
+		cout << "ì˜ëª» ì…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	}
 
-	Equipment* skill = equipment_inventory[index];
+	Equipment* skill = Equipment_Inventory[index];
 
 	delete skill;
-	cout << "½ºÅ³À» »ç¿ëÇß½À´Ï´Ù!" << endl;
+	cout << "ìŠ¤í‚¬ì„ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤!" << endl;
 }
 
-void Character::addskill(Equipment* skill)
+void Character::AddSkill(Equipment* skill)
 {
-	if (equipment_inventory.size() < max_skill_size)
+	if (Equipment_Inventory.size() < Max_Skill_Size)
 	{
-		equipment_inventory.push_back(skill);
-		cout << "½ºÅ³ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù." << endl;
+		Equipment_Inventory.push_back(skill);
+		cout << "ìŠ¤í‚¬ì´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	}
 	else
 	{
-		cout << "ÀÎº¥Åä¸®°¡ °¡µæÂ÷¼­, ½ºÅ³À» Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù." << endl;
+		cout << "ì¸ë²¤í† ë¦¬ê°€ ê°€ë“ì°¨ì„œ, ìŠ¤í‚¬ì„ ì¶”ê°€í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
 	}
 }
 
-void Character::removeskill(Equipment* skill)
+void Character::RemoveSkill(Equipment* skill)
 {
-	auto it = find(equipment_inventory.begin(), equipment_inventory.end(), item);
+	auto it = find(Equipment_Inventory.begin(), Equipment_Inventory.end(), skill);
 
-	if (it != equipment_inventory.end())
+	if (it != Equipment_Inventory.end())
 	{
-		equipment_inventory.erase(it);
+		Equipment_Inventory.erase(it);
 	}
 }
 
-void Character::byeInventory(int buycount)
+void Character::ByeInventory(int buycount)
 {
 	switch (buycount)
 	{
 	case 1:
-		max_inventory_size += 3;
-		inventory.reserve(max_inventory_size);
-		cout << "ÀÎº¥Åä¸®¸¦ È®ÀåµÇ¾ú½À´Ï´Ù. ÇöÀç ÀÎº¥Åä¸® »çÀÌÁî : " << inventory.size() << endl;
+		Max_Inventory_Size += 3;
+		Inventory.reserve(Max_Inventory_Size);
+		cout << "ì¸ë²¤í† ë¦¬ë¥¼ í™•ì¥ë˜ì—ˆìŠµë‹ˆë‹¤. í˜„ì¬ ì¸ë²¤í† ë¦¬ ì‚¬ì´ì¦ˆ : " << Inventory.size() << endl;
 		break;
 	case 2:
-		max_inventory_size += 5;
-		inventory.reserve(max_inventory_size);
-		cout << "ÀÎº¥Åä¸®¸¦ È®ÀåµÇ¾ú½À´Ï´Ù. ÇöÀç ÀÎº¥Åä¸® »çÀÌÁî : " << inventory.size() << endl;
+		Max_Inventory_Size += 5;
+		Inventory.reserve(Max_Inventory_Size);
+		cout << "ì¸ë²¤í† ë¦¬ë¥¼ í™•ì¥ë˜ì—ˆìŠµë‹ˆë‹¤. í˜„ì¬ ì¸ë²¤í† ë¦¬ ì‚¬ì´ì¦ˆ : " << Inventory.size() << endl;
 		break;
 	default:
-		cout << "ÀÎº¥Åä¸®¸¦ ÃÖ´ë È®ÀåÇß½À´Ï´Ù!" << endl;
+		cout << "ì¸ë²¤í† ë¦¬ë¥¼ ìµœëŒ€ í™•ì¥í–ˆìŠµë‹ˆë‹¤!" << endl;
 		break;
 	}
 }
 
-int Character::getgold() const
+int Character::Getgold()
 {
-	return gold;
+	return Gold;
 }
 
-void Character::minusgold(int buymoney)
+void Character::MinusGold(int buymoney)
 {
-	if (gold >= buymoney)
+	if (Gold >= buymoney)
 	{
-		gold -= buymoney;
-		cout << "°ñµå¸¦ »ç¿ëÇß½À´Ï´Ù! »ç¿ëµÈ °ñµå : " << buymoney << "³²Àº °ñµå : " << gold << endl;
+		Gold -= buymoney;
+		cout << "ê³¨ë“œë¥¼ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤! ì‚¬ìš©ëœ ê³¨ë“œ : " << buymoney << "ë‚¨ì€ ê³¨ë“œ : " << Gold << endl;
 	}
 	else
 	{
-		cout << "°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù! ÇöÀç º¸À¯ °ñµå : " << gold << endl;
+		cout << "ê³¨ë“œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤! í˜„ì¬ ë³´ìœ  ê³¨ë“œ : " << Gold << endl;
 	}
 }
 
-void Character::plusgold(int sellmoney)
+void Character::PlusGold(int sellmoney)
 {
-	gold += dealmoney;
-	cout << "ÇöÀç º¸À¯ °ñµå : " << sellmoney << endl;
+	Gold += sellmoney;
+	cout << "í˜„ì¬ ë³´ìœ  ê³¨ë“œ : " << Gold << endl;
 }
 
-void Character::setexp(int plusexp)
+void Character::SetExp(int plusexp)
 {
-	if (level < 10)
+	if (Level < 10)
 	{
-		if (exp < maxExp)
+		if (Exp < MaxExp)
 		{
-			exp += plusexp;
+			Exp += plusexp;
 		}
 		else
 		{
-			levelUp();
-			exp += plusexp;
+			LevelUp();
+			Exp += plusexp;
 		}
 	}
 }
+
+void Character::GetAttack()
+{
+	return Attack;
+}
+
+void Character::GetHealth()
+{
+	return Health;
+}
+
+
 
 
 
