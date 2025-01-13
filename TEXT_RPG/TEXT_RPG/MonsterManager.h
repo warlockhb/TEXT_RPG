@@ -12,12 +12,13 @@ public:
 	MonsterManager();
 	~MonsterManager();
 
-	void CreateMonster();
-	void DeleteMonster();
+	Monster* CreateNormalMonster();
+	Monster* CreateBossMonster();
+	void DeleteMonster(Monster* _monster);
 
-	string GetName();
-	int GetHp();
-	int GetPower();
-	void TakeDamage(int _damage);
+	//string GetName();
+	//int GetHp();
+	//int GetPower();
+	//void TakeDamage(int _damage);
 };
 

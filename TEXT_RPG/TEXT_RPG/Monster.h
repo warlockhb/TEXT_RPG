@@ -6,17 +6,17 @@ using namespace std;
 
 class Monster
 {
-private:
+protected:
 	string _Name;
 	int _Hp;
 	int _Power;
 
 public:
-	Monster(string _name, int _hp, int _Power);
+	Monster(string _name, int _hp, int _power);
 	~Monster();
 
-	virtual string GetName();
-	virtual int GetHp();
-	virtual int GetPower();
-	virtual void TakeDamage(int _damage);
+	virtual string GetName() = 0;
+	virtual int GetHp() = 0;
+	virtual int GetPower() = 0;
+	virtual void TakeDamage(int _damage) = 0;
 };
