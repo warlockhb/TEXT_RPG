@@ -1,34 +1,40 @@
 
 #pragma once
 #include <string>
-#include "..//Character.h"
+
 #include "ItemType.h"
+#include "..//Character.h"
 using namespace std;
+
+class Character;
 
 struct StatModifier
 {
     int LevelMod = 0;
-    int HpMod = 0;
     int MaxHpMod = 0;
     int ExpMod = 0;
     int AttackMod = 0;
-    int GoldMod = 0;
+
+    float LevelMult = 0.0f;
+    float MaxHpMult = 0.0f;
+    float ExpMult = 0.0f;
+    float AttackMult = 0.0f;
 };
 
 class Item
 {
 protected:
     int ID = 0;
-    string Name = '';
+    string Name = "";
     int Price = 0;
-    string Description = '';
+    string Description = "";
     StatModifier StatModifier;
 
 private:
 
     // 기본 모디파이 적용
-    void ApplyModifier(Character* Character);
-    void RemoveModifier(Character* Character);
+    // void ApplyModifier(Character* Character);
+    // void RemoveModifier(Character* Character);
 
     // 특수 효과 적용
     virtual void ApplyEffect(Character* Character);
