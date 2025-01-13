@@ -26,7 +26,7 @@ void Inn::EnterInn(Character& character) {
 		switch (choice) {
 		case 'y':
 			//여관 이용O 선택한 경우
-			if (character.getgold() < cost) {
+			if (character.Getgold() < cost) {
 				//골드 부족한 경우 -> 마을로 복귀
 				cout << "골드가 부족하여 마을로 돌아갑니다." << endl;
 				return;
@@ -57,7 +57,7 @@ void Inn::EnterInn(Character& character) {
 
 void Inn::UseInn(Character& character) {
 	//10골드 차감 및 플레이어 체력 회복(수정 필요re)
-	character.minusgold(-10);
+	character.SetMinusGold(10);
 	//character.health = character.maxhealth;//
 	//cout << "잔여 골드 수: "<< character.getgold() << endl;
 	//cout << "현재 체력: " << character.health << endl;
