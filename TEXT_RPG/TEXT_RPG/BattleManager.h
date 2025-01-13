@@ -4,15 +4,14 @@
 #include "Monster.h"
 #include "Character.h"
 
-
 class BattleManager
 {
 public:
 	BattleManager();
 
 	void StartBattle();
-	void AttackCharacter(Character* character, Monster* monster);
-	void AttackMonster(Character* character, Monster* monster);
+	void AttackCharacter(Monster* monster);
+	void AttackMonster(Monster* monster);
 
 private:
 
