@@ -3,12 +3,8 @@
 #include <string>
 #include <vector>
 #include "Item//Item.h"
-#include "Item//Equipment/Equipment.h"
-#include "Item//PassiveItem/PassiveItem.h"
 using namespace std;
 
-//class PassiveItem;
-//class Equipment;
 
 class Character
 {
