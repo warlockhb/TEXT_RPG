@@ -1,10 +1,10 @@
 #include "Monster.h"
 
 
-Monster::Monster(string _name, int _hp, int _Power)
+Monster::Monster(string _name, int _hp, int _power)
 	: _Name(_name)
 	, _Hp(_hp)
-	, _Power(_Power)
+	, _Power(_power)
 {
 }
 
