@@ -10,10 +10,10 @@ class Equipment;
 class Character
 {
 private:
-	//½Ì±ÛÅæ
+	//ï¿½Ì±ï¿½ï¿½ï¿½
 	static Character* instance;
 
-	//¼öÄ¡ ÆÄ¶ó¹ÌÅÍ
+	//ï¿½ï¿½Ä¡ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 	string name;	
 	int level;		
 	int health;		
@@ -23,10 +23,10 @@ private:
 	int maxExp;
 	int gold;
 	
-	//ÀÎº¥Åä¸®
+	//ï¿½Îºï¿½ï¿½ä¸®
 	vector<PassiveItem*> inventory;
 	size_t max_inventory_size = 7;
-	//ÀåºñÄ­
+	//ï¿½ï¿½ï¿½Ä­
 	vector<Equipment*> equipment_inventory;
 	const size_t max_skill_size = 5;
 
@@ -36,7 +36,7 @@ private:
 	Character& operator = (const Character&) = delete;
 
 public:
-	//½Ì±ÛÅæ »ý¼º
+	//ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	static Character* getInstance(string name = "");
 
 	void displayStatus();

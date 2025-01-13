@@ -26,17 +26,17 @@ Character* Character::getInstance(string name)
 	return instance;
 }
 
-//ÇÃ·¹ÀÌ¾î ½ºÅÈº¸¿©ÁÖ±â
+//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½Èºï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 void Character::displayStatus()
 {
 	cout << "=============================" << endl;
-	cout << "ÀÌ¸§ : " << name << endl;
-	cout << "·¹º§ : " << level << endl;
-	cout << "Ã¼·Â : " << health << "/" << maxhealth << endl;
-	cout << "°ø°Ý·Â : " << attack << endl;
-	cout << "ÇöÀç °æÇèÄ¡ : " << exp << endl;
-	cout << "´ÙÀ½ ·¹º§±îÁöÀÇ °æÇèÄ¡ : " << maxExp - exp << endl;
-	cout << "º¸À¯ °ñµå : " << gold << endl;
+	cout << "ï¿½Ì¸ï¿½ : " << name << endl;
+	cout << "ï¿½ï¿½ï¿½ï¿½ : " << level << endl;
+	cout << "Ã¼ï¿½ï¿½ : " << health << "/" << maxhealth << endl;
+	cout << "ï¿½ï¿½ï¿½Ý·ï¿½ : " << attack << endl;
+	cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ : " << exp << endl;
+	cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ : " << maxExp - exp << endl;
+	cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : " << gold << endl;
 	cout << "=============================" << endl;
 }
 
@@ -49,12 +49,12 @@ void Character::levelUp()
 		this->health = maxhealth;
 		this->attack += level * 5;
 		this->exp = 0;
-		cout << "·¹º§ ¾÷!" << endl;
+		cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½!" << endl;
 	}
 
 	if (level >= 10)
 	{
-		cout << "ÃÖ´ë ·¹º§!" << endl;
+		cout << "ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½!" << endl;
 	}
 }
 
@@ -62,16 +62,16 @@ void Character::useItem(int index)
 {
 	if (index < 0 || index >= inventory.size())
 	{
-		cout << "Àß¸ø ÀÔ·ÂµÇ¾ú½À´Ï´Ù." << endl;
+		cout << "ï¿½ß¸ï¿½ ï¿½Ô·ÂµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;
 	}
 
 	PassiveItem* item = inventory[index];
-	//¾ÆÀÌÅÛ »ç¿ë
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	//item->use(this)?
 
 	delete item;
 	inventory.erase(inventory.begin() + index);
-	cout << "¾ÆÀÌÅÛÀ» »ç¿ëÇß½À´Ï´Ù!" << endl;
+	cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½!" << endl;
 }
 
 void Character::addItem(PassiveItem* item)
@@ -79,11 +79,11 @@ void Character::addItem(PassiveItem* item)
 	if (inventory.size() < max_inventory_size)
 	{
 		inventory.push_back(item);
-		cout << "ÀÎº¥Åä¸®¿¡ ¾ÆÀÌÅÛÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù." << endl;
+		cout << "ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;
 	}
 	else
 	{
-		cout << "ÀÎº¥Åä¸®°¡ °¡µæÂ÷¼­, ¾ÆÀÌÅÛÀ» Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù." << endl;
+		cout << "ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;
 	}
 }
 
@@ -101,13 +101,13 @@ void Character::skilluse(int index)
 {
 	if (index < 0 || index >= equipment_inventory.size())
 	{
-		cout << "Àß¸ø ÀÔ·ÂµÇ¾ú½À´Ï´Ù." << endl;
+		cout << "ï¿½ß¸ï¿½ ï¿½Ô·ÂµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;
 	}
 
 	Equipment* skill = equipment_inventory[index];
 
 	delete skill;
-	cout << "½ºÅ³À» »ç¿ëÇß½À´Ï´Ù!" << endl;
+	cout << "ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½!" << endl;
 }
 
 void Character::addskill(Equipment* skill)
@@ -115,11 +115,11 @@ void Character::addskill(Equipment* skill)
 	if (equipment_inventory.size() < max_skill_size)
 	{
 		equipment_inventory.push_back(skill);
-		cout << "½ºÅ³ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù." << endl;
+		cout << "ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;
 	}
 	else
 	{
-		cout << "ÀÎº¥Åä¸®°¡ °¡µæÂ÷¼­, ½ºÅ³À» Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù." << endl;
+		cout << "ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;
 	}
 }
 
@@ -140,15 +140,15 @@ void Character::byeInventory(int buycount)
 	case 1:
 		max_inventory_size += 3;
 		inventory.reserve(max_inventory_size);
-		cout << "ÀÎº¥Åä¸®¸¦ È®ÀåµÇ¾ú½À´Ï´Ù. ÇöÀç ÀÎº¥Åä¸® »çÀÌÁî : " << inventory.size() << endl;
+		cout << "ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ È®ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " << inventory.size() << endl;
 		break;
 	case 2:
 		max_inventory_size += 5;
 		inventory.reserve(max_inventory_size);
-		cout << "ÀÎº¥Åä¸®¸¦ È®ÀåµÇ¾ú½À´Ï´Ù. ÇöÀç ÀÎº¥Åä¸® »çÀÌÁî : " << inventory.size() << endl;
+		cout << "ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ È®ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " << inventory.size() << endl;
 		break;
 	default:
-		cout << "ÀÎº¥Åä¸®¸¦ ÃÖ´ë È®ÀåÇß½À´Ï´Ù!" << endl;
+		cout << "ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½Ö´ï¿½ È®ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½!" << endl;
 		break;
 	}
 }
@@ -163,18 +163,18 @@ void Character::minusgold(int buymoney)
 	if (gold >= buymoney)
 	{
 		gold -= buymoney;
-		cout << "°ñµå¸¦ »ç¿ëÇß½À´Ï´Ù! »ç¿ëµÈ °ñµå : " << buymoney << "³²Àº °ñµå : " << gold << endl;
+		cout << "ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½! ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : " << buymoney << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : " << gold << endl;
 	}
 	else
 	{
-		cout << "°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù! ÇöÀç º¸À¯ °ñµå : " << gold << endl;
+		cout << "ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½! ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : " << gold << endl;
 	}
 }
 
 void Character::plusgold(int sellmoney)
 {
 	gold += dealmoney;
-	cout << "ÇöÀç º¸À¯ °ñµå : " << sellmoney << endl;
+	cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : " << sellmoney << endl;
 }
 
 void Character::setexp(int plusexp)
@@ -192,6 +192,3 @@ void Character::setexp(int plusexp)
 		}
 	}
 }
-
-
-

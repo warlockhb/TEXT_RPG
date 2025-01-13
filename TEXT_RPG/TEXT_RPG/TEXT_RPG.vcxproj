@@ -128,20 +128,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Calculator.cpp" />
-    <ClCompile Include="Chracter.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MonsterManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
-    <ClInclude Include="Chracter.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Equipment.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
