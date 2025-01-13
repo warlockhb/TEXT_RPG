@@ -1,5 +1,4 @@
 ﻿#include "Character.h"
-em#include "Character.h"
 
 Character * Character::instance = nullptr;
 
@@ -23,7 +22,6 @@ Character* Character::GetInstance(string name)
 	{
 		instance = new Character();
 	}
-
 	return instance;
 }
 
@@ -38,6 +36,7 @@ void Character::DisPlayStatus()
 	cout << "현재 경험치 : " << Exp << endl;
 	cout << "다음 레벨까지의 경험치 : " << MaxExp - Exp << endl;
 	cout << "보유 골드 : " << Gold << endl;
+	cout << "=============================" << endl;
 }
 
 
@@ -153,9 +152,56 @@ void Character::ByeInventory(int buycount)
 	}
 }
 
+void Character::Die()
+{
+	cout << "캐릭터가 사망했습니다. 게임 오버" << endl;
+	cout << "당신의 최종 레벨 : " << Level << endl;
+}
+
+void Character::GetAttack()
+{
+	return Attack;
+}
+
+void Character::GetHealth()
+{
+	return Health;
+}
+
 int Character::Getgold()
 {
 	return Gold;
+}
+
+string Character::GetName()
+{
+	return Name;
+}
+
+int Character::GetLevel()
+{
+	return Level;
+}
+
+int Character::GetMaxHealth()
+{
+	return MaxHealth;
+}
+
+void Character::SetExp(int plusexp)
+{
+	if (Level < 10)
+	{
+		if (Exp < MaxExp)
+		{
+			Exp += plusexp;
+		}
+		else
+		{
+			LevelUp();
+			Exp += plusexp;
+		}
+	}
 }
 
 void Character::MinusGold(int buymoney)
@@ -177,28 +223,51 @@ void Character::PlusGold(int sellmoney)
 	cout << "현재 보유 골드 : " << Gold << endl;
 }
 
-void Character::SetExp(int plusexp)
+void Character::SetMinusHp(int minushp)
 {
-	if (Level < 10)
+	if (Health > 0)
 	{
-		if (Exp < MaxExp)
+		Health -= minushp;
+		cout << "현재 캐릭터의 체력 : " << Health << endl;
+
+		if (Health <= 0)
 		{
-			Exp += plusexp;
+			Die();
 		}
-		else
-		{
-			LevelUp();
-			Exp += plusexp;
-		}
+	}
+	else
+	{
+		Die();
 	}
 }
 
-void Character::GetAttack()
+void Character::SetPlusHp(int plushp)
 {
-	return Attack;
+	if (Health < MaxHealth)
+	{
+		Health += plushp;
+		cout << "현재 캐릭터의 체력 : " << Health << endl;
+
+		if (Health >= MaxHealth)
+		{
+			Health = MaxHealth;
+		}
+	}
+	else
+	{
+		cout << "체력을 회북 할 수 없습니다." << endl;
+	}
 }
 
-void Character::GetHealth()
+void Character::SetMinusAttack(int minusatk)
 {
-	return Health;
+	this->Attack -= minusatk;
 }
+
+void Character::SetPlusAttack(int plusatk)
+{
+	this->Attack += plusatk;
+}
+
+
+
