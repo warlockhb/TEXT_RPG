@@ -2,5 +2,4 @@
 #include "GameManager.h"
 void main()
 {
-	GameManager::StartGame;
 }
