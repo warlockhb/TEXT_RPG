@@ -11,7 +11,6 @@ BattleManager::BattleManager()
 
 void BattleManager::StartBattle()
 {
-<<<<<<< HEAD
 	//Todo : ÀÚµ¿°ø°İ & ¼öµ¿°ø°İ
 	cout << "1. ÀÚµ¿ ÀüÅõ ___ 2. ¼öµ¿ ÀüÅõ" << endl;
 	int BattleType = 0;
@@ -32,23 +31,6 @@ void BattleManager::StartBattle()
 		cout << "±×³É ÀÚµ¿ÀüÅõÇÏ¼¼¿ä.";
 		break;
 	}
-
-    bool CanAttackFirst = rand() % 2 == 0;
-    int TurnCount = 1;
-
-    if (CanAttackFirst)
-    {
-        cout << "ìºë¦­??? ì œ ê³µê²©" << endl;
-    }
-    else
-    {
-        cout << "ëª¬ìŠ¤??? ì œ ê³µê²©" << endl;
-    }
-
-    while (true)
-    {
-
-    }
 }
 
 void BattleManager::AttackCharacter(Monster* Monster)
