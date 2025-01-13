@@ -11,22 +11,22 @@ BattleManager::BattleManager()
 
 void BattleManager::StartBattle()
 {
-	bool CanAttackFirst = rand() % 2 == 0;
-	int TurnCount = 1;
+    bool CanAttackFirst = rand() % 2 == 0;
+    int TurnCount = 1;
 
-	if (CanAttackFirst)
-	{
-		cout << "Ä³¸¯ÅÍ ¼±Á¦ °ø°İ" << endl;
-	}
-	else
-	{
-		cout << "¸ó½ºÅÍ ¼±Á¦ °ø°İ" << endl;
-	}
+    if (CanAttackFirst)
+    {
+        cout << "ìºë¦­í„° ì„ ì œ ê³µê²©" << endl;
+    }
+    else
+    {
+        cout << "ëª¬ìŠ¤í„° ì„ ì œ ê³µê²©" << endl;
+    }
 
-	while (true)
-	{
+    while (true)
+    {
 
-	}
+    }
 }
 
 void BattleManager::AttackCharacter(Monster* Monster)
@@ -42,7 +42,6 @@ void BattleManager::AttackMonster(Monster* Monster)
 void BattleManager::EndBattle()
 {
 }
-
 
 
 

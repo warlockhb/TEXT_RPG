@@ -4,7 +4,7 @@
 
 class Inn {
 public:
-	//re: ¿©°ü ÀÌ¿ë·á 10°ñµå(°¡Á¤)
+	//re: ì—¬ê´€ ì´ìš©ë£Œ 10ê³¨ë“œ(ê°€ì •)
 	const int cost = 10;
 
 	void EnterInn(Character& character);
