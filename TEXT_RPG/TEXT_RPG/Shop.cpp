@@ -12,29 +12,29 @@ using namespace std;
 void Shop::EnterShop(Character& character) {
 	int choice;
 	while (true) {
-		cout << "ªÛ¡°ø° ¿‘¿Â«ﬂΩ¿¥œ¥Ÿ." << endl;
+		cout << "ÏÉÅÏ†êÏóê ÏûÖÏû•ÌñàÏäµÎãàÎã§." << endl;
 
-		cout << "---<< ªÛ¡° >>---" << endl;
-		cout << " 1. ªÛ«∞ ±∏∏≈" << endl;
-		cout << " 2. ªÛ«∞ ∆«∏≈" << endl;
-		cout << " 3. ªÛ¡° ≥™∞°±‚" << endl;
+		cout << "---<< ÏÉÅÏ†ê >>---" << endl;
+		cout << " 1. ÏÉÅÌíà Íµ¨Îß§" << endl;
+		cout << " 2. ÏÉÅÌíà ÌåêÎß§" << endl;
+		cout << " 3. ÏÉÅÏ†ê ÎÇòÍ∞ÄÍ∏∞" << endl;
 		cout << "----------------" << endl;
-		cout << "π¯»£∏¶ ¿‘∑¬«œººø‰: " << endl;
+		cout << "Î≤àÌò∏Î•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî: " << endl;
 		cin >> choice;
 
 		switch (choice) {
 		case 1:
-			//ªÛ«∞ ±∏∏≈
-			cout << " ªÛ«∞ ±∏∏≈" << endl;
+			//ÏÉÅÌíà Íµ¨Îß§
+			cout << " ÏÉÅÌíà Íµ¨Îß§" << endl;
 			//BuyItem();
 			break;
 		case 2:
-			//ªÛ«∞ ∆«∏≈
-			cout << " ªÛ«∞ ∆«∏≈" << endl;
+			//ÏÉÅÌíà ÌåêÎß§
+			cout << " ÏÉÅÌíà ÌåêÎß§" << endl;
 			//SellItem();
 			break;
 		case 3:
-			cout << " ªÛ¡° ≥™∞°¥¬ ¡ﬂ" << endl;
+			cout << " ÏÉÅÏ†ê ÎÇòÍ∞ÄÎäî Ï§ë" << endl;
 			return;
 		}
 	}
@@ -43,14 +43,14 @@ void Shop::EnterShop(Character& character) {
 
 //
 //void Shop::BuyItem(Character & character) {
-//	//ºˆ¡§
+//	//ÏàòÏ†ï
 //}
 //
 //void Shop::ShowItems(Item& item) {
-//	//ºˆ¡§
+//	//ÏàòÏ†ï
 //}
 //
 //void Shop::SellItem(Character& character) {
-//	//ºˆ¡§
+//	//ÏàòÏ†ï
 //
 //}

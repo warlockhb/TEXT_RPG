@@ -2,9 +2,9 @@
 
 void GameManager::StartGame()
 {
-	//°ÔÀÓ ½ÃÀÛ
+	//???? ????
 }
 void GameManager::GenerateCharacter()
 {
-	//Ä³¸¯ÅÍ »ı¼º
+	//ï¿½ï¿½???? ????
 }

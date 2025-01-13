@@ -8,37 +8,37 @@ Village::Village() {
 }
 
 void Village::ShowChoice(Character& character) {
-	/*Logger::getInstance().logEvent("∏∂¿ª ¿‘¿Â");*/
-	cout << "∏∂¿ªø° ¿‘¿Â«ﬂΩ¿¥œ¥Ÿ" << endl;
+	/*Logger::getInstance().logEvent("ÎßàÏùÑ ÏûÖÏû•");*/
+	cout << "ÎßàÏùÑÏóê ÏûÖÏû•ÌñàÏäµÎãàÎã§" << endl;
 	int choice;
 
 	while (true) {
-		cout << "---<<  º±≈√¡ˆ  >>---" << endl;
-		cout << " 1. ø©∞¸" << endl;
-		cout << " 2. ªÛ¡°" << endl;
-		cout << " 3. ≥™∞°±‚" << endl;
+		cout << "---<<  ÏÑ†ÌÉùÏßÄ  >>---" << endl;
+		cout << " 1. Ïó¨Í¥Ä" << endl;
+		cout << " 2. ÏÉÅÏ†ê" << endl;
+		cout << " 3. ÎÇòÍ∞ÄÍ∏∞" << endl;
 		cout << "--------------------" << endl;
-		cout << "π¯»£∏¶ ¿‘∑¬«œººø‰: ";
-		//º±≈√¡ˆ ¿‘∑¬(øπø‹√≥∏Æ« ø‰)
+		cout << "Î≤àÌò∏Î•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî: ";
+		//ÏÑ†ÌÉùÏßÄ ÏûÖÎ†•(ÏòàÏô∏Ï≤òÎ¶¨ÌïÑÏöî)
 		cin >> choice;
 
 		switch (choice) {
 		case 1:
-			cout << "ø©∞¸ø° ¿‘¿Â¡ﬂ" << endl;
-			inn.EnterInn(character);//√º∑¬ »˙, ∞ÒµÂ ø©∫Œ
+			cout << "Ïó¨Í¥ÄÏóê ÏûÖÏû•Ï§ë" << endl;
+			inn.EnterInn(character);//Ï≤¥Î†• Ìûê, Í≥®Îìú Ïó¨Î∂Ä
 			break;
 
 		case 2:
-			cout << "ªÛ¡°ø° ¿‘¿Â¡ﬂ" << endl;
-			shop.EnterShop(character);//¿Œ∫•≈‰∏Æ, ∞ÒµÂ
+			cout << "ÏÉÅÏ†êÏóê ÏûÖÏû•Ï§ë" << endl;
+			shop.EnterShop(character);//Ïù∏Î≤§ÌÜ†Î¶¨, Í≥®Îìú
 			break;
 
 		case 3:
-			cout << "∏∂¿ªø°º≠ ≥™∞°¥¬ ¡ﬂ" << endl;
+			cout << "ÎßàÏùÑÏóêÏÑú ÎÇòÍ∞ÄÎäî Ï§ë" << endl;
 			return;
 
 		default:
-			cout << "¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ. ¥ŸΩ√ ¿‘∑¬«œººø‰." << endl;
+			cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§. Îã§Ïãú ÏûÖÎ†•ÌïòÏÑ∏Ïöî." << endl;
 		}
 	}
 	

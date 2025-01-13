@@ -21,7 +21,7 @@ Monster* MonsterManager::CreateNormalMonster()
 		return monster;
 
 	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 3
-	int randomNum = dist(gen); // ·£´ý ¹øÈ£ »ý¼º
+	int randomNum = dist(gen); // ëžœë¤ ë²ˆí˜¸ ìƒì„±
 
 	string monsterName = "";
 
@@ -38,7 +38,7 @@ Monster* MonsterManager::CreateNormalMonster()
 	else if (randomNum == 5)
 		monsterName = "Zombie";
 
-	// ÇÃ·¹ÀÌ¾î ·¹º§¿¡ µû¶ó ¸ó½ºÅÍ ½ºÅ×ÀÌÅÍ½º º¯°æÇØÁÖ±â.
+	// í”Œë ˆì´ì–´ ë ˆë²¨ì— ë”°ë¼ ëª¬ìŠ¤í„° ìŠ¤í…Œì´í„°ìŠ¤ ë³€ê²½í•´ì£¼ê¸°.
 	monster = new NormalMonster(monsterName, 100, 100);
 
 	return monster;
@@ -49,7 +49,7 @@ Monster* MonsterManager::CreateBossMonster()
 	if (monster != nullptr)
 		return monster;
 
-	// Ãß°¡ÀÛ¾÷.
+	// ì¶”ê°€ìž‘ì—….
 	string monsterName = "Boss Monster";
 	monster = new BossMonster(monsterName, 100, 100);
 
@@ -61,12 +61,12 @@ void MonsterManager::DeleteMonster(Monster* _monster)
 	if (_monster == nullptr)
 		return;
 
-	// monster ·¹º§¿¡ µû¶ó¼­ ·£´ýÀ¸·Î item drop.
+	// monster ë ˆë²¨ì— ë”°ë¼ì„œ ëžœë¤ìœ¼ë¡œ item drop.
 
-	// monster Ã³Ä¡±â·Ï ÀúÀå
+	// monster ì²˜ì¹˜ê¸°ë¡ ì €ìž¥
 	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
 	
-	// monster»èÁ¦
+	// monsterì‚­ì œ
 	delete _monster;
 	_monster = nullptr;
 }
