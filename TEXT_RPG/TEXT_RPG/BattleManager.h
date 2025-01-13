@@ -10,8 +10,9 @@ class BattleManager
 public:
 	BattleManager();
 
-	void Battle();
-	void AttackEachOther(Character* character, Monster* monster, int turn);
+	void StartBattle();
+	void AttackCharacter(Character* character, Monster* monster);
+	void AttackMonster(Character* character, Monster* monster);
 
 private:
 
