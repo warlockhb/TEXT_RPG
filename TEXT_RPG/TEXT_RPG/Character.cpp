@@ -20,13 +20,13 @@ Character* Character::GetInstance(string name)
 {
 	if (instance == nullptr)
 	{
-		instance = new Character();
+		instance = new Character(name);
 	}
 	return instance;
 }
 
 
-void Character::DisPlayStatus()
+void Character::DisplayStatus()
 {
 	cout << "=============================" << endl;
 	cout << "이름 : " << Name << endl;
@@ -42,7 +42,7 @@ void Character::DisPlayStatus()
 
 void Character::LevelUp()
 {
-	if (Level < 10 && exp >= maxExp)
+	if (Level < 10 && exp >= MaxExp)
 	{
 		this->Level++;
 		this->MaxHealth += Level * 20;
@@ -64,11 +64,16 @@ void Character::UseItem(int index)
 		cout << "잘못 입력되었습니다." << endl;
 	}
 
-	PassiveItem* item = Inventory[index];
-	//아이템 사용
-	//item->use(this)?
+	//TODO: 아이템 구현부 재설정
+	// PassiveItem* Item = Inventory[index];
+	// if (Item)
+	// {
+	// 	Item->ApplyEffect(this);  // 아이템 효과 적용
+	// 	delete Item;              // 메모리 해제
+	// 	Inventory.erase(Inventory.begin() + index);
+	// 	cout << "아이템을 사용했습니다!" << endl;
+	// }
 
-	delete item;
 	Inventory.erase(Inventory.begin() + index);
 	cout << "아이템을 사용했습니다!" << endl;
 }
@@ -96,7 +101,7 @@ void Character::RemoveItem(PassiveItem* item)
 	}
 }
 
-void Character::SkillUse(int index)
+void Character::UseSkill(int index)
 {
 	if (index < 0 || index >= Equipment_Inventory.size())
 	{
@@ -158,12 +163,12 @@ void Character::Die()
 	cout << "당신의 최종 레벨 : " << Level << endl;
 }
 
-void Character::GetAttack()
+int Character::GetAttack()
 {
 	return Attack;
 }
 
-void Character::GetHealth()
+int Character::GetHealth()
 {
 	return Health;
 }
@@ -204,7 +209,7 @@ void Character::SetExp(int plusexp)
 	}
 }
 
-void Character::MinusGold(int buymoney)
+void Character::SetMinusGold(int buymoney)
 {
 	if (Gold >= buymoney)
 	{
@@ -217,7 +222,7 @@ void Character::MinusGold(int buymoney)
 	}
 }
 
-void Character::PlusGold(int sellmoney)
+void Character::SetPlusGold(int sellmoney)
 {
 	Gold += sellmoney;
 	cout << "현재 보유 골드 : " << Gold << endl;

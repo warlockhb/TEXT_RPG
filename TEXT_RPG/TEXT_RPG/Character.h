@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "//Item//Item.h"
+#include "//Item//Equipment/Equipment.h"
+#include "//Item//PassiveItem/PassiveItem.h"
 using namespace std;
 
 class PassiveItem;
@@ -39,7 +42,7 @@ public:
 	static Character * GetInstance(string name = "");
 
 	//플레이어스테이트보여주기
-	void DisPlayStatus();
+	void DisplayStatus();
 
 	//캐릭터레벨업
 	void LevelUp();
@@ -50,7 +53,7 @@ public:
 	void RemoveItem(PassiveItem* item);
 
 	//스킬사용&추가&제거
-	void SkillUse(int index);
+	void UseSkill(int index);
 	void AddSkill(Equipment* skill);
 	void RemoveSkill(Equipment* skill);
 
