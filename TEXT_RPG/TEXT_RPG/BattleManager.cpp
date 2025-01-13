@@ -23,8 +23,6 @@ void BattleManager::StartBattle()
 		cout << "몬스터 선제 공격" << endl;
 	}
 
-	//Monster* _Monster = MonsterManager::CreateMonster();
-
 	while (true)
 	{
 
@@ -39,6 +37,10 @@ void BattleManager::AttackCharacter(Monster* Monster)
 void BattleManager::AttackMonster(Monster* Monster)
 {
 
+}
+
+void BattleManager::EndBattle()
+{
 }
 
 

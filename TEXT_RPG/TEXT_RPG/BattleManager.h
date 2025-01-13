@@ -12,6 +12,7 @@ public:
 	void StartBattle();
 	void AttackCharacter(Monster* monster);
 	void AttackMonster(Monster* monster);
+	void EndBattle();
 
 private:
 
