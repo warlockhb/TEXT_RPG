@@ -1,5 +1,16 @@
-#pragma once
-#include "Item.h"
+﻿enum EPassiveItemType
+{
+    // 100~199 : 포션
+    ID_POTION_HP_SMALL = 100,         // 소형 포션
+    ID_POTION_HP_MEDIUM = 101,        // 중형 포션
+    ID_POTION_HP_LARGE = 102,         // 대형 포션
+    
+    // 200~299 : 부적
+    ID_AMULET_OF_STRENGTH = 200,      // 힘의 부적
+    ID_AMULET_OF_WISDOM = 201,        // 지혜의 부적
+    ID_AMULET_OF_VITALITY = 202,      // 생명력의 부적
+    ID_AMULET_OF_FORTUNE = 203,       // 행운의 부적
+};
 
 enum EEquipmentType
 {
@@ -33,14 +44,4 @@ enum EEquipmentType
     ID_WEAPON_LONG_BOW = 1402,        // 장궁
     ID_WEAPON_MAGIC_STAFF = 1403,     // 마법 지팡이
 
-};
-
-class Equipment : public Item
-{
-public:
-    void Equip(Character* character);
-    void Unequip(Character* character);
-    
-    virtual void ApplyEffect(Character* character) override;
-    virtual void RemoveEffect(Character* character) override;
 };
