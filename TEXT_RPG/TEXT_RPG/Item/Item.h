@@ -2,6 +2,7 @@
 #pragma once
 #include <string>
 #include "..//Character.h"
+#include "ItemType.h"
 using namespace std;
 
 struct StatModifier
@@ -16,21 +17,32 @@ struct StatModifier
 
 class Item
 {
-private:
+protected:
     int ID = 0;
     string Name = '';
     int Price = 0;
     string Description = '';
     StatModifier StatModifier;
 
+private:
+
+    // 기본 모디파이 적용
+    void ApplyModifier(Character* Character);
+    void RemoveModifier(Character* Character);
+
+    // 특수 효과 적용
+    virtual void ApplyEffect(Character* Character);
+    virtual void RemoveEffect(Character* Character);
+
+
 public:
-    Item(int code, string name, int price, string desc);
+    Item();
 
     // 비교 연산자 : 캐릭터 HasItem에서 사용 가능
     bool operator==(const Item& other) const;
     
-    virtual void ApplyEffect(Character* character) = 0;
-    virtual void RemoveEffect(Character* character) = 0;
+    void Apply(Character* Character);
+    void Remove(Character* Character);
 
     // Get
     int GetID() const;

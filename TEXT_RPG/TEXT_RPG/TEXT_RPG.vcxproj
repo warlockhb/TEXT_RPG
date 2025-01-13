@@ -135,6 +135,9 @@
     <ClCompile Include="Inn.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Item\Equipment.cpp" />
+    <ClCompile Include="Item\Item.cpp" />
+    <ClCompile Include="Item\PassiveItem.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -148,10 +151,11 @@
     <ClInclude Include="BossMonster.h" />
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="Character.h" />
-    <ClInclude Include="Equipment.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Inn.h" />
-    <ClInclude Include="Item.h" />
+    <ClInclude Include="Item\Equipment.h" />
+    <ClInclude Include="Item\Item.h" />
+    <ClInclude Include="Item\PassiveItem.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterManager.h" />
