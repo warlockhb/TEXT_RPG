@@ -7,7 +7,7 @@ using namespace std;
 Village::Village() {
 }
 
-void Village::showChoice(Character& character) {
+void Village::ShowChoice(Character& character) {
 	/*Logger::getInstance().logEvent("마을 입장");*/
 	cout << "마을에 입장했습니다" << endl;
 	int choice;
@@ -25,12 +25,12 @@ void Village::showChoice(Character& character) {
 		switch (choice) {
 		case 1:
 			cout << "여관에 입장중" << endl;
-			Inn.EnterInn(character);//체력 힐, 골드 여부
+			inn.EnterInn(character);//체력 힐, 골드 여부
 			break;
 
 		case 2:
 			cout << "상점에 입장중" << endl;
-			Shop.EnterShop(character);//인벤토리, 골드
+			shop.EnterShop(character);//인벤토리, 골드
 			break;
 
 		case 3:

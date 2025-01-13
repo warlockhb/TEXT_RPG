@@ -4,6 +4,10 @@
 #include "Character.h"
 
 class Village {
+private:
+	Inn inn;
+	Shop shop;
 public:
+	Village();
 	void ShowChoice(Character& character);
 };
