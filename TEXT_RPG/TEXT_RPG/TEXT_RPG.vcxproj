@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattleManager.cpp" />
     <ClCompile Include="BossMonster.cpp" />
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="NormalMonster.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BattleManager.h" />
     <ClInclude Include="BossMonster.h" />
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="Character.h" />
