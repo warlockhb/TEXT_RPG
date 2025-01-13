@@ -11,6 +11,7 @@ class Character
 {
 private:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//싱글톤
 	static Character* instance;
 
@@ -32,37 +33,44 @@ private:
 	const size_t Max_Skill_Size = 5;
 =======
 	//�̱���
+=======
+	//싱글톤
+>>>>>>> main
 	static Character* instance;
 
-	//��ġ �Ķ����
-	string name;	
-	int level;		
-	int health;		
-	int maxhealth;	
-	int attack;		
+	//수치 파라미터
+	string name;
+	int level;
+	int health;
+	int maxhealth;
+	int attack;
 	int exp;
 	int maxExp;
 	int gold;
-	
-	//�κ��丮
+
+	//인벤토리
 	vector<PassiveItem*> inventory;
 	size_t max_inventory_size = 7;
-	//���ĭ
+	//장비칸
 	vector<Equipment*> equipment_inventory;
 	const size_t max_skill_size = 5;
 >>>>>>> 4d9d67f6080d6d58e206ff953df655494e76d7ec
 
 	Character(string New_name);
 
-	Character(const Chracter&) = delete;
+	Character(const Character&) = delete;
 	Character& operator = (const Character&) = delete;
 
 public:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//싱글톤 생성
 	static Character* GetInstance(string name = "");
 =======
 	//�̱��� ����
+=======
+	//싱글톤 생성
+>>>>>>> main
 	static Character* getInstance(string name = "");
 >>>>>>> 4d9d67f6080d6d58e206ff953df655494e76d7ec
 
