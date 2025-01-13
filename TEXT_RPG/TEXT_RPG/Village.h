@@ -5,5 +5,5 @@
 
 class Village {
 public:
-	ShowChoice(Character& character);
+	void ShowChoice(Character& character);
 };
