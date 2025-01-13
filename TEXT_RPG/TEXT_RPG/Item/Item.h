@@ -3,7 +3,7 @@
 #include <string>
 
 #include "ItemType.h"
-#include "..//Character.h"
+#include "../Character.h"
 using namespace std;
 
 class Character;
@@ -37,12 +37,13 @@ private:
     // void RemoveModifier(Character* Character);
 
     // 특수 효과 적용
-    virtual void ApplyEffect(Character* Character);
-    virtual void RemoveEffect(Character* Character);
+    // virtual void ApplyEffect(Character* Character);
+    // virtual void RemoveEffect(Character* Character);
 
 
 public:
-    Item();
+    Item() = default;
+    virtual ~Item() = default;
 
     // 비교 연산자 : 캐릭터 HasItem에서 사용 가능
     bool operator==(const Item& other) const;
@@ -51,8 +52,8 @@ public:
     void Remove(Character* Character);
 
     // Get
-    int GetID() const;
-    string GetName() const;
-    int GetPrice() const;
-    string GetDescription() const;
+    // int GetID() const;
+    // string GetName() const;
+    // int GetPrice() const;
+    // string GetDescription() const;
 };

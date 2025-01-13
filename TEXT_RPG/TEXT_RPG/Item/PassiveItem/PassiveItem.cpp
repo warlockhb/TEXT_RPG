@@ -1,5 +1,3 @@
 ﻿#include "PassiveItem.h"
+#include "../Item.h"
 
-void PassiveItem::ApplyEffect(Character* Character)
-{
-}

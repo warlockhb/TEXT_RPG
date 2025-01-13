@@ -1,12 +1,12 @@
 ﻿#include "Item.h"
 
-void Item::ApplyModifier(Character* Character)
-{
-}
-
-void Item::RemoveModifier(Character* Character)
-{
-}
+// void Item::ApplyEffect(Character* Character)
+// {
+// }
+//
+// void Item::RemoveEffect(Character* Character)
+// {
+// }
 
 bool Item::operator==(const Item& other) const
 {
@@ -15,12 +15,8 @@ bool Item::operator==(const Item& other) const
 
 void Item::Apply(Character* Character)
 {
-    ApplyModifier(Character);
-    ApplyEffect(Character);
 }
 
 void Item::Remove(Character* Character)
 {
-    RemoveModifier(Character);
-    RemoveEffect(Character);
 }
