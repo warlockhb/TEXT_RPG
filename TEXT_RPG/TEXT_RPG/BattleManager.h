@@ -12,6 +12,8 @@ public:
 	void StartBattle();
 	void AttackCharacter(Monster* monster);
 	void AttackMonster(Monster* monster);
+	void AutoBattle();
+	void ManualBattle();
 	void EndBattle();
 
 private:
