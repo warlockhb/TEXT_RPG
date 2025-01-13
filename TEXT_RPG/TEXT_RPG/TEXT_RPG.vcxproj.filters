@@ -42,6 +42,15 @@
     <ClCompile Include="Logger.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h">
@@ -60,6 +69,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
