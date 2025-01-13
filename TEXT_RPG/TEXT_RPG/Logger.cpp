@@ -2,64 +2,74 @@
 #include "Logger.h"
 #include <iostream>
 
-Logger& Logger::getInstance() {
-    static Logger instance;
-    return instance;
+// GetInstance 메서드 구현
+Logger& Logger::GetInstance() {
+    static Logger Instance;
+    return Instance;
 }
 
-void Logger::logEvent(const std::string& entry) {
-    logs.push_back(entry);
-    std::cout << entry << std::endl; // 실시간으로 콘솔에 출력
+// LogEvent 메서드 구현
+void Logger::LogEvent(const std::string& Entry) {
+    Logs.push_back(Entry);
+    std::cout << Entry << std::endl; // 실시간으로 콘솔에 출력
 }
 
-void Logger::recordMonsterDefeated(const std::string& monsterName) {
-    monstersDefeated[monsterName]++; //몬스터 처치 수 ++
+// RecordMonsterDefeated 메서드 구현
+void Logger::RecordMonsterDefeated(const std::string& MonsterName) {
+    MonstersDefeated[MonsterName]++; // 몬스터 처치 수 ++
+    LogEvent("Monster defeated: " + MonsterName); // 로그 기록 추가 (선택 사항)
 }
 
-void Logger::recordItemUsed(const std::string& itemName) {
-    itemsUsed[itemName]++; //아이템 사용 수 ++
+// RecordItemUsed 메서드 구현
+void Logger::RecordItemUsed(const std::string& ItemName) {
+    ItemsUsed[ItemName]++; // 아이템 사용 수 ++
+    LogEvent("Item used: " + ItemName); // 로그 기록 추가 (선택 사항)
 }
 
-void Logger::addGold(int amount) {
-    totalGoldAcquired += amount;// 총 골드 획득량
+// AddGold 메서드 구현
+void Logger::AddGold(int Amount) {
+    TotalGoldAcquired += Amount; // 총 골드 획득량
+    LogEvent("Gold acquired: " + std::to_string(Amount)); // 로그 기록 추가 (선택 사항)
 }
 
-void Logger::showLogs() const {
+// ShowLogs 메서드 구현
+void Logger::ShowLogs() const {
     std::cout << "----- 게임 로그 -----" << std::endl;
-    for (const auto& entry : logs) {
-        std::cout << entry << std::endl;
+    for (const auto& Entry : Logs) {
+        std::cout << Entry << std::endl;
     }
 }
 
-void Logger::showSummary() const {
+// ShowSummary 메서드 구현
+void Logger::ShowSummary() const {
     std::cout << "\n----- 게임 요약 -----" << std::endl;
 
     // 몬스터 처치 내역
     std::cout << "처치한 몬스터:" << std::endl;
-    if (monstersDefeated.empty()) {
+    if (MonstersDefeated.empty()) {
         std::cout << "없음" << std::endl;
     }
     else {
-        for (const auto& pair : monstersDefeated) {
-            const std::string& monster = pair.first;
-            int count = pair.second;
-            std::cout << monster << " - " << count << "마리" << std::endl;
+        for (const auto& Pair : MonstersDefeated) {
+            const std::string& Monster = Pair.first;
+            int Count = Pair.second;
+            std::cout << Monster << " - " << Count << "마리" << std::endl;
         }
     }
 
     // 아이템 사용 내역
     std::cout << "사용한 아이템:" << std::endl;
-    if (itemsUsed.empty()) {
+    if (ItemsUsed.empty()) {
         std::cout << "없음" << std::endl;
     }
     else {
-        for (const auto& pair : itemsUsed) {
-            const std::string& item = pair.first;
-            int count = pair.second;
-            std::cout << item << " - " << count << "개" << std::endl;
+        for (const auto& Pair : ItemsUsed) {
+            const std::string& Item = Pair.first;
+            int Count = Pair.second;
+            std::cout << Item << " - " << Count << "개" << std::endl;
         }
     }
 
     // 총 골드 획득
-    std::cout << "총 골드 획득: " << totalGoldAcquired << "골드" << std::endl;
+    std::cout << "총 골드 획득: " << TotalGoldAcquired << "골드" << std::endl;
 }

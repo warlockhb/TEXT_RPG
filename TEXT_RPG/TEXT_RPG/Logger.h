@@ -8,36 +8,36 @@
 
 class Logger {
 private:
-    std::vector<std::string> logs;
-    std::map<std::string, int> monstersDefeated;
-    std::map<std::string, int> itemsUsed;
-    int totalGoldAcquired;
+    std::vector<std::string> Logs;
+    std::map<std::string, int> MonstersDefeated;
+    std::map<std::string, int> ItemsUsed;
+    int TotalGoldAcquired;
 
-    Logger() : totalGoldAcquired(0) {}
+    Logger() : TotalGoldAcquired(0) {}
 public:
     // 복사 생성자 및 대입 연산자 삭제
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
 
-    static Logger& getInstance();
+    static Logger& GetInstance();
 
     // 일반 로그 기록
-    void logEvent(const std::string& entry);
+    void LogEvent(const std::string& Entry);
 
     // 몬스터 처치 기록
-    void recordMonsterDefeated(const std::string& monsterName);
+    void RecordMonsterDefeated(const std::string& MonsterName);
 
     // 아이템 사용 기록
-    void recordItemUsed(const std::string& itemName);
+    void RecordItemUsed(const std::string& ItemName);
 
     // 골드 획득 기록
-    void addGold(int amount);
+    void AddGold(int Amount);
 
     // 로그 전체 보기
-    void showLogs() const;
+    void ShowLogs() const;
 
     // 요약 로그 보기
-    void showSummary() const;
+    void ShowSummary() const;
 };
 
 #endif
