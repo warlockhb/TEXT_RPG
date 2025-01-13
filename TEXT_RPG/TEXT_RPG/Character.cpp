@@ -26,7 +26,7 @@ Character* Character::GetInstance(string New_name)
 }
 
 
-void Character::DisPlayStatus()
+void Character::DisplayStatus()
 {
 	cout << "=============================" << endl;
 	cout << "이름 : " << Name << endl;
@@ -43,6 +43,7 @@ void Character::DisPlayStatus()
 void Character::LevelUp()
 {
 	if (Level < 10 && Exp >= MaxExp)
+
 	{
 		this->Level++;
 		this->MaxHealth += Level * 20;
