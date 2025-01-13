@@ -1,84 +1,83 @@
-#include "Character.h"
+﻿#include "Character.h"
 
-Character* Character::instance = nullptr;
+Character * Character::instance = nullptr;
 
-Character::Character(string Name)
+Character::Character(string New_name)
 {
-	this->name = Name;
-	this->level = 1;
-	this->maxhealth = 100;
-	this->health = maxhealth;
-	this->attack = 30;
-	this->exp = 0;
-	this->maxExp = 100;
-	this->gold = 0;
-	this->inventory.reserve(max_inventory_size);
-	this->equipment_inventory.reserve(max_skill_size);
+	this->Name = New_name;
+	this->Level = 1;
+	this->MaxHealth = 100;
+	this->Health = MaxHealth;
+	this->Attack = 30;
+	this->Exp = 0;
+	this->MaxExp = 100;
+	this->Gold = 0;
+	this->Inventory.reserve(Max_Inventory_Size);
+	this->Equipment_Inventory.reserve(Max_Skill_Size);
 }
 
-Character* Character::getInstance(string name)
+Character* Character::GetInstance(string name)
 {
 	if (instance == nullptr)
 	{
-		instance = new Character(name);
+		instance = new Character();
 	}
-
 	return instance;
 }
 
-//플레이어 스탯보여주기
-void Character::displayStatus()
+
+void Character::DisPlayStatus()
 {
 	cout << "=============================" << endl;
-	cout << "이름 : " << name << endl;
-	cout << "레벨 : " << level << endl;
-	cout << "체력 : " << health << "/" << maxhealth << endl;
-	cout << "공격력 : " << attack << endl;
-	cout << "현재 경험치 : " << exp << endl;
-	cout << "다음 레벨까지의 경험치 : " << maxExp - exp << endl;
-	cout << "보유 골드 : " << gold << endl;
+	cout << "이름 : " << Name << endl;
+	cout << "레벨 : " << Level << endl;
+	cout << "체력 : " << Health << "/" << MaxHealth << endl;
+	cout << "공격력 : " << Attack << endl;
+	cout << "현재 경험치 : " << Exp << endl;
+	cout << "다음 레벨까지의 경험치 : " << MaxExp - Exp << endl;
+	cout << "보유 골드 : " << Gold << endl;
 	cout << "=============================" << endl;
 }
 
-void Character::levelUp()
+
+void Character::LevelUp()
 {
-	if (level < 10 && exp >= maxExp)
+	if (Level < 10 && exp >= maxExp)
 	{
-		this->level++;
-		this->maxhealth += level * 20;
-		this->health = maxhealth;
-		this->attack += level * 5;
-		this->exp = 0;
+		this->Level++;
+		this->MaxHealth += Level * 20;
+		this->Health = MaxHealth;
+		this->Attack += Level * 5;
+		this->Exp = 0;
 		cout << "레벨 업!" << endl;
 	}
-
-	if (level >= 10)
+	if (Level >= 10)
 	{
 		cout << "최대 레벨!" << endl;
 	}
 }
 
-void Character::useItem(int index)
+void Character::UseItem(int index)
 {
-	if (index < 0 || index >= inventory.size())
+	if (index < 0 || index >= Inventory.size())
 	{
 		cout << "잘못 입력되었습니다." << endl;
 	}
 
-	PassiveItem* item = inventory[index];
+	PassiveItem* item = Inventory[index];
 	//아이템 사용
 	//item->use(this)?
 
 	delete item;
-	inventory.erase(inventory.begin() + index);
+	Inventory.erase(Inventory.begin() + index);
 	cout << "아이템을 사용했습니다!" << endl;
 }
 
-void Character::addItem(PassiveItem* item)
+void Character::AddItem(PassiveItem* item)
 {
-	if (inventory.size() < max_inventory_size)
+	if (Inventory.size() < Max_Inventory_Size)
 	{
-		inventory.push_back(item);
+		Inventory.push_back(item);
 		cout << "인벤토리에 아이템이 추가되었습니다." << endl;
 	}
 	else
@@ -87,34 +86,34 @@ void Character::addItem(PassiveItem* item)
 	}
 }
 
-void Character::removeItem(PassiveItem* item)
+void Character::RemoveItem(PassiveItem* item)
 {
-	auto it = find(inventory.begin(), inventory.end(), item);
+	auto it = find(Inventory.begin(), Inventory.end(), item);
 
-	if (it != inventory.end())
+	if (it != Inventory.end())
 	{
-		inventory.erase(it);
+		Inventory.erase(it);
 	}
 }
 
-void Character::skilluse(int index)
+void Character::SkillUse(int index)
 {
-	if (index < 0 || index >= equipment_inventory.size())
+	if (index < 0 || index >= Equipment_Inventory.size())
 	{
 		cout << "잘못 입력되었습니다." << endl;
 	}
 
-	Equipment* skill = equipment_inventory[index];
+	Equipment* skill = Equipment_Inventory[index];
 
 	delete skill;
 	cout << "스킬을 사용했습니다!" << endl;
 }
 
-void Character::addskill(Equipment* skill)
+void Character::AddSkill(Equipment* skill)
 {
-	if (equipment_inventory.size() < max_skill_size)
+	if (Equipment_Inventory.size() < Max_Skill_Size)
 	{
-		equipment_inventory.push_back(skill);
+		Equipment_Inventory.push_back(skill);
 		cout << "스킬이 추가되었습니다." << endl;
 	}
 	else
@@ -123,30 +122,29 @@ void Character::addskill(Equipment* skill)
 	}
 }
 
-void Character::removeskill(Equipment* skill)
+void Character::RemoveSkill(Equipment* skill)
 {
-	/*	auto it = find(equipment_inventory.begin(), equipment_inventory.end(), item);
+	auto it = find(Equipment_Inventory.begin(), Equipment_Inventory.end(), skill);
 
-		if (it != equipment_inventory.end())
-		{
-			equipment_inventory.erase(it);
-		}
-		*/
+	if (it != Equipment_Inventory.end())
+	{
+		Equipment_Inventory.erase(it);
+	}
 }
 
-void Character::byeInventory(int buycount)
+void Character::ByeInventory(int buycount)
 {
 	switch (buycount)
 	{
 	case 1:
-		max_inventory_size += 3;
-		inventory.reserve(max_inventory_size);
-		cout << "인벤토리를 확장되었습니다. 현재 인벤토리 사이즈 : " << inventory.size() << endl;
+		Max_Inventory_Size += 3;
+		Inventory.reserve(Max_Inventory_Size);
+		cout << "인벤토리를 확장되었습니다. 현재 인벤토리 사이즈 : " << Inventory.size() << endl;
 		break;
 	case 2:
-		max_inventory_size += 5;
-		inventory.reserve(max_inventory_size);
-		cout << "인벤토리를 확장되었습니다. 현재 인벤토리 사이즈 : " << inventory.size() << endl;
+		Max_Inventory_Size += 5;
+		Inventory.reserve(Max_Inventory_Size);
+		cout << "인벤토리를 확장되었습니다. 현재 인벤토리 사이즈 : " << Inventory.size() << endl;
 		break;
 	default:
 		cout << "인벤토리를 최대 확장했습니다!" << endl;
@@ -154,44 +152,121 @@ void Character::byeInventory(int buycount)
 	}
 }
 
-int Character::getgold() const
+void Character::Die()
 {
-	return gold;
+	cout << "캐릭터가 사망했습니다. 게임 오버" << endl;
+	cout << "당신의 최종 레벨 : " << Level << endl;
 }
 
-void Character::minusgold(int buymoney)
+void Character::GetAttack()
 {
-	if (gold >= buymoney)
-	{
-		gold -= buymoney;
-		cout << "골드를 사용했습니다! 사용된 골드 : " << buymoney << "남은 골드 : " << gold << endl;
-	}
-	else
-	{
-		cout << "골드가 부족합니다! 현재 보유 골드 : " << gold << endl;
-	}
+	return Attack;
 }
 
-void Character::plusgold(int sellmoney)
+void Character::GetHealth()
 {
-	//	gold += dealmoney;
-	cout << "현재 보유 골드 : " << sellmoney << endl;
+	return Health;
 }
 
-void Character::setexp(int plusexp)
+int Character::Getgold()
 {
-	if (level < 10)
+	return Gold;
+}
+
+string Character::GetName()
+{
+	return Name;
+}
+
+int Character::GetLevel()
+{
+	return Level;
+}
+
+int Character::GetMaxHealth()
+{
+	return MaxHealth;
+}
+
+void Character::SetExp(int plusexp)
+{
+	if (Level < 10)
 	{
-		if (exp < maxExp)
+		if (Exp < MaxExp)
 		{
-			exp += plusexp;
+			Exp += plusexp;
 		}
 		else
 		{
-			levelUp();
-			exp += plusexp;
+			LevelUp();
+			Exp += plusexp;
 		}
 	}
+}
+
+void Character::MinusGold(int buymoney)
+{
+	if (Gold >= buymoney)
+	{
+		Gold -= buymoney;
+		cout << "골드를 사용했습니다! 사용된 골드 : " << buymoney << "남은 골드 : " << Gold << endl;
+	}
+	else
+	{
+		cout << "골드가 부족합니다! 현재 보유 골드 : " << Gold << endl;
+	}
+}
+
+void Character::PlusGold(int sellmoney)
+{
+	Gold += sellmoney;
+	cout << "현재 보유 골드 : " << Gold << endl;
+}
+
+void Character::SetMinusHp(int minushp)
+{
+	if (Health > 0)
+	{
+		Health -= minushp;
+		cout << "현재 캐릭터의 체력 : " << Health << endl;
+
+		if (Health <= 0)
+		{
+			Die();
+		}
+	}
+	else
+	{
+		Die();
+	}
+}
+
+void Character::SetPlusHp(int plushp)
+{
+	if (Health < MaxHealth)
+	{
+		Health += plushp;
+		cout << "현재 캐릭터의 체력 : " << Health << endl;
+
+		if (Health >= MaxHealth)
+		{
+			Health = MaxHealth;
+		}
+	}
+	else
+	{
+		cout << "체력을 회북 할 수 없습니다." << endl;
+	}
+}
+
+void Character::SetMinusAttack(int minusatk)
+{
+	this->Attack -= minusatk;
+}
+
+void Character::SetPlusAttack(int plusatk)
+{
+	this->Attack += plusatk;
 }
 
 
