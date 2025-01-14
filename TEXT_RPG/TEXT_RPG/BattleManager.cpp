@@ -11,143 +11,140 @@ BattleManager::BattleManager()
 
 void BattleManager::StartBattle()
 {
-	//Todo : 자동공격 & 수동공격
-	cout << "1. 자동 전투 ___ 2. 수동 전투" << endl;
+    //Todo : 자동공격 & 수동공격
+    cout << "1. 자동 전투 ___ 2. 수동 전투" << endl;
 
-	//cout << "---- 자동 전투 시작 ----" << endl;
-	int BattleType = 1;
-	cin >> BattleType;
-	cout << endl;
+    //cout << "---- 자동 전투 시작 ----" << endl;
+    int BattleType = 1;
+    cin >> BattleType;
+    cout << endl;
 
-	switch (BattleType)
-	{
-	case 1:
-		cout << "자동전투" << endl;
-		AutoBattle();
-		break;
-	case 2:
-		cout << "수동전투" << endl;
-		ManualBattle();
-		break;
-	default:
-		cout << "그냥 자동전투하세요.";
-		break;
-	}
+    switch (BattleType)
+    {
+    case 1:
+        cout << "자동전투" << endl;
+        AutoBattle();
+        break;
+    case 2:
+        cout << "수동전투" << endl;
+        ManualBattle();
+        break;
+    default:
+        cout << "그냥 자동전투하세요.";
+        break;
+    }
 }
 
 void BattleManager::AutoBattle()
 {
-	MonsterManager* _MonsterManager = new MonsterManager();
+    MonsterManager* _MonsterManager = new MonsterManager();
 
-	Monster* Monster = _MonsterManager->CreateNormalMonster();
+    Monster* Monster = _MonsterManager->CreateNormalMonster();
 
-	int TurnCount = 0;
-	while (true)
-	{
-		if (TurnCount % 2 == 0)
-		{
-			AttackMonster(*Monster);
-			//Todo : Item 랜덤 사용
-		}
-		else
-		{
-			AttackCharacter(*Monster);
-		}
+    int TurnCount = 0;
+    while (true)
+    {
+        if (TurnCount % 2 == 0)
+        {
+            AttackMonster(*Monster);
+            //Todo : Item 랜덤 사용
+        }
+        else
+        {
+            AttackCharacter(*Monster);
+        }
 
-		if (IsDead(TempHealth))
-		{
-			EndBattle();
-			_MonsterManager->DeleteMonster(Monster);
-			delete _MonsterManager;
-			break;
-		}
-		
-		TurnCount++;
-	}
+        if (IsDead(TempHealth))
+        {
+            EndBattle();
+            _MonsterManager->DeleteMonster(Monster);
+            delete _MonsterManager;
+            break;
+        }
+
+        TurnCount++;
+    }
 }
 
 void BattleManager::AttackCharacter(Monster& Monster)
 {
-	cout << "---- 몬스터가 플레이어를 공격합니다.----\n" << endl;
-	int Damage = Monster.GetPower();
-	cout << "---- 데미지 : "<<  Damage << " ----\n" << endl;
-	Character::GetInstance()->SetMinusHp(Damage);
-	TempHealth = Character::GetInstance()->GetHealth();
-	cout << "캐릭터 남은 체력 : " << TempHealth << "\n" <<endl;
+    cout << "---- 몬스터가 플레이어를 공격합니다.----\n" << endl;
+    int Damage = Monster.GetPower();
+    cout << "---- 데미지 : " << Damage << " ----\n" << endl;
+    Character::GetInstance()->SetMinusHp(Damage);
+    TempHealth = Character::GetInstance()->GetHealth();
+    cout << "캐릭터 남은 체력 : " << TempHealth << "\n" << endl;
 }
 
 void BattleManager::AttackMonster(Monster& Monster)
 {
-	cout << "---- 플레이어가 몬스터를 공격합니다.----\n" << endl; 
-	int Damage = Character::GetInstance()->GetAttack();
-	cout <<"---- 데미지 : " <<  Damage << " ----\n" << endl;
-	Monster.TakeDamage(Damage);
-	TempHealth = Monster.GetHp();
-	cout <<"몬스터 남은 체력 : " << TempHealth << "\n" <<endl;
-
-	
+    cout << "---- 플레이어가 몬스터를 공격합니다.----\n" << endl;
+    int Damage = Character::GetInstance()->GetAttack();
+    cout << "---- 데미지 : " << Damage << " ----\n" << endl;
+    Monster.TakeDamage(Damage);
+    TempHealth = Monster.GetHp();
+    cout << "몬스터 남은 체력 : " << TempHealth << "\n" << endl;
 }
 
 void BattleManager::ManualBattle()
 {
-	MonsterManager* _MonsterManager = new MonsterManager();
+    MonsterManager* _MonsterManager = new MonsterManager();
+    //Todo : 보스몬스터 조건
+    Monster* Monster = Character::GetInstance()->GetLevel() == 10
+                           ? _MonsterManager->CreateBossMonster()
+                           : _MonsterManager->CreateNormalMonster();
 
-	Monster* Monster = _MonsterManager->CreateNormalMonster();
+    int TurnCount = 0;
+    while (true)
+    {
+        if (TurnCount % 2 == 0)
+        {
+            int choice = 0;
 
-	int TurnCount = 0;
-	while (true)
-	{
-		if (TurnCount % 2 == 0)
-		{
-			int choice = 0;
+            cout << "1. 기본공격 ____ 2. 스킬사용 ____ 3. 아이템 사용 ";
+            cin >> choice;
 
-			cout << "1. 기본공격 ____ 2. 스킬사용 ____ 3. 아이템 사용 ";
-			cin >> choice;
+            switch (choice)
+            {
+            case 1:
+                cout << "기본 공격" << endl;
+                AttackMonster(*Monster);
 
-			switch (choice)
-			{
-			case 1:
-				cout << "기본 공격" << endl;
-				AttackMonster(*Monster);
-				
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			default:
-				cout << "기본 공격" << endl;
-				AttackMonster(*Monster);
-				break;
-			}
-		}
-		else
-		{
-			AttackCharacter(*Monster);
-		}
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                cout << "기본 공격" << endl;
+                AttackMonster(*Monster);
+                break;
+            }
+        }
+        else
+        {
+            AttackCharacter(*Monster);
+        }
 
-		if (IsDead(TempHealth))
-		{
-			EndBattle();
-			_MonsterManager->DeleteMonster(Monster);
-			delete _MonsterManager;
-			
-			break;
-		}
-		
-		TurnCount++;
-	}
+        if (IsDead(TempHealth))
+        {
+            EndBattle();
+            _MonsterManager->DeleteMonster(Monster);
+            delete _MonsterManager;
+
+            break;
+        }
+
+        TurnCount++;
+    }
 }
 
 void BattleManager::EndBattle()
 {
-	cout << "---- 전투 종료 ----" << endl;
+    cout << "---- 전투 종료 ----" << endl;
 }
 
 bool BattleManager::IsDead(int Health)
 {
-	return Health <= 0;
+    return Health <= 0;
 }
-
-
-
