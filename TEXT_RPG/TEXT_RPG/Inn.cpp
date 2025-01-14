@@ -26,7 +26,7 @@ void Inn::EnterInn(Character& character) {
 		switch (choice) {
 		case 'y':
 			//�뿬愿� �씠�슜O �꽑�깮�븳 寃쎌슦
-			if (character.Getgold() < cost) {
+			if (character.GetGold() < cost) {
 				//怨⑤뱶 遺�議깊븳 寃쎌슦 -> 留덉쓣濡� 蹂듦��
 				cout << "怨⑤뱶媛� 遺�議깊븯�뿬 留덉쓣濡� �룎�븘媛묐땲�떎." << endl;
 				return;

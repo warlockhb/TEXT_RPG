@@ -1,4 +1,7 @@
 ﻿#include "Character.h"
+#include <algorithm>
+#include <iostream>
+using namespace std;
 
 Character * Character::instance = nullptr;
 
@@ -12,8 +15,9 @@ Character::Character(string New_name)
 	this->Exp = 0;
 	this->MaxExp = 100;
 	this->Gold = 0;
-	//this->Inventory.reserve(Max_Inventory_Size);
-	//this->Equipment_Inventory.reserve(Max_Skill_Size);
+	this->CurrentMaxHealth = MaxHealth;
+	this->CurrentHealth = MaxHealth;
+	this->CurrentAttack = Attack;
 }
 
 Character* Character::GetInstance(string New_name)
@@ -23,39 +27,6 @@ Character* Character::GetInstance(string New_name)
 		instance = new Character(New_name);
 	}
 	return instance;
-}
-
-
-void Character::DisplayStatus()
-{
-	cout << "=============================" << endl;
-	cout << "이름 : " << Name << endl;
-	cout << "레벨 : " << Level << endl;
-	cout << "체력 : " << Health << "/" << MaxHealth << endl;
-	cout << "공격력 : " << Attack << endl;
-	cout << "현재 경험치 : " << Exp << endl;
-	cout << "다음 레벨까지의 경험치 : " << MaxExp - Exp << endl;
-	cout << "보유 골드 : " << Gold << endl;
-	cout << "=============================" << endl;
-}
-
-
-void Character::LevelUp()
-{
-	if (Level < 10 && Exp >= MaxExp)
-
-	{
-		this->Level++;
-		this->MaxHealth += Level * 20;
-		this->Health = MaxHealth;
-		this->Attack += Level * 5;
-		this->Exp = 0;
-		cout << "레벨 업!" << endl;
-	}
-	if (Level >= 10)
-	{
-		cout << "최대 레벨!" << endl;
-	}
 }
 
 //void Character::UseItem(int index)
@@ -159,50 +130,54 @@ void Character::Die()
 	cout << "당신의 최종 레벨 : " << Level << endl;
 }
 
-int Character::GetAttack()
-{
-	return Attack;
-}
-
-int Character::GetHealth()
-{
-	return Health;
-}
-
-int Character::Getgold()
-{
-	return Gold;
-}
-
-string Character::GetName()
+string Character::GetName() const
 {
 	return Name;
 }
 
-int Character::GetLevel()
+int Character::GetLevel() const
 {
 	return Level;
 }
 
-int Character::GetMaxHealth()
+int Character::GetHealth() const
+{
+	return Health;
+}
+
+int Character::GetMaxHealth() const
 {
 	return MaxHealth;
 }
 
-void Character::SetExp(int plusexp)
+int Character::GetAttack() const
 {
-	if (Level < 10)
-	{
-		if (Exp < MaxExp)
-		{
-			Exp += plusexp;
-		}
-		else
-		{
-			LevelUp();
-			Exp += plusexp;
-		}
-	}
+	return Attack;
+}
+
+int Character::GetExp() const
+{
+	return Exp;
+}
+
+int Character::GetGold() const
+{
+	return Gold;
+}
+
+int Character::GetCurrentHealth() const
+{
+	return CurrentHealth;
+}
+
+int Character::GetCurrentMaxHealth() const
+{
+	return CurrentMaxHealth;
+}
+
+int Character::GetCurrentAttack() const
+{
+	return  CurrentMaxHealth;
 }
 
 void Character::SetMinusGold(int buymoney)
@@ -224,24 +199,6 @@ void Character::SetPlusGold(int sellmoney)
 	cout << "현재 보유 골드 : " << Gold << endl;
 }
 
-void Character::SetMinusHp(int minushp)
-{
-	if (Health > 0)
-	{
-		Health -= minushp;
-		cout << "현재 캐릭터의 체력 : " << Health << endl;
-
-		if (Health <= 0)
-		{
-			Die();
-		}
-	}
-	else
-	{
-		Die();
-	}
-}
-
 void Character::SetPlusHp(int plushp)
 {
 	if (Health < MaxHealth)
@@ -260,15 +217,150 @@ void Character::SetPlusHp(int plushp)
 	}
 }
 
-void Character::SetMinusAttack(int minusatk)
+void Character::SetHealth(int health)
 {
-	Attack -= minusatk;
+	health = min(health, MaxHealth);
+	health = max(health, 0);
+	Health = health;
 }
 
-void Character::SetPlusAttack(int plusatk)
+void Character::SetMaxHealth(int maxhealth)
 {
-	Attack += plusatk;
+	maxhealth = min(maxhealth, MaxHealth);
+	maxhealth = max(maxhealth, 1);
+	MaxHealth = maxhealth;
 }
 
+void Character::SetAttack(int attack)
+{
+	Attack = max(0, attack);
+}
+
+void Character::SetExp(int exp)
+{
+	Exp = max(0, exp);
+}
+
+void Character::SetMaxExp(int maxexp)
+{
+	MaxExp = max(1, maxexp);
+}
+
+void Character::SetGold(int gold)
+{
+	Gold = max(0, gold);
+}
+
+void Character::SetCurrentHealth(int health)
+{
+	health = min(health, MaxHealth);
+	health = max(health, 0);
+	CurrentHealth = health;
+}
+
+void Character::SetCurrentMaxHealth(int maxhealth)
+{
+	maxhealth = min(maxhealth, MaxHealth);
+	maxhealth = max(maxhealth, 1);
+	CurrentMaxHealth = maxhealth;
+}
+
+void Character::SetCurrentAttack(int atk)
+{
+	CurrentAttack = max(0, atk);
+}
+
+void Character::DisPlayStatus()
+{
+	cout << "=============================" << endl;
+	cout << "이름 : " << Name << endl;
+	cout << "레벨 : " << Level << endl;
+	cout << "체력 : " << Health << "/" << MaxHealth << endl;
+	cout << "공격력 : " << Attack << endl;
+	cout << "현재 경험치 : " << Exp << endl;
+	cout << "다음 레벨까지의 경험치 : " << MaxExp - Exp << endl;
+	cout << "보유 골드 : " << Gold << endl;
+	cout << "=============================" << endl;
+}
+
+void Character::TakeDamage(int damage)
+{
+	if (CurrentHealth > 0)
+	{
+		CurrentHealth -= damage;
+		cout << "현재 캐릭터의 체력 : " << CurrentHealth << endl;
+
+		if (CurrentHealth <= 0)
+		{
+			CurrentHealth = 0;
+			PlayerDie();
+		}
+	}
+	else
+	{
+		PlayerDie();
+	}
+}
+
+void Character::RecoverHealth(int health)
+{
+	
+}
+
+void Character::AllRecoverHealth()
+{
+	CurrentHealth = CurrentMaxHealth;
+}
+
+void Character::PlayerDie()
+{
+}
+
+void Character::ExpUp(int plusexp)
+{
+	if (Level < 10)
+	{
+		if (Exp < MaxExp)
+		{
+			Exp += plusexp;
+		}
+		else
+		{
+			LevelUp();
+			Exp += plusexp;
+		}
+	}
+}
+
+void Character::LevelUp()
+{
+	if (Level < 10 && Exp >= MaxExp)
+
+	{
+		this->Level++;
+		this->MaxHealth += Level * 20;
+		this->Health = MaxHealth;
+		this->Attack += Level * 5;
+		this->Exp = 0;
+		this->CurrentMaxHealth = MaxHealth;
+		this->CurrentHealth = MaxHealth;
+		this->CurrentAttack = Attack;
+		cout << "레벨 업!" << endl;
+	}
+	if (Level >= 10)
+	{
+		cout << "최대 레벨!" << endl;
+	}
+}
+
+void Character::GoldUp(int plusgold)
+{
+	
+}
+
+void Character::GoldDown(int minusgold)
+{
+	
+}
 
 
