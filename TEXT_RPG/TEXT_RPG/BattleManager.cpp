@@ -1,4 +1,4 @@
-#include "BattleManager.h"
+ï»¿#include "BattleManager.h"
 #include "MonsterManager.h"
 #include "Character.h"
 #include <cstdlib>
@@ -11,8 +11,8 @@ BattleManager::BattleManager()
 
 void BattleManager::StartBattle()
 {
-	//Todo : ÀÚµ¿°ø°Ý & ¼öµ¿°ø°Ý
-	cout << "1. ÀÚµ¿ ÀüÅõ ___ 2. ¼öµ¿ ÀüÅõ" << endl;
+	//Todo : ìžë™ê³µê²© & ìˆ˜ë™ê³µê²©
+	cout << "1. ìžë™ ì „íˆ¬ ___ 2. ìˆ˜ë™ ì „íˆ¬" << endl;
 	int BattleType = 0;
 	cin >> BattleType;
 	cout << endl;
@@ -20,23 +20,23 @@ void BattleManager::StartBattle()
 	switch (BattleType)
 	{
 	case 1:
-		cout << "ÀÚµ¿ÀüÅõ" << endl;
+		cout << "ìžë™ì „íˆ¬" << endl;
 		AutoBattle();
 		break;
 	case 2:
-		cout << "¼öµ¿ÀüÅõÀÎµ¥ ±¸Çö ¾ÈµÆÀ¸´Ï ÀÚµ¿ÀüÅõÇÏ¼¼¿ä." << endl;
+		cout << "ìˆ˜ë™ì „íˆ¬ì¸ë° êµ¬í˜„ ì•ˆëìœ¼ë‹ˆ ìžë™ì „íˆ¬í•˜ì„¸ìš”." << endl;
 		ManualBattle();
 		break;
 	default:
-		cout << "±×³É ÀÚµ¿ÀüÅõÇÏ¼¼¿ä.";
+		cout << "ê·¸ëƒ¥ ìžë™ì „íˆ¬í•˜ì„¸ìš”.";
 		break;
 	}
 }
 
 void BattleManager::AttackCharacter(Monster* Monster)
 {
-	cout << "---- ¸ó½ºÅÍ°¡ ÇÃ·¹ÀÌ¾î¸¦ °ø°ÝÇÕ´Ï´Ù.----" << endl;
-	cout << "---- µ¥¹ÌÁö : "<< Monster->GetPower() << "----" << endl;
+	cout << "---- ëª¬ìŠ¤í„°ê°€ í”Œë ˆì´ì–´ë¥¼ ê³µê²©í•©ë‹ˆë‹¤.----" << endl;
+	cout << "---- ë°ë¯¸ì§€ : "<< Monster->GetPower() << "----" << endl;
 	
 	
 }
