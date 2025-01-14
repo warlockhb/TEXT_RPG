@@ -133,6 +133,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Inn.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item\Equipment\Equipment.cpp" />
     <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Item\PassiveItem\Amulet.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Inn.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item\Equipment\Equipment.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Item\ItemType.h" />
