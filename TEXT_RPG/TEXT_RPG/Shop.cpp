@@ -1,13 +1,22 @@
 ﻿#include "Character.h"
 #include "Shop.h"
 #include "./Item/PassiveItem/Potion.h"
-
-//#include "Item.h"
+#include "./Item/Equipment/Equipment.h"
+#include "./Item/PassiveItem/Amulet.h"
+#include "./Item/PassiveItem/PassiveItem.h"
 
 #include <iostream>
 
 using namespace std;
 
+Shop::Shop()
+{
+	potions[ID_POTION_HP_SMALL] = new PotionHPSmal();
+	potions[ID_POTION_HP_MEDIUM] = new PotionHpMedium();
+	potions[ID_POTION_HP_LARGE] = new PotionHpLarge();
+
+	//[물건복붙]추가 판매할 물건들(작성예정)
+}
 
 void Shop::EnterShop(Character& character) {
 	int choice;
@@ -78,27 +87,32 @@ void Shop::BuyItem() {
 
 void Shop::ShowItems(int choice)
 {
+	int cnt = 1;
 	switch (choice)
 	{
 	case 1:
 		cout << "--<<  포션 구매  >>--" << endl;
-		//for문 : {i}<<". " << 아이템명 << 아이템 설명? << 아이템 가격 << endl;
+		for (auto& potion : potions)
+		{
+			cout << potion.second->GetName() << ": "
+				 <<potion.second->GetDescription() << "("
+				 <<potion.second->GetPrice() << "G)" << endl;
+		}
 		break;
+		//입력 받는 것부터 진행 
 	case 2:
 		cout << "--<<  패시브 구매  >>--" << endl;
-		//for문 : {i}<<". " << 아이템명 << 아이템 설명? << 아이템 가격 << endl;
-		cout << " 1. " << endl;
+		//[물건복붙]수정 예정
 		break;
 	case 3:
 		cout << "--<<  아뮬렛 구매  >>--" << endl;
-		//for문 : {i}<<". " << 아이템명 << 아이템 설명? << 아이템 가격 << endl;
-		cout << " 1. " << endl;
+		//[물건복붙]수정 예정
 		break;
 	case 4:
 		cout << "--<<  장비 구매  >>--" << endl;
-		//for문 : {i}<<". " << 아이템명 << 아이템 설명? << 아이템 가격 << endl;
-		cout << " 1. " << endl;
+		//[물건복붙]수정 예정
 		break;
+		
 	default://do nothing
 		break;
 	}
@@ -111,4 +125,16 @@ void Shop::ShowItems(int choice)
 void Shop::SellItem() {
 	//수정
 
+}
+
+
+Shop::~Shop()
+{
+	for (auto& potion : potions)
+	{
+		delete potion.second;
+	}
+	//[물건복붙]수정 예정(나머지 추가 판매 물품들도 객체 해제하기)
+
+	
 }
