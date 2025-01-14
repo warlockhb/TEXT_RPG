@@ -67,15 +67,17 @@ void MonsterManager::DeleteMonster(Monster* _monster)
 	if (_monster == nullptr)
 		return;
 
-	//// Item Drop
-	//Item* item = DropItem();
+	// Item Drop
+	Item* item = DropItem();
 
-	//if ( item != nullptr )
-	//	item->Apply(Character::GetInstance());
+	if ( item != nullptr )
+	{
+		// Item을 Inventory에 넣어주기
+	}
 
-	//// Drop Gold
-	//int gold = DropGold();
-	//Character::GetInstance()->SetPlusGold(gold);
+	// Drop Gold
+	int gold = DropGold();
+	Character::GetInstance()->SetPlusGold(gold);
 
 
 	// monster Recording
