@@ -62,11 +62,22 @@ Monster* MonsterManager::CreateBossMonster()
 	return monster;
 }
 
-void MonsterManager::DeleteMonster(Monster* _monster)
+void MonsterManager::DeleteMonster(Monster* _monster, bool _isSuccessful)
 {
 	if (_monster == nullptr)
 		return;
 
+	if ( _isSuccessful )
+		HuntComplete(_monster);
+	else
+		HuntFailed();
+
+	delete _monster;
+	_monster = nullptr;
+}
+
+void MonsterManager::HuntComplete(Monster* _monster)
+{
 	// Item Drop
 	Item* item = DropItem();
 
@@ -79,12 +90,13 @@ void MonsterManager::DeleteMonster(Monster* _monster)
 	int gold = DropGold();
 	Character::GetInstance()->SetPlusGold(gold);
 
-
 	// monster Recording
 	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
-	
-	delete _monster;
-	_monster = nullptr;
+}
+
+void MonsterManager::HuntFailed()
+{
+	// 사냥 실패
 }
 
 Item* MonsterManager::DropItem()

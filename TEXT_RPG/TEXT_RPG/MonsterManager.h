@@ -15,7 +15,10 @@ public:
 
 	Monster* CreateNormalMonster();
 	Monster* CreateBossMonster();
-	void DeleteMonster(Monster* _monster);
+	void DeleteMonster(Monster* _monster, bool _isSuccessful);
+
+	void HuntComplete(Monster* _monster);
+	void HuntFailed();
 
 	Item* DropItem();
 	int	DropGold();
