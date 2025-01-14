@@ -1,7 +1,5 @@
 ﻿#include "Character.h"
-#include "Village.h"
 #include "Shop.h"
-#include "Logger.h"
 //#include "Item.h"
 
 #include <iostream>
