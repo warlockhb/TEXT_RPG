@@ -7,6 +7,14 @@ using namespace std;
 
 BattleManager::BattleManager()
 {
+    IsBattleEnd = false;
+}
+
+BattleManager::~BattleManager()
+{
+    delete _MonsterManager;
+    _MonsterManager = nullptr;
+    _Monster = nullptr;
 }
 
 void BattleManager::StartBattle()
@@ -37,31 +45,25 @@ void BattleManager::StartBattle()
 
 void BattleManager::AutoBattle()
 {
-    MonsterManager* _MonsterManager = new MonsterManager();
+    _MonsterManager = new MonsterManager();
 
-    Monster* Monster = _MonsterManager->CreateNormalMonster();
+    _Monster = _Monster = Character::GetInstance()->GetLevel() == 10
+                           ? _MonsterManager->CreateBossMonster()
+                           : _MonsterManager->CreateNormalMonster();
 
     int TurnCount = 0;
-    while (true)
+    while (!IsBattleEnd)
     {
         if (TurnCount % 2 == 0)
         {
-            AttackMonster(*Monster);
+            AttackMonster(*_Monster);
             //Todo : Item 랜덤 사용
         }
         else
         {
-            AttackCharacter(*Monster);
+            AttackCharacter(*_Monster);
         }
-
-        if (IsDead(TempHealth))
-        {
-            EndBattle();
-            _MonsterManager->DeleteMonster(Monster);
-            delete _MonsterManager;
-            break;
-        }
-
+        
         TurnCount++;
     }
 }
@@ -72,8 +74,13 @@ void BattleManager::AttackCharacter(Monster& Monster)
     int Damage = Monster.GetPower();
     cout << "---- 데미지 : " << Damage << " ----\n" << endl;
     Character::GetInstance()->SetMinusHp(Damage);
-    TempHealth = Character::GetInstance()->GetHealth();
-    cout << "캐릭터 남은 체력 : " << TempHealth << "\n" << endl;
+    int Health = Character::GetInstance()->GetHealth();
+    cout << "캐릭터 남은 체력 : " << Health << "\n" << endl;
+
+    if (IsDead(Health))
+    {
+        EndBattle(false);
+    }
 }
 
 void BattleManager::AttackMonster(Monster& Monster)
@@ -82,20 +89,26 @@ void BattleManager::AttackMonster(Monster& Monster)
     int Damage = Character::GetInstance()->GetAttack();
     cout << "---- 데미지 : " << Damage << " ----\n" << endl;
     Monster.TakeDamage(Damage);
-    TempHealth = Monster.GetHp();
-    cout << "몬스터 남은 체력 : " << TempHealth << "\n" << endl;
+    int Health = Monster.GetHp();
+    
+    cout << "몬스터 남은 체력 : " <<  Health << "\n" << endl;
+    
+    if (IsDead(Health))
+    {
+        EndBattle(true);
+    }
 }
 
 void BattleManager::ManualBattle()
 {
-    MonsterManager* _MonsterManager = new MonsterManager();
+   _MonsterManager = new MonsterManager();
     //Todo : 보스몬스터 조건
-    Monster* Monster = Character::GetInstance()->GetLevel() == 10
+    _Monster = Character::GetInstance()->GetLevel() == 10
                            ? _MonsterManager->CreateBossMonster()
                            : _MonsterManager->CreateNormalMonster();
 
     int TurnCount = 0;
-    while (true)
+    while (!IsBattleEnd)
     {
         if (TurnCount % 2 == 0)
         {
@@ -108,8 +121,7 @@ void BattleManager::ManualBattle()
             {
             case 1:
                 cout << "기본 공격" << endl;
-                AttackMonster(*Monster);
-
+                AttackMonster(*_Monster);
                 break;
             case 2:
                 break;
@@ -117,30 +129,24 @@ void BattleManager::ManualBattle()
                 break;
             default:
                 cout << "기본 공격" << endl;
-                AttackMonster(*Monster);
+                AttackMonster(*_Monster);
                 break;
             }
         }
         else
         {
-            AttackCharacter(*Monster);
+            AttackCharacter(*_Monster);
         }
-
-        if (IsDead(TempHealth))
-        {
-            EndBattle();
-            _MonsterManager->DeleteMonster(Monster);
-            delete _MonsterManager;
-
-            break;
-        }
-
+        
         TurnCount++;
     }
 }
 
-void BattleManager::EndBattle()
+void BattleManager::EndBattle(bool IsPlayerWin)
 {
+    _MonsterManager->HuntComplete(_Monster);
+    
+    IsBattleEnd = true;
     cout << "---- 전투 종료 ----" << endl;
 }
 
