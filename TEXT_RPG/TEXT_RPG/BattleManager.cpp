@@ -47,6 +47,7 @@ void BattleManager::AutoBattle()
 		if (TurnCount % 2 == 0)
 		{
 			AttackMonster(*Monster);
+			//Todo : Item 랜덤 사용
 		}
 		else
 		{
@@ -56,6 +57,8 @@ void BattleManager::AutoBattle()
 		if (IsDead(TempHealth))
 		{
 			EndBattle();
+			_MonsterManager->DeleteMonster(Monster);
+			delete _MonsterManager;
 			break;
 		}
 		
@@ -81,6 +84,8 @@ void BattleManager::AttackMonster(Monster& Monster)
 	Monster.TakeDamage(Damage);
 	TempHealth = Monster.GetHp();
 	cout <<"몬스터 남은 체력 : " << TempHealth << "\n" <<endl;
+
+	
 }
 
 void BattleManager::ManualBattle()
@@ -104,6 +109,7 @@ void BattleManager::ManualBattle()
 			case 1:
 				cout << "기본 공격" << endl;
 				AttackMonster(*Monster);
+				
 				break;
 			case 2:
 				break;
@@ -123,6 +129,9 @@ void BattleManager::ManualBattle()
 		if (IsDead(TempHealth))
 		{
 			EndBattle();
+			_MonsterManager->DeleteMonster(Monster);
+			delete _MonsterManager;
+			
 			break;
 		}
 		

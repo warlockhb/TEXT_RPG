@@ -2,7 +2,6 @@
 #define BATTLE_MANAGER_H_
 
 #include "Monster.h"
-#include "Character.h"
 
 class BattleManager
 {
