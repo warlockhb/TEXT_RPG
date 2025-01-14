@@ -11,7 +11,7 @@ void Village::ShowChoice(Character& character) {
 	/*Logger::getInstance().logEvent("마을 입장");*/
 	cout << "마을에 입장했습니다" << endl;
 	int choice;
-
+	
 	while (true) {
 		cout << "---<<  선택지  >>---" << endl;
 		cout << " 1. 여관" << endl;
@@ -22,6 +22,15 @@ void Village::ShowChoice(Character& character) {
 		//선택지 입력(예외처리필요)
 		cin >> choice;
 
+		//choice 예외 처리
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "잘못된 입력입니다. 숫자를 입력하세요." << endl;
+			continue;
+		}
+		
 		switch (choice) {
 		case 1:
 			cout << "여관에 입장중" << endl;

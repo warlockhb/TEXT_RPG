@@ -7,10 +7,11 @@ using namespace std;
 
 
 void Inn::EnterInn(Character& character) {
-	char choice;
+	string choice = "";
 	
 
-	while (true) {
+	while (true)
+	{
 		cout << "여관에 입장했습니다" << endl;
 		cout << "---<<  여관  >>---" << endl;
 		cout << "-  이용료  : 10G -" << endl;
@@ -18,11 +19,9 @@ void Inn::EnterInn(Character& character) {
 		cout << "여관을 사용하겠습니까?(y/n): ";
 		
 		cin >> choice;
-		
 
-		switch (choice) {
-		case 'y':
-			if (character.Getgold() < cost) {
+		if (choice == "y"){
+			if (character.Getgold() < INN_COST) {
 				//골드가 부족한 경우 -> 마을로 복귀
 				cout << "골드가 부족하여 마을로 돌아갑니다." << endl;
 				return;
@@ -35,17 +34,15 @@ void Inn::EnterInn(Character& character) {
 				cout << "마을로 돌아갑니다." << endl;
 				return;
 			}
-			break;
-		case 'n':
-			
-			cout << "여관 이용을 거부했습니다. 마을로 돌아갑니다." << endl;
+		}
+		else if (choice == "n"){
 			//여관 이용X 선택한 경우 -> 마을로 복귀
+			cout << "여관 이용을 거부했습니다. 마을로 돌아갑니다." << endl;
 			return;
-
-		default:
+		}
+		else{
 			//값을 잘못 입력한 경우 EnterInn() 재호출
-			cout << "y 또는 n만 입력해주세요" << endl;
-			break;
+			cout << "y 또는 n만 입력해주세요." << endl;
 		}
 	
 	}
@@ -53,7 +50,7 @@ void Inn::EnterInn(Character& character) {
 
 void Inn::UseInn(Character& character) {
 	//10골드 차감
-	character.SetMinusGold(10);
+	character.SetMinusGold(INN_COST);
 
 	//플레이어 체력 회복
 	int recover = character.GetMaxHealth() - character.GetHealth();

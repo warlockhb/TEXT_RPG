@@ -4,7 +4,7 @@
 
 class Inn {
 public:
-	const int cost = 10;
+	const int INN_COST = 10;
 
 	void EnterInn(Character& character);
 	void UseInn(Character& character);
