@@ -1,16 +1,16 @@
 ﻿#pragma once
 #include "PassiveItem.h"
 
-class PotionHPSmal: public PassiveItem
+class PotionHPSmall: public PassiveItem
 {
 public:
-    PotionHPSmal()
+    PotionHPSmall()
     {
         ID = ID_POTION_HP_SMALL;
         Name = "소형 포션";
         Price = 30;
         Description = "체력을 회복시켜준다.";
-        
+        DynamicStat.HpMod = 20;
     }
 };
 
