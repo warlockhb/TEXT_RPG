@@ -60,6 +60,7 @@ public:
     float GetModAttackMult() const { return Mod.AttackMult; }
 
     // Get stage mod
+    //test
     int GetStageLevelMod() const { return Stage.LevelMod; }
     int GetStageHpMod() const { return Stage.HpMod; }
     int GetStageMaxHpMod() const { return Stage.MaxHpMod; }
