@@ -19,9 +19,4 @@ public:
 
 	Item* DropItem();
 	int	DropGold();
-
-	/*string GetName();
-	int GetHp();
-	int GetPower();
-	void TakeDamage(int _damage);*/
 };
