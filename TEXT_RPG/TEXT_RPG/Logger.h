@@ -15,28 +15,28 @@ private:
 
     Logger() : TotalGoldAcquired(0) {}
 public:
-    // 蹂듭궗 �깮�꽦�옄 諛� ����엯 �뿰�궛�옄 �궘�젣
+    // 복사 생성자 및 대입 연산자 삭제
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
 
     static Logger& GetInstance();
 
-    // �씪諛� 濡쒓렇 湲곕줉
+    // 일반 로그 기록
     void LogEvent(const std::string& Entry);
 
-    // 紐ъ뒪�꽣 泥섏튂 湲곕줉
+    // 몬스터 처치 기록
     void RecordMonsterDefeated(const std::string& MonsterName);
 
-    // �븘�씠�뀥 �궗�슜 湲곕줉
+    // 아이템 사용 기록
     void RecordItemUsed(const std::string& ItemName);
 
-    // 怨⑤뱶 �쉷�뱷 湲곕줉
+    // 골드 획득 기록
     void AddGold(int Amount);
 
-    // 濡쒓렇 �쟾泥� 蹂닿린
+    // 로그 전체 보기
     void ShowLogs() const;
 
-    // �슂�빟 濡쒓렇 蹂닿린
+    // 요약 로그 보기
     void ShowSummary() const;
 };
 
