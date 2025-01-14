@@ -32,7 +32,7 @@ public:
 	//싱글톤
 	static Character * GetInstance(string New_name = "");
 
-	//Inventory* GetInventory();
+	Inventory* GetInventory();
 
 	//아이템사용&추가&제거
 	//void UseItem(int index);

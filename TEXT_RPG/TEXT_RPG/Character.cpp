@@ -6,6 +6,7 @@ using namespace std;
 Character * Character::instance = nullptr;
 
 Character::Character(string New_name)
+	: inventory()
 {
 	this->Name = New_name;
 	this->Level = 1;
@@ -28,6 +29,12 @@ Character* Character::GetInstance(string New_name)
 	}
 	return instance;
 }
+
+Inventory* Character::GetInventory()
+{
+	return inventory;
+}
+
 
 //void Character::UseItem(int index)
 //{
@@ -171,7 +178,7 @@ int Character::GetCurrentMaxHealth() const
 
 int Character::GetCurrentAttack() const
 {
-	return  CurrentMaxHealth;
+	return  CurrentAttack;
 }
 
 void Character::SetHealth(int health)
