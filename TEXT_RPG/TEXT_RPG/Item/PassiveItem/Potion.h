@@ -10,6 +10,7 @@ public:
         Name = "소형 포션";
         Price = 30;
         Description = "체력을 회복시켜준다.";
+        
     }
 };
 
