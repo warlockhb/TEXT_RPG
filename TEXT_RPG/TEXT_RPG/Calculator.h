@@ -1,4 +1,4 @@
-#ifndef CALCULATOR_H_
+﻿#ifndef CALCULATOR_H_
 #define CALCULATOR_H_
 
 class Calculator

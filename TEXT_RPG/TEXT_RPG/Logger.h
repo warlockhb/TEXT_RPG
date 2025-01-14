@@ -1,4 +1,4 @@
-// include/Logger.h
+﻿// include/Logger.h
 #ifndef LOGGER_H
 #define LOGGER_H
 
@@ -15,28 +15,28 @@ private:
 
     Logger() : TotalGoldAcquired(0) {}
 public:
-    // 복사 생성자 및 대입 연산자 삭제
+    // 蹂듭궗 �깮�꽦�옄 諛� ����엯 �뿰�궛�옄 �궘�젣
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
 
     static Logger& GetInstance();
 
-    // 일반 로그 기록
+    // �씪諛� 濡쒓렇 湲곕줉
     void LogEvent(const std::string& Entry);
 
-    // 몬스터 처치 기록
+    // 紐ъ뒪�꽣 泥섏튂 湲곕줉
     void RecordMonsterDefeated(const std::string& MonsterName);
 
-    // 아이템 사용 기록
+    // �븘�씠�뀥 �궗�슜 湲곕줉
     void RecordItemUsed(const std::string& ItemName);
 
-    // 골드 획득 기록
+    // 怨⑤뱶 �쉷�뱷 湲곕줉
     void AddGold(int Amount);
 
-    // 로그 전체 보기
+    // 濡쒓렇 �쟾泥� 蹂닿린
     void ShowLogs() const;
 
-    // 요약 로그 보기
+    // �슂�빟 濡쒓렇 蹂닿린
     void ShowSummary() const;
 };
 

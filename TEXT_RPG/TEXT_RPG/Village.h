@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Inn.h"
 #include "Shop.h"
 #include "Character.h"

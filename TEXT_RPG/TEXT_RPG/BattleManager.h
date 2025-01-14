@@ -1,4 +1,4 @@
-#ifndef BATTLE_MANAGER_H_
+﻿#ifndef BATTLE_MANAGER_H_
 #define BATTLE_MANAGER_H_
 
 #include "Monster.h"
@@ -12,6 +12,8 @@ public:
 	void StartBattle();
 	void AttackCharacter(Monster* monster);
 	void AttackMonster(Monster* monster);
+	void AutoBattle();
+	void ManualBattle();
 	void EndBattle();
 
 private:

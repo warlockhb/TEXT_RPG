@@ -1,4 +1,4 @@
-#include "Monster.h"
+﻿#include "Monster.h"
 
 
 Monster::Monster(string _name, int _hp, int _power)

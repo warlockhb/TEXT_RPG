@@ -1,4 +1,4 @@
-#include "GameManager.h"
+﻿#include "GameManager.h"
 
 void GameManager::StartGame()
 {
@@ -6,5 +6,5 @@ void GameManager::StartGame()
 }
 void GameManager::GenerateCharacter()
 {
-	//��???? ????
+	//占쏙옙???? ????
 }
