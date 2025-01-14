@@ -81,5 +81,51 @@ public:
 	//attack추가&제거
 	void SetMinusAttack(int minusatk);
 	void SetPlusAttack(int plusatk);
+
+	
+// Set functions implementation
+// Set new attack value
+void SetAttack(int newAttack) {
+	Attack = newAttack < 0 ? 0 : newAttack;
+}
+
+// Set new health value
+void SetHealth(int newHealth) {
+	Health = (newHealth < 0 ? 0 : newHealth > MaxHealth ? MaxHealth : newHealth);
+}
+
+// Set new maximum health value
+void SetMaxHealth(int newMaxHealth) {
+	MaxHealth = newMaxHealth < 0 ? 0 : newMaxHealth;
+	if (Health > newMaxHealth) {
+		Health = newMaxHealth;
+	}
+}
+
+// Set new gold value
+void SetGold(int newGold) {
+	Gold = newGold < 0 ? 0 : newGold;
+}
+
+// Set new experience value
+void SetExpDirectly(int newExp) {
+	Exp = newExp < 0 ? 0 : newExp;
+}
+
+// Set new maximum experience value
+void SetMaxExp(int newMaxExp) {
+	MaxExp = newMaxExp < 0 ? 0 : newMaxExp;
+}
+
+// Set new character name
+void SetName(const string& newName) {
+	Name = newName;
+}
+
+// Set character level directly
+void SetLevel(int newLevel) {
+	Level = newLevel < 0 ? 0 : newLevel;
+}
+	
 };
 
