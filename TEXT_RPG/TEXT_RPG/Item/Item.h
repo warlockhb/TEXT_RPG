@@ -59,10 +59,10 @@ public:
     bool operator==(const Item& other) const;
     
     //Get
-    int GetID() const;
-    string GetName() const;
-    int GetPrice() const;
-    string GetDescription() const;
-    StatModifier* GetMod() const;
-    StatModifier* GetModStage() const;
+    int GetID() const { return ID; }
+    string GetName() const { return Name; }
+    int GetPrice() const { return Price; }
+    string GetDescription() const { return Description; }
+    StatModifier* GetMod() const { return Mod; }
+    StatModifier* GetModStage() const { return ModStage; }
 };
