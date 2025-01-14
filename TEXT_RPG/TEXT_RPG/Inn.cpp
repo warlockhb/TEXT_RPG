@@ -57,7 +57,7 @@ void Inn::EnterInn(Character& character) {
 
 void Inn::UseInn(Character& character) {
 	//10怨⑤뱶 李④컧 諛� �뵆�젅�씠�뼱 泥대젰 �쉶蹂�(�닔�젙 �븘�슂re)
-	character.SetMinusGold(10);
+	character.LoseGold(10);
 	//character.health = character.maxhealth;//
 	//cout << "�옍�뿬 怨⑤뱶 �닔: "<< character.getgold() << endl;
 	//cout << "�쁽�옱 泥대젰: " << character.health << endl;

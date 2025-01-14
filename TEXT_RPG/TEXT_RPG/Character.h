@@ -47,9 +47,6 @@ public:
 	//인벤토리 추가
 	//void ByeInventory(int buycount);
 
-	//플레이어 사망
-	void Die();
-
 	//Get
 	string GetName() const;
 	int GetLevel() const;
@@ -61,16 +58,6 @@ public:
 	int GetCurrentHealth() const;
 	int GetCurrentMaxHealth() const;
 	int GetCurrentAttack() const;
-	
-	
-	//Set
-	//exp추가
-	//void SetExp(int plusexp);
-	//골드추가&제거
-	void SetMinusGold(int buymoney);
-	void SetPlusGold(int sellmoney);
-	//hp추가&제거
-	void SetPlusHp(int plushp);
 
 	//Set
 	void SetHealth(int health);
@@ -96,12 +83,12 @@ public:
 	//캐릭터 사망
 	void PlayerDie();
 	//경험치 증가
-	void ExpUp(int plusexp);
+	void GainExp(int plusexp);
 	//캐릭터 레벨업
 	void LevelUp();
 	//골드 추가
-	void GoldUp(int plusgold);
+	void AddGold(int plusgold);
 	//골드 감소
-	void GoldDown(int minusgold);
+	void LoseGold(int minusgold);
 };
 

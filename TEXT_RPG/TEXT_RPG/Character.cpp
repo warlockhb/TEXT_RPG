@@ -124,12 +124,6 @@ Character* Character::GetInstance(string New_name)
 //	}
 //}
 
-void Character::Die()
-{
-	cout << "캐릭터가 사망했습니다. 게임 오버" << endl;
-	cout << "당신의 최종 레벨 : " << Level << endl;
-}
-
 string Character::GetName() const
 {
 	return Name;
@@ -178,43 +172,6 @@ int Character::GetCurrentMaxHealth() const
 int Character::GetCurrentAttack() const
 {
 	return  CurrentMaxHealth;
-}
-
-void Character::SetMinusGold(int buymoney)
-{
-	if (Gold >= buymoney)
-	{
-		Gold -= buymoney;
-		cout << "골드를 사용했습니다! 사용된 골드 : " << buymoney << "남은 골드 : " << Gold << endl;
-	}
-	else
-	{
-		cout << "골드가 부족합니다! 현재 보유 골드 : " << Gold << endl;
-	}
-}
-
-void Character::SetPlusGold(int sellmoney)
-{
-	Gold += sellmoney;
-	cout << "현재 보유 골드 : " << Gold << endl;
-}
-
-void Character::SetPlusHp(int plushp)
-{
-	if (Health < MaxHealth)
-	{
-		Health += plushp;
-		cout << "현재 캐릭터의 체력 : " << Health << endl;
-
-		if (Health >= MaxHealth)
-		{
-			Health = MaxHealth;
-		}
-	}
-	else
-	{
-		cout << "체력을 회북 할 수 없습니다." << endl;
-	}
 }
 
 void Character::SetHealth(int health)
@@ -285,18 +242,16 @@ void Character::DisPlayStatus()
 
 void Character::TakeDamage(int damage)
 {
-	if (CurrentHealth > 0)
+	if (CurrentHealth <= 0)
 	{
-		CurrentHealth -= damage;
-		cout << "현재 캐릭터의 체력 : " << CurrentHealth << endl;
-
-		if (CurrentHealth <= 0)
-		{
-			CurrentHealth = 0;
-			PlayerDie();
-		}
+		PlayerDie();
+		return;
 	}
-	else
+
+	SetCurrentHealth(max(CurrentHealth - damage, 0));
+	cout << "캐릭터 피격! 대미지 : " << damage << "현재 체력 : " << GetCurrentHealth() << endl;
+
+	if (CurrentHealth <= 0)
 	{
 		PlayerDie();
 	}
@@ -304,7 +259,15 @@ void Character::TakeDamage(int damage)
 
 void Character::RecoverHealth(int health)
 {
-	
+	if (CurrentHealth < CurrentMaxHealth)
+	{
+		SetCurrentHealth(min(CurrentHealth + health, MaxHealth));
+	}
+	else if (CurrentHealth >= CurrentMaxHealth)
+	{
+		SetCurrentHealth(CurrentMaxHealth);
+		cout << "더이상 체력을 회복할 수 없습니다." << endl;
+	}
 }
 
 void Character::AllRecoverHealth()
@@ -314,9 +277,14 @@ void Character::AllRecoverHealth()
 
 void Character::PlayerDie()
 {
+	cout << "캐릭터 사망. 게임 오버" << endl;
+	cout << "===========================" << endl;
+	cout << "캐릭터 이름 : " << Name << endl;
+	cout << "최종 레벨 : " << Level << endl;
+	cout << "===========================" << endl;
 }
 
-void Character::ExpUp(int plusexp)
+void Character::GainExp(int plusexp)
 {
 	if (Level < 10)
 	{
@@ -353,14 +321,28 @@ void Character::LevelUp()
 	}
 }
 
-void Character::GoldUp(int plusgold)
+void Character::AddGold(int plusgold)
 {
-	
+	SetGold(Gold + plusgold);
+	cout << "현재 보유한 골드 : " << GetGold() << endl;
 }
 
-void Character::GoldDown(int minusgold)
+void Character::LoseGold(int minusgold)
 {
-	
+	if (GetGold() <= 0)
+	{
+		cout << "골드가...아예 없으신데요..?" << endl;
+	}
+
+	if (GetGold() >= minusgold)
+	{
+		SetGold(GetGold() - minusgold);
+		cout << "골드를 사용하셨습니다. 사용하신 골드 : " << minusgold << "현재 남은 골드 : " << GetGold() << endl;
+	}
+	else
+	{
+		cout << "골드가 부족합니다. 보유 골드 : " << GetGold() << endl;
+	}
 }
 
 
