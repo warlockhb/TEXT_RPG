@@ -35,7 +35,7 @@ public:
 	//싱글톤
 	static Character * GetInstance(string New_name = "");
 
-	//Inventory* GetInventory();
+	Inventory* GetInventory();
 
 	//아이템사용&추가&제거
 	//void UseItem(int index);
@@ -75,6 +75,7 @@ public:
 	//hp추가&제거
 	void SetPlusHp(int plushp);
 
+	
 	//Set
 	void SetHealth(int health);
 	void SetMaxHealth(int maxhealth);
@@ -99,12 +100,12 @@ public:
 	//캐릭터 사망
 	void PlayerDie();
 	//경험치 증가
-	void ExpUp(int plusexp);
+	void GainExp(int plusexp);
 	//캐릭터 레벨업
 	void LevelUp();
 	//골드 추가
-	void GoldUp(int plusgold);
+	void AddGold(int plusgold);
 	//골드 감소
-	void GoldDown(int minusgold);
+	void LoseGold(int minusgold);
 };
 
