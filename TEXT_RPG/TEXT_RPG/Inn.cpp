@@ -55,9 +55,10 @@ void Inn::EnterInn(Character& character) {
 }
 
 void Inn::UseInn(Character& character) {
-	//10골드 차감 및 플레이어 체력 회복(수정 필요re)
-	//character.SetMinusGold(10);
-	//cout << "잔여 골드 수: "<<character.getgold() << endl;
-	//cout << "현재 체력: " << character.health << endl;
-	//여관 이용 종료
+	//10골드 차감
+	character.SetMinusGold(10);
+
+	//플레이어 체력 회복
+	int recover = character.GetMaxHealth() - character.GetHealth();
+	character.SetPlusHp(recover);
 }
