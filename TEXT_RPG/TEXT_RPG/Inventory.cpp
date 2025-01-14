@@ -95,7 +95,7 @@ Inventory::~Inventory()
 void Inventory::Apply()
 {
     UpdateStaticStat();
-    UpdateEveryTurnStat();
+    UpdateStackStat();
 
     Owner->SetCurrentMaxHealth(Owner->GetMaxHealth() + TotalStaticStat.MaxHealth + TotalStackStat.MaxHealth);
     Owner->SetCurrentAttack(Owner->GetAttack() + TotalStaticStat.Attack + TotalStackStat.Attack);
