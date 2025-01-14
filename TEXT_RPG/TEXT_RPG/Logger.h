@@ -1,4 +1,4 @@
-// include/Logger.h
+ï»¿// include/Logger.h
 #ifndef LOGGER_H
 #define LOGGER_H
 
@@ -15,28 +15,28 @@ private:
 
     Logger() : TotalGoldAcquired(0) {}
 public:
-    // º¹»ç »ı¼ºÀÚ ¹× ´ëÀÔ ¿¬»êÀÚ »èÁ¦
+    // ë³µì‚¬ ìƒì„±ì ë° ëŒ€ì… ì—°ì‚°ì ì‚­ì œ
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
 
     static Logger& GetInstance();
 
-    // ÀÏ¹İ ·Î±× ±â·Ï
+    // ì¼ë°˜ ë¡œê·¸ ê¸°ë¡
     void LogEvent(const std::string& Entry);
 
-    // ¸ó½ºÅÍ Ã³Ä¡ ±â·Ï
+    // ëª¬ìŠ¤í„° ì²˜ì¹˜ ê¸°ë¡
     void RecordMonsterDefeated(const std::string& MonsterName);
 
-    // ¾ÆÀÌÅÛ »ç¿ë ±â·Ï
+    // ì•„ì´í…œ ì‚¬ìš© ê¸°ë¡
     void RecordItemUsed(const std::string& ItemName);
 
-    // °ñµå È¹µæ ±â·Ï
+    // ê³¨ë“œ íšë“ ê¸°ë¡
     void AddGold(int Amount);
 
-    // ·Î±× ÀüÃ¼ º¸±â
+    // ë¡œê·¸ ì „ì²´ ë³´ê¸°
     void ShowLogs() const;
 
-    // ¿ä¾à ·Î±× º¸±â
+    // ìš”ì•½ ë¡œê·¸ ë³´ê¸°
     void ShowSummary() const;
 };
 

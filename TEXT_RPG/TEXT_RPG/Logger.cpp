@@ -1,75 +1,75 @@
-// src/Logger.cpp
+ï»¿// src/Logger.cpp
 #include "Logger.h"
 #include <iostream>
 
-// GetInstance ¸Þ¼­µå ±¸Çö
+// GetInstance ë©”ì„œë“œ êµ¬í˜„
 Logger& Logger::GetInstance() {
     static Logger Instance;
     return Instance;
 }
 
-// LogEvent ¸Þ¼­µå ±¸Çö
+// LogEvent ë©”ì„œë“œ êµ¬í˜„
 void Logger::LogEvent(const std::string& Entry) {
     Logs.push_back(Entry);
-    std::cout << Entry << std::endl; // ½Ç½Ã°£À¸·Î ÄÜ¼Ö¿¡ Ãâ·Â
+    std::cout << Entry << std::endl; // ì‹¤ì‹œê°„ìœ¼ë¡œ ì½˜ì†”ì— ì¶œë ¥
 }
 
-// RecordMonsterDefeated ¸Þ¼­µå ±¸Çö
+// RecordMonsterDefeated ë©”ì„œë“œ êµ¬í˜„
 void Logger::RecordMonsterDefeated(const std::string& MonsterName) {
-    MonstersDefeated[MonsterName]++; // ¸ó½ºÅÍ Ã³Ä¡ ¼ö ++
-    LogEvent("Monster defeated: " + MonsterName); // ·Î±× ±â·Ï Ãß°¡ (¼±ÅÃ »çÇ×)
+    MonstersDefeated[MonsterName]++; // ëª¬ìŠ¤í„° ì²˜ì¹˜ ìˆ˜ ++
+    LogEvent("Monster defeated: " + MonsterName); // ë¡œê·¸ ê¸°ë¡ ì¶”ê°€ (ì„ íƒ ì‚¬í•­)
 }
 
-// RecordItemUsed ¸Þ¼­µå ±¸Çö
+// RecordItemUsed ë©”ì„œë“œ êµ¬í˜„
 void Logger::RecordItemUsed(const std::string& ItemName) {
-    ItemsUsed[ItemName]++; // ¾ÆÀÌÅÛ »ç¿ë ¼ö ++
-    LogEvent("Item used: " + ItemName); // ·Î±× ±â·Ï Ãß°¡ (¼±ÅÃ »çÇ×)
+    ItemsUsed[ItemName]++; // ì•„ì´í…œ ì‚¬ìš© ìˆ˜ ++
+    LogEvent("Item used: " + ItemName); // ë¡œê·¸ ê¸°ë¡ ì¶”ê°€ (ì„ íƒ ì‚¬í•­)
 }
 
-// AddGold ¸Þ¼­µå ±¸Çö
+// AddGold ë©”ì„œë“œ êµ¬í˜„
 void Logger::AddGold(int Amount) {
-    TotalGoldAcquired += Amount; // ÃÑ °ñµå È¹µæ·®
-    LogEvent("Gold acquired: " + std::to_string(Amount)); // ·Î±× ±â·Ï Ãß°¡ (¼±ÅÃ »çÇ×)
+    TotalGoldAcquired += Amount; // ì´ ê³¨ë“œ íšë“ëŸ‰
+    LogEvent("Gold acquired: " + std::to_string(Amount)); // ë¡œê·¸ ê¸°ë¡ ì¶”ê°€ (ì„ íƒ ì‚¬í•­)
 }
 
-// ShowLogs ¸Þ¼­µå ±¸Çö
+// ShowLogs ë©”ì„œë“œ êµ¬í˜„
 void Logger::ShowLogs() const {
-    std::cout << "----- °ÔÀÓ ·Î±× -----" << std::endl;
+    std::cout << "----- ê²Œìž„ ë¡œê·¸ -----" << std::endl;
     for (const auto& Entry : Logs) {
         std::cout << Entry << std::endl;
     }
 }
 
-// ShowSummary ¸Þ¼­µå ±¸Çö
+// ShowSummary ë©”ì„œë“œ êµ¬í˜„
 void Logger::ShowSummary() const {
-    std::cout << "\n----- °ÔÀÓ ¿ä¾à -----" << std::endl;
+    std::cout << "\n----- ê²Œìž„ ìš”ì•½ -----" << std::endl;
 
-    // ¸ó½ºÅÍ Ã³Ä¡ ³»¿ª
-    std::cout << "Ã³Ä¡ÇÑ ¸ó½ºÅÍ:" << std::endl;
+    // ëª¬ìŠ¤í„° ì²˜ì¹˜ ë‚´ì—­
+    std::cout << "ì²˜ì¹˜í•œ ëª¬ìŠ¤í„°:" << std::endl;
     if (MonstersDefeated.empty()) {
-        std::cout << "¾øÀ½" << std::endl;
+        std::cout << "ì—†ìŒ" << std::endl;
     }
     else {
         for (const auto& Pair : MonstersDefeated) {
             const std::string& Monster = Pair.first;
             int Count = Pair.second;
-            std::cout << Monster << " - " << Count << "¸¶¸®" << std::endl;
+            std::cout << Monster << " - " << Count << "ë§ˆë¦¬" << std::endl;
         }
     }
 
-    // ¾ÆÀÌÅÛ »ç¿ë ³»¿ª
-    std::cout << "»ç¿ëÇÑ ¾ÆÀÌÅÛ:" << std::endl;
+    // ì•„ì´í…œ ì‚¬ìš© ë‚´ì—­
+    std::cout << "ì‚¬ìš©í•œ ì•„ì´í…œ:" << std::endl;
     if (ItemsUsed.empty()) {
-        std::cout << "¾øÀ½" << std::endl;
+        std::cout << "ì—†ìŒ" << std::endl;
     }
     else {
         for (const auto& Pair : ItemsUsed) {
             const std::string& Item = Pair.first;
             int Count = Pair.second;
-            std::cout << Item << " - " << Count << "°³" << std::endl;
+            std::cout << Item << " - " << Count << "ê°œ" << std::endl;
         }
     }
 
-    // ÃÑ °ñµå È¹µæ
-    std::cout << "ÃÑ °ñµå È¹µæ: " << TotalGoldAcquired << "°ñµå" << std::endl;
+    // ì´ ê³¨ë“œ íšë“
+    std::cout << "ì´ ê³¨ë“œ íšë“: " << TotalGoldAcquired << "ê³¨ë“œ" << std::endl;
 }

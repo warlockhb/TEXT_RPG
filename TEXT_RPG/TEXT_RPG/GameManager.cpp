@@ -1,10 +1,10 @@
-#include "GameManager.h"
+ï»¿#include "GameManager.h"
 
 void GameManager::StartGame()
 {
-	//°ÔÀÓ ½ÃÀÛ
+	//???? ????
 }
 void GameManager::GenerateCharacter()
 {
-	//Ä³¸¯ÅÍ »ı¼º
+	//å ì™ì˜™???? ????
 }

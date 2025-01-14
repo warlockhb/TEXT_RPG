@@ -1,7 +1,9 @@
 #include "MonsterManager.h"
 #include "Logger.h"
 #include "Calculator.h"
-
+#include "BossMonster.h"
+#include "NormalMonster.h"
+#include "Character.h"
 
 MonsterManager::MonsterManager()
 	: monster(nullptr)
@@ -13,10 +15,13 @@ MonsterManager::~MonsterManager()
 {
 }
 
-void MonsterManager::CreateMonster()
+Monster* MonsterManager::CreateNormalMonster()
 {
-	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 3
-	int randomNum = dist(gen); // ·£´ý ¹øÈ£ »ý¼º
+	if (monster != nullptr)
+		return monster;
+
+	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 5
+	int randomNum = dist(gen);
 
 	string monsterName = "";
 
@@ -33,51 +38,76 @@ void MonsterManager::CreateMonster()
 	else if (randomNum == 5)
 		monsterName = "Zombie";
 
-	// ÇÃ·¹ÀÌ¾î ·¹º§¿¡ µû¶ó ¸ó½ºÅÍ ½ºÅ×ÀÌÅÍ½º º¯°æÇØÁÖ±â.
-	monster = new Monster(monsterName, 100, 100);
+	// Create NormalMonster
+	int hp = Character::GetInstance()->GetLevel() * 100;
+	int power = Character::GetInstance()->GetLevel() * 10;
+
+	monster = new NormalMonster(monsterName, hp , power);
+
+	return monster;
 }
 
-void MonsterManager::DeleteMonster()
+Monster* MonsterManager::CreateBossMonster()
 {
-	// monster ·¹º§¿¡ µû¶ó¼­ ·£´ýÀ¸·Î item drop.
-
-	// monster Ã³Ä¡±â·Ï ÀúÀå
 	if (monster != nullptr)
+		return monster;
+
+	// ç•°ë¶½ï¿½ï¿½ï¿½ì˜‰ï¿½ë¾½.
+	string monsterName = "Boss Monster";
+	int hp = 10 * 500;
+	int power = 10 *20;
+
+	monster = new BossMonster(monsterName, hp , power);
+
+	return monster;
+}
+
+void MonsterManager::DeleteMonster(Monster* _monster)
+{
+	if (_monster == nullptr)
+		return;
+
+	// Item Drop
+	Item* item = DropItem();
+
+	if ( item != nullptr )
 	{
-		Logger::getInstance().recordMonsterDefeated(GetName());
+		// Itemì„ Inventoryì— ë„£ì–´ì£¼ê¸°
 	}
 
-	// monster»èÁ¦
-	delete monster;
-	monster = nullptr;
+	// Drop Gold
+	int gold = DropGold();
+	Character::GetInstance()->SetPlusGold(gold);
+
+
+	// monster Recording
+	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
+	
+	delete _monster;
+	_monster = nullptr;
 }
 
-string MonsterManager::GetName()
+Item* MonsterManager::DropItem()
 {
-	if (monster != nullptr)
-		return monster->GetName();
+	std::uniform_int_distribution<> dist(0 , 4); // 0 ~ 4
+	int randomNum = dist(gen); 
 
-	return string();
+	// 20%
+	if ( randomNum == 4 )
+	{
+		// Random.
+		// return Item;
+	}
+
+
+	return nullptr;
 }
 
-int MonsterManager::GetHp()
+int MonsterManager::DropGold()
 {
-	if (monster != nullptr)
-		return monster->GetHp();
+	std::uniform_int_distribution<> dist(1 , 5); // 0 ~ 4
+	int randomNum = dist(gen);
+	int gold = Character::GetInstance()->GetLevel() * randomNum;
 
-	return 0;
-}
-
-int MonsterManager::GetPower()
-{
-	if (monster != nullptr)
-		return monster->GetPower();
-
-	return 0;
-}
-
-void MonsterManager::TakeDamage(int _damage)
-{
-	if (monster != nullptr)
-		monster->TakeDamage(_damage);
+	return gold;
 }
