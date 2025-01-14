@@ -2,74 +2,74 @@
 #include "Logger.h"
 #include <iostream>
 
-// GetInstance 硫붿꽌�뱶 援ы쁽
+// GetInstance 메서드 구현
 Logger& Logger::GetInstance() {
     static Logger Instance;
     return Instance;
 }
 
-// LogEvent 硫붿꽌�뱶 援ы쁽
+// LogEvent 메서드 구현
 void Logger::LogEvent(const std::string& Entry) {
     Logs.push_back(Entry);
-    std::cout << Entry << std::endl; // �떎�떆媛꾩쑝濡� 肄섏넄�뿉 異쒕젰
+    std::cout << Entry << std::endl; // 실시간으로 콘솔에 출력
 }
 
-// RecordMonsterDefeated 硫붿꽌�뱶 援ы쁽
+// RecordMonsterDefeated 메서드 구현
 void Logger::RecordMonsterDefeated(const std::string& MonsterName) {
-    MonstersDefeated[MonsterName]++; // 紐ъ뒪�꽣 泥섏튂 �닔 ++
-    LogEvent("Monster defeated: " + MonsterName); // 濡쒓렇 湲곕줉 異붽�� (�꽑�깮 �궗�빆)
+    MonstersDefeated[MonsterName]++; // 몬스터 처치 수 ++
+    LogEvent("Monster defeated: " + MonsterName); // 로그 기록 추가 (선택 사항)
 }
 
-// RecordItemUsed 硫붿꽌�뱶 援ы쁽
+// RecordItemUsed 메서드 구현
 void Logger::RecordItemUsed(const std::string& ItemName) {
-    ItemsUsed[ItemName]++; // �븘�씠�뀥 �궗�슜 �닔 ++
-    LogEvent("Item used: " + ItemName); // 濡쒓렇 湲곕줉 異붽�� (�꽑�깮 �궗�빆)
+    ItemsUsed[ItemName]++; // 아이템 사용 수 ++
+    LogEvent("Item used: " + ItemName); // 로그 기록 추가 (선택 사항)
 }
 
-// AddGold 硫붿꽌�뱶 援ы쁽
+// AddGold 메서드 구현
 void Logger::AddGold(int Amount) {
-    TotalGoldAcquired += Amount; // 珥� 怨⑤뱶 �쉷�뱷�웾
-    LogEvent("Gold acquired: " + std::to_string(Amount)); // 濡쒓렇 湲곕줉 異붽�� (�꽑�깮 �궗�빆)
+    TotalGoldAcquired += Amount; // 총 골드 획득량
+    LogEvent("Gold acquired: " + std::to_string(Amount)); // 로그 기록 추가 (선택 사항)
 }
 
-// ShowLogs 硫붿꽌�뱶 援ы쁽
+// ShowLogs 메서드 구현
 void Logger::ShowLogs() const {
-    std::cout << "----- 寃뚯엫 濡쒓렇 -----" << std::endl;
+    std::cout << "----- 게임 로그 -----" << std::endl;
     for (const auto& Entry : Logs) {
         std::cout << Entry << std::endl;
     }
 }
 
-// ShowSummary 硫붿꽌�뱶 援ы쁽
+// ShowSummary 메서드 구현
 void Logger::ShowSummary() const {
-    std::cout << "\n----- 寃뚯엫 �슂�빟 -----" << std::endl;
+    std::cout << "\n----- 게임 요약 -----" << std::endl;
 
-    // 紐ъ뒪�꽣 泥섏튂 �궡�뿭
-    std::cout << "泥섏튂�븳 紐ъ뒪�꽣:" << std::endl;
+    // 몬스터 처치 내역
+    std::cout << "처치한 몬스터:" << std::endl;
     if (MonstersDefeated.empty()) {
-        std::cout << "�뾾�쓬" << std::endl;
+        std::cout << "없음" << std::endl;
     }
     else {
         for (const auto& Pair : MonstersDefeated) {
             const std::string& Monster = Pair.first;
             int Count = Pair.second;
-            std::cout << Monster << " - " << Count << "留덈━" << std::endl;
+            std::cout << Monster << " - " << Count << "마리" << std::endl;
         }
     }
 
-    // �븘�씠�뀥 �궗�슜 �궡�뿭
-    std::cout << "�궗�슜�븳 �븘�씠�뀥:" << std::endl;
+    // 아이템 사용 내역
+    std::cout << "사용한 아이템:" << std::endl;
     if (ItemsUsed.empty()) {
-        std::cout << "�뾾�쓬" << std::endl;
+        std::cout << "없음" << std::endl;
     }
     else {
         for (const auto& Pair : ItemsUsed) {
             const std::string& Item = Pair.first;
             int Count = Pair.second;
-            std::cout << Item << " - " << Count << "媛�" << std::endl;
+            std::cout << Item << " - " << Count << "개" << std::endl;
         }
     }
 
-    // 珥� 怨⑤뱶 �쉷�뱷
-    std::cout << "珥� 怨⑤뱶 �쉷�뱷: " << TotalGoldAcquired << "怨⑤뱶" << std::endl;
+    // 총 골드 획득
+    std::cout << "총 골드 획득: " << TotalGoldAcquired << "골드" << std::endl;
 }
