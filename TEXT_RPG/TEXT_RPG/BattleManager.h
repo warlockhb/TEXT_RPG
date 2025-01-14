@@ -10,14 +10,14 @@ public:
 	BattleManager();
 
 	void StartBattle();
+private:
 	void AttackCharacter(Monster* monster);
 	void AttackMonster(Monster* monster);
 	void AutoBattle();
 	void ManualBattle();
 	void EndBattle();
-
-private:
-
+	bool IsDead(int Health);
+	int TempHealth;
 };
 
 #endif
