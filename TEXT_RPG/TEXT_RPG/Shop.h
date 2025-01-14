@@ -4,9 +4,10 @@
 
 
 class Shop {
+
 public:
 	void EnterShop(Character& character);
-	//void ShowItems(Item& item);//re
-	void BuyItem(Character& character);
-	void SellItem(Character& character);
+	void ShowItems(int choice);
+	void BuyItem();
+	void SellItem();
 };
