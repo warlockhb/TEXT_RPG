@@ -12,10 +12,12 @@ BattleManager::BattleManager()
 void BattleManager::StartBattle()
 {
 	//Todo : 자동공격 & 수동공격
-	cout << "1. 자동 전투 ___ 2. 수동 전투" << endl;
-	int BattleType = 0;
-	cin >> BattleType;
-	cout << endl;
+	//cout << "1. 자동 전투 ___ 2. 수동 전투" << endl;
+
+	cout << "---- 자동 전투 시작 ----" << endl;
+	int BattleType = 1;
+	// cin >> BattleType;
+	// cout << endl;
 
 	switch (BattleType)
 	{
