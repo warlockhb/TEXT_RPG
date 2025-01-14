@@ -1,4 +1,4 @@
-#include "Character.h"
+﻿#include "Character.h"
 #include "Village.h"
 #include "Shop.h"
 #include "Logger.h"
