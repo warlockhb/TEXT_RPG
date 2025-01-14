@@ -1,4 +1,4 @@
-﻿#ifndef BATTLE_MANAGER_H_
+#ifndef BATTLE_MANAGER_H_
 #define BATTLE_MANAGER_H_
 
 #include "Monster.h"
