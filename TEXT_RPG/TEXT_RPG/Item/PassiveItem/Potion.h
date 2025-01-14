@@ -10,7 +10,8 @@ public:
         Name = "소형 포션";
         Price = 30;
         Description = "체력을 회복시켜준다.";
-        DynamicStat.HpMod = 20;
+        StaticStat.MaxHpMod = 100;
+        EveryTurnStat.HpMod = 20;
     }
 };
 

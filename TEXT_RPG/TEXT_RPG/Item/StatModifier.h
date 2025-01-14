@@ -8,7 +8,8 @@ struct StatModifier
     int ExpMod = 0;
     int AttackMod = 0;
     int GoldMod = 0;
-        
+    
+    int HpMult = 0.0f;;    
     float MaxHpMult = 0.0f;
     float AttackMult = 0.0f;
 
@@ -39,16 +40,15 @@ struct StatModifier
         }
         return *this;
     }
-
-    template <typename T>
-    StatModifier& operator*(const T value)
+    
+    StatModifier& operator*=(const int value)
     {
-        LevelMod = static_cast<int>(LevelMod * value);
-        HpMod = static_cast<int>(HpMod * value);
-        MaxHpMod = static_cast<int>(MaxHpMod * value);
-        AttackMod = static_cast<int>(AttackMod * value);
-        ExpMod = static_cast<int>(ExpMod * value);
-        GoldMod = static_cast<int>(GoldMod * value);
+        LevelMod = LevelMod * value;
+        HpMod = HpMod * value;
+        MaxHpMod = MaxHpMod * value;
+        AttackMod = AttackMod * value;
+        ExpMod = ExpMod * value;
+        GoldMod = GoldMod * value;
         MaxHpMult *= value;
         AttackMult *= value;
         return *this;

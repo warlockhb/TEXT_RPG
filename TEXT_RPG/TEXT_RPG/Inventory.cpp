@@ -1,43 +1,88 @@
 #include "Inventory.h"
 
 
-void Inventory::Update()
+void Inventory::UpdateStaticStat()
 {
     Stat Stat;
     
     for (auto item : ItemsInventory)
     {
-        
         if (item)
         {
+            StatModifier StaticStat = item->GetStaticStat();
             // 모디
-            Stat.Level += item->GetStaticStat().LevelMod +
-                item->GetDynamicStat().LevelMod;
-            
-            Stat.Health += item->GetStaticStat().HpMod +
-                item->GetDynamicStat().HpMod;
-            
-            Stat.MaxHealth += item->GetStaticStat().MaxHpMod +
-                  item->GetDynamicStat().MaxHpMod;
-
-            Stat.Attack += item->GetStaticStat().AttackMod +
-               item->GetDynamicStat().AttackMod;
-
-            Stat.Exp += item->GetStaticStat().ExpMod +
-                item->GetDynamicStat().ExpMod;
-
-            Stat.Gold += item->GetStaticStat().GoldMod +
-                item->GetDynamicStat().GoldMod;
+            // 현재 체력 비례는 제외
+            Stat.MaxHealth += StaticStat.MaxHpMod;
+            Stat.Attack += StaticStat.AttackMod;
 
             // 멀티
-            Stat.MaxHealth += (Owner->GetMaxHealth() * item->GetStaticStat().MaxHpMult) +
-                (Owner->GetMaxHealth() * item->GetDynamicStat().MaxHpMult);
-            
-            Stat.Attack += (Owner->GetMaxHealth() * item->GetStaticStat().AttackMult) +
-                (Owner->GetMaxHealth() * item->GetDynamicStat().AttackMult);
+            // 현재 체력 비례는 제외
+            Stat.MaxHealth += (Owner->GetMaxHealth() * StaticStat.MaxHpMult);
+            Stat.Attack += (Owner->GetAttack() * StaticStat.AttackMult);
         }
     }
+    TotalStaticStat = Stat;
 }
+
+void Inventory::UpdateStackStat()
+{
+    Stat Stat;
+    
+    for (auto item : ItemsInventory)
+    {
+        if (item)
+        {
+            StatModifier StackStat = item->GetStackStat();
+            int Stack = item->GetStack();
+            
+            // 모디
+            // 현재 체력 비례는 제외
+            Stat.MaxHealth += StackStat.MaxHpMod * Stack;
+            Stat.Attack += StackStat.AttackMod * Stack;
+
+            // 멀티
+            Stat.MaxHealth += static_cast<int>(Owner->GetMaxHealth() * StackStat.MaxHpMult) * Stack;
+            Stat.Attack += static_cast<int>(Owner->GetAttack() * StackStat.AttackMult) * Stack;
+        }
+    }
+    TotalStackStat = Stat;
+}
+
+void Inventory::UpdateEveryTurnStat()
+{
+    Stat Stat;
+    
+    for (auto item : ItemsInventory)
+    {
+        if (item)
+        {
+            StatModifier EveryTurnStat = item->GetEveryTurnStat();
+            // 모디
+            // 현재 체력 비례는 제외
+            Stat.Health += EveryTurnStat.HpMod;
+            Stat.MaxHealth += EveryTurnStat.MaxHpMod;
+            Stat.Attack += EveryTurnStat.AttackMod;
+            Stat.Exp += EveryTurnStat.ExpMod;
+            Stat.Gold += EveryTurnStat.GoldMod;
+
+            // 멀티
+            // 최대 체력 비례 회복 매커니즘
+            Stat.Health += (Owner->GetMaxHealth() * EveryTurnStat.HpMult);
+            Stat.MaxHealth += (Owner->GetMaxHealth() * EveryTurnStat.MaxHpMult);
+            Stat.Attack += (Owner->GetAttack() * EveryTurnStat.AttackMult);
+        }
+        
+    }
+    TotalEveryTurnStat = Stat;
+
+    // 현재 적용
+    Owner->SetExp(Owner->GetExp() + TotalEveryTurnStat.Exp);
+    Owner->SetGold(Owner->GetGold() + TotalEveryTurnStat.Gold);
+    Owner->SetCurrentMaxHealth(Owner->GetCurrentMaxHealth() + TotalEveryTurnStat.MaxHealth);
+    Owner->SetCurrentHealth(Owner->GetCurrentHealth() + TotalEveryTurnStat.Health);
+    Owner->SetCurrentAttack(Owner->GetCurrentAttack() + TotalEveryTurnStat.Attack);
+}
+
 
 Inventory::~Inventory()
 {
@@ -47,6 +92,17 @@ Inventory::~Inventory()
     }
 }
 
+void Inventory::Apply()
+{
+    UpdateStaticStat();
+    UpdateEveryTurnStat();
+
+    Owner->SetCurrentMaxHealth(Owner->GetMaxHealth() + TotalStaticStat.MaxHealth + TotalStackStat.MaxHealth);
+    Owner->SetCurrentAttack(Owner->GetAttack() + TotalStaticStat.Attack + TotalStackStat.Attack);
+}
+
+
+
 void Inventory::DisplayInventory()
 {
 }
@@ -55,7 +111,7 @@ void Inventory::AddItem(PassiveItem* item)
 {
     ItemsInventory.push_back(item);
     
-    Update();
+    Apply();
 }
 
 void Inventory::RemoveItem(PassiveItem* item)
@@ -66,8 +122,8 @@ void Inventory::RemoveItem(PassiveItem* item)
     {
         ItemsInventory.erase(it);
     }
-    
-    Update();
+
+    Apply();
 }
 
 void Inventory::RemoveItem(int index)
@@ -81,8 +137,7 @@ void Inventory::RemoveItem(int index)
     {
         ItemsInventory.erase(it);
     }
-
-    Update();
+    Apply();
 }
 
 PassiveItem* Inventory::GetItem(int index)
@@ -96,9 +151,11 @@ void Inventory::UpdateStage()
 {
     for (auto item : ItemsInventory)
     {
-        item->UpdateDynamic(1);
+        if (item)
+            item->UpdateStack(1);
     }
-    Update();
+    Apply();
+    UpdateEveryTurnStat();
 }
 
 

@@ -224,7 +224,6 @@ void Character::SetCurrentHealth(int health)
 
 void Character::SetCurrentMaxHealth(int maxhealth)
 {
-	maxhealth = min(maxhealth, MaxHealth);
 	maxhealth = max(maxhealth, 1);
 	CurrentMaxHealth = maxhealth;
 }
