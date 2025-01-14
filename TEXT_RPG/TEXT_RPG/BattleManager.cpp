@@ -63,22 +63,22 @@ void BattleManager::AutoBattle()
 
 void BattleManager::AttackCharacter(Monster* Monster)
 {
-	cout << "---- 몬스터가 플레이어를 공격합니다.----" << endl;
+	cout << "---- 몬스터가 플레이어를 공격합니다.----\n" << endl;
 	int Damage = Monster->GetPower();
-	cout << "---- 데미지 : "<<  Damage << " ----" << endl;
+	cout << "---- 데미지 : "<<  Damage << " ----\n" << endl;
 	Character::GetInstance()->SetMinusHp(Damage);
 	TempHealth = Character::GetInstance()->GetHealth();
-	cout << "캐릭터 남은 체력 : " << TempHealth << endl;
+	cout << "캐릭터 남은 체력 : " << TempHealth << "\n" <<endl;
 }
 
 void BattleManager::AttackMonster(Monster* Monster)
 {
-	cout << "---- 플레이어가 몬스터를 공격합니다.----" << endl; 
+	cout << "---- 플레이어가 몬스터를 공격합니다.----\n" << endl; 
 	int Damage = Character::GetInstance()->GetAttack();
-	cout <<"---- 데미지 : " <<  Damage << " ----" << endl;
+	cout <<"---- 데미지 : " <<  Damage << " ----\n" << endl;
 	Monster->TakeDamage(Damage);
 	TempHealth = Monster->GetHp();
-	cout <<"몬스터 남은 체력 : " << TempHealth << endl;
+	cout <<"몬스터 남은 체력 : " << TempHealth << "\n" <<endl;
 }
 
 void BattleManager::ManualBattle()
