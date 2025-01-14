@@ -1,4 +1,4 @@
-
+﻿
 #pragma once
 #include <string>
 
@@ -32,11 +32,11 @@ protected:
 
 private:
 
-    // 기본 모디파이 적용
+    // 湲곕낯 紐⑤뵒�뙆�씠 �쟻�슜
     // void ApplyModifier(Character* Character);
     // void RemoveModifier(Character* Character);
 
-    // 특수 효과 적용
+    // �듅�닔 �슚怨� �쟻�슜
     // virtual void ApplyEffect(Character* Character);
     // virtual void RemoveEffect(Character* Character);
 
@@ -45,7 +45,7 @@ public:
     Item() = default;
     virtual ~Item() = default;
 
-    // 비교 연산자 : 캐릭터 HasItem에서 사용 가능
+    // 鍮꾧탳 �뿰�궛�옄 : 罹먮┃�꽣 HasItem�뿉�꽌 �궗�슜 媛��뒫
     bool operator==(const Item& other) const;
     
     void Apply(Character* Character);

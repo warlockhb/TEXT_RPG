@@ -1,4 +1,4 @@
-#include "Inn.h"
+﻿#include "Inn.h"
 //#include "Item.h"
 #include "Character.h"
 #include "Logger.h"
@@ -14,41 +14,41 @@ void Inn::EnterInn(Character& character) {
 	
 
 	while (true) {
-		cout << "여관에 입장했습니다." << endl;
-		cout << "---<<  여관  >>---" << endl;
-		cout << "-  이용료 : 10G -" << endl;
+		cout << "�뿬愿��뿉 �엯�옣�뻽�뒿�땲�떎." << endl;
+		cout << "---<<  �뿬愿�  >>---" << endl;
+		cout << "-  �씠�슜猷� : 10G -" << endl;
 		cout << "------------------" << endl;
-		cout << "여관을 사용하겠습니까?(y/n): ";
-		//선택지 입력(예외처리필요)
+		cout << "�뿬愿��쓣 �궗�슜�븯寃좎뒿�땲源�?(y/n): ";
+		//�꽑�깮吏� �엯�젰(�삁�쇅泥섎━�븘�슂)
 		cin >> choice;
 		
 
 		switch (choice) {
 		case 'y':
-			//여관 이용O 선택한 경우
+			//�뿬愿� �씠�슜O �꽑�깮�븳 寃쎌슦
 			if (character.Getgold() < cost) {
-				//골드 부족한 경우 -> 마을로 복귀
-				cout << "골드가 부족하여 마을로 돌아갑니다." << endl;
+				//怨⑤뱶 遺�議깊븳 寃쎌슦 -> 留덉쓣濡� 蹂듦��
+				cout << "怨⑤뱶媛� 遺�議깊븯�뿬 留덉쓣濡� �룎�븘媛묐땲�떎." << endl;
 				return;
 			}
 			else {
-				//골드 충분한 경우 -> 여관 이용 후 마을로 복귀
-				cout << "여관 이용중" << endl;
+				//怨⑤뱶 異⑸텇�븳 寃쎌슦 -> �뿬愿� �씠�슜 �썑 留덉쓣濡� 蹂듦��
+				cout << "�뿬愿� �씠�슜以�" << endl;
 				UseInn(character);
-				//마을로 복귀
-				cout << "마을로 돌아갑니다." << endl;
+				//留덉쓣濡� 蹂듦��
+				cout << "留덉쓣濡� �룎�븘媛묐땲�떎." << endl;
 				return;
 			}
 			break;
 		case 'n':
-			//여관 이용X 선택한 경우 -> 마을로 복귀 
-			cout << "여관 이용을 거부했습니다. 마을로 돌아갑니다." << endl;
-			//마을로 복귀
+			//�뿬愿� �씠�슜X �꽑�깮�븳 寃쎌슦 -> 留덉쓣濡� 蹂듦�� 
+			cout << "�뿬愿� �씠�슜�쓣 嫄곕���뻽�뒿�땲�떎. 留덉쓣濡� �룎�븘媛묐땲�떎." << endl;
+			//留덉쓣濡� 蹂듦��
 			return;
 
 		default:
-			//값을 잘못 입력한 경우 EnterInn() 재호출
-			cout << "y 또는 n만 입력해주세요" << endl;
+			//媛믪쓣 �옒紐� �엯�젰�븳 寃쎌슦 EnterInn() �옱�샇異�
+			cout << "y �삉�뒗 n留� �엯�젰�빐二쇱꽭�슂" << endl;
 			break;
 		}
 	
@@ -56,11 +56,11 @@ void Inn::EnterInn(Character& character) {
 }
 
 void Inn::UseInn(Character& character) {
-	//10골드 차감 및 플레이어 체력 회복(수정 필요re)
+	//10怨⑤뱶 李④컧 諛� �뵆�젅�씠�뼱 泥대젰 �쉶蹂�(�닔�젙 �븘�슂re)
 	character.SetMinusGold(10);
 	//character.health = character.maxhealth;//
-	//cout << "잔여 골드 수: "<< character.getgold() << endl;
-	//cout << "현재 체력: " << character.health << endl;
-	//여관 이용 종료
-	/*Logger::getInstance().logEvent("여관 이용 종료");*/
+	//cout << "�옍�뿬 怨⑤뱶 �닔: "<< character.getgold() << endl;
+	//cout << "�쁽�옱 泥대젰: " << character.health << endl;
+	//�뿬愿� �씠�슜 醫낅즺
+	/*Logger::getInstance().logEvent("�뿬愿� �씠�슜 醫낅즺");*/
 }

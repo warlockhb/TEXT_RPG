@@ -1,4 +1,4 @@
-#include "MonsterManager.h"
+﻿#include "MonsterManager.h"
 #include "Logger.h"
 #include "Calculator.h"
 #include "BossMonster.h"
@@ -21,7 +21,7 @@ Monster* MonsterManager::CreateNormalMonster()
 		return monster;
 
 	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 3
-	int randomNum = dist(gen); // 랜덤 번호 생성
+	int randomNum = dist(gen); // �옖�뜡 踰덊샇 �깮�꽦
 
 	string monsterName = "";
 
@@ -38,7 +38,7 @@ Monster* MonsterManager::CreateNormalMonster()
 	else if (randomNum == 5)
 		monsterName = "Zombie";
 
-	// 플레이어 레벨에 따라 몬스터 스테이터스 변경해주기.
+	// �뵆�젅�씠�뼱 �젅踰⑥뿉 �뵲�씪 紐ъ뒪�꽣 �뒪�뀒�씠�꽣�뒪 蹂�寃쏀빐二쇨린.
 	monster = new NormalMonster(monsterName, 100, 100);
 
 	return monster;
@@ -49,7 +49,7 @@ Monster* MonsterManager::CreateBossMonster()
 	if (monster != nullptr)
 		return monster;
 
-	// 추가작업.
+	// 異붽���옉�뾽.
 	string monsterName = "Boss Monster";
 	monster = new BossMonster(monsterName, 100, 100);
 
@@ -61,12 +61,12 @@ void MonsterManager::DeleteMonster(Monster* _monster)
 	if (_monster == nullptr)
 		return;
 
-	// monster 레벨에 따라서 랜덤으로 item drop.
+	// monster �젅踰⑥뿉 �뵲�씪�꽌 �옖�뜡�쑝濡� item drop.
 
-	// monster 처치기록 저장
+	// monster 泥섏튂湲곕줉 ����옣
 	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
 	
-	// monster삭제
+	// monster�궘�젣
 	delete _monster;
 	_monster = nullptr;
 }
