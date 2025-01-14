@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <string>
-#include "Inventory.h"
+// #include "Inventory.h"
+using namespace std;
+
+class Inventory;
 
 class Character
 {

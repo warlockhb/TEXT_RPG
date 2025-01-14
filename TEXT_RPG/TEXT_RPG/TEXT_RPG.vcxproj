@@ -161,6 +161,7 @@
     <ClInclude Include="Item\PassiveItem\Amulet.h" />
     <ClInclude Include="Item\PassiveItem\PassiveItem.h" />
     <ClInclude Include="Item\PassiveItem\Potion.h" />
+    <ClInclude Include="Item\StatModifier.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterManager.h" />
