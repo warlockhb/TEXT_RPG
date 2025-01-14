@@ -15,9 +15,9 @@ public:
 	void AutoBattle();
 	void ManualBattle();
 	void EndBattle();
-
+	bool IsDead(int Health);
 private:
-
+	int TempHealth;
 };
 
 #endif

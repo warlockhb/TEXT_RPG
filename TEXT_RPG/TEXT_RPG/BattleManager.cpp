@@ -33,20 +33,6 @@ void BattleManager::StartBattle()
 	}
 }
 
-void BattleManager::AttackCharacter(Monster* Monster)
-{
-	cout << "---- 몬스터가 플레이어를 공격합니다.----" << endl;
-	cout << "---- 데미지 : "<< Monster->GetPower() << "----" << endl;
-	
-	
-}
-
-void BattleManager::AttackMonster(Monster* Monster)
-{
-	cout << "---- ----" << endl; 
-
-}
-
 void BattleManager::AutoBattle()
 {
 	MonsterManager* _MonsterManager = new MonsterManager();
@@ -64,16 +50,50 @@ void BattleManager::AutoBattle()
 		{
 			AttackCharacter(Monster);
 		}
+
+		if (IsDead(TempHealth))
+		{
+			EndBattle();
+			break;
+		}
+		
+		TurnCount++;
 	}
+}
+
+void BattleManager::AttackCharacter(Monster* Monster)
+{
+	cout << "---- 몬스터가 플레이어를 공격합니다.----" << endl;
+	int Damage = Monster->GetPower();
+	cout << "---- 데미지 : "<<  Damage << " ----" << endl;
+	Character::GetInstance()->SetMinusHp(Damage);
+	TempHealth = Character::GetInstance()->GetHealth();
+	cout << "캐릭터 남은 체력 : " << TempHealth << endl;
+}
+
+void BattleManager::AttackMonster(Monster* Monster)
+{
+	cout << "---- 플레이어가 몬스터를 공격합니다.----" << endl; 
+	int Damage = Character::GetInstance()->GetAttack();
+	cout <<"---- 데미지 : " <<  Damage << " ----" << endl;
+	Monster->TakeDamage(Damage);
+	TempHealth = Monster->GetHp();
+	cout <<"몬스터 남은 체력 : " << TempHealth << endl;
 }
 
 void BattleManager::ManualBattle()
 {
-
+	
 }
 
 void BattleManager::EndBattle()
 {
+	cout << "---- 전투 종료 ----" << endl;
+}
+
+bool BattleManager::IsDead(int Health)
+{
+	return Health <= 0;
 }
 
 
