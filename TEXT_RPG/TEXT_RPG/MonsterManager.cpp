@@ -1,9 +1,9 @@
-﻿#include "MonsterManager.h"
+#include "MonsterManager.h"
 #include "Logger.h"
 #include "Calculator.h"
 #include "BossMonster.h"
 #include "NormalMonster.h"
-
+#include "Character.h"
 
 MonsterManager::MonsterManager()
 	: monster(nullptr)
@@ -20,7 +20,7 @@ Monster* MonsterManager::CreateNormalMonster()
 	if (monster != nullptr)
 		return monster;
 
-	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 3
+	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 5
 	int randomNum = dist(gen); // �옖�뜡 踰덊샇 �깮�꽦
 
 	string monsterName = "";
@@ -61,14 +61,39 @@ void MonsterManager::DeleteMonster(Monster* _monster)
 	if (_monster == nullptr)
 		return;
 
-	// monster �젅踰⑥뿉 �뵲�씪�꽌 �옖�뜡�쑝濡� item drop.
+	// Item Drop
+	Item* item = DropItem();
 
-	// monster 泥섏튂湲곕줉 ����옣
+	if ( item != nullptr )
+		item->Apply(Character::GetInstance());
+
+
+	// monster Recording
 	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
 	
 	// monster�궘�젣
 	delete _monster;
 	_monster = nullptr;
+}
+
+Item* MonsterManager::DropItem()
+{
+	std::uniform_int_distribution<> dist(0 , 4); // 0 ~ 4
+	int randomNum = dist(gen); 
+
+	// 20%
+	if ( randomNum == 4 )
+	{
+		// return Item;
+	}
+
+
+	return nullptr;
+}
+
+int MonsterManager::DropGold()
+{
+	return 0;
 }
 
 //string MonsterManager::GetName()
