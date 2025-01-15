@@ -3,19 +3,9 @@
 #include <vector>
 #include "Item/PassiveItem/PassiveItem.h"
 #include "Character.h"
+#include "Stat.h"
+
 using namespace std;
-
-
-struct Stat
-{
-	int Level = 0;
-	int Health = 0;
-	int MaxHealth = 0;
-	int Attack = 0;
-	int Exp = 0;
-	int MaxExp = 0;
-	int Gold = 0;
-};
 
 
 class PassiveItem;
@@ -30,23 +20,16 @@ private:
 
 	size_t Max_Inventory_size = 7;
 	vector<PassiveItem*> ItemsInventory;
-
-	Stat TotalStaticStat;
-	Stat TotalEveryTurnStat;
-	Stat TotalStackStat;
-	
-	// 멤버 메서드
-	void UpdateStaticStat();
-	void UpdateEveryTurnStat();
-	void UpdateStackStat();
-
+	StatManager ApplyStats;
 
 public:
-	Inventory(Character* Ower) : Owner(Ower), ItemsInventory(Max_Inventory_size) {}
+	Inventory(Character* Ower) :
+		Owner(Ower),
+		ItemsInventory(Max_Inventory_size),
+		ApplyStats(Ower) {}
+	
 	~Inventory();
 
-	void Apply();
-	
 	void DisplayInventory();
 
 	void AddItem(PassiveItem* item);
@@ -60,4 +43,10 @@ public:
 
 	//TODO: 디스플레이 함수 구현 해야함.
 	void DisplayItemStat(int index);
+
+	//인벤토리 크기 증가
+	void ExpandItemInventory();
+
+	//인벤토리 크기 확인
+	int GetItemInventorySize();
 };

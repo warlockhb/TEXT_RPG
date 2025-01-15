@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 
 #include "BattleManager.h"
 #include "GameManager.h"
