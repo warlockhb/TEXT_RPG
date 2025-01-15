@@ -24,6 +24,16 @@ Character::Character(string New_name)
 	inventory = new Inventory(this);
 }
 
+Character::~Character()
+{
+	if (inventory != nullptr)
+	{
+		delete inventory;
+		inventory = nullptr;
+	}
+}
+
+
 Character* Character::GetInstance(string New_name)
 {
 	if (instance == nullptr)
@@ -55,29 +65,6 @@ Inventory* Character::GetInventory()
 //	cout << "아이템을 사용했습니다!" << endl;
 //}
 
-//void Character::AddItem(PassiveItem* item)
-//{
-//	if (Inventory.size() < Max_Inventory_Size)
-//	{
-//		Inventory.push_back(item);
-//		cout << "인벤토리에 아이템이 추가되었습니다." << endl;
-//	}
-//	else
-//	{
-//		cout << "인벤토리가 가득차서, 아이템을 추가할 수 없습니다." << endl;
-//	}
-//}
-
-//void Character::RemoveItem(PassiveItem* item)
-//{
-//	auto it = find(Inventory.begin(), Inventory.end(), item);
-//
-//	if (it != Inventory.end())
-//	{
-//		Inventory.erase(it);
-//	}
-//}
-//
 //void Character::SkillUse(int index)
 //{
 //	if (index < 0 || index >= Equipment_Inventory.size())
@@ -111,26 +98,6 @@ Inventory* Character::GetInventory()
 //	if (it != Equipment_Inventory.end())
 //	{
 //		Equipment_Inventory.erase(it);
-//	}
-//}
-//
-//void Character::ByeInventory(int buycount)
-//{
-//	switch (buycount)
-//	{
-//	case 1:
-//		Max_Inventory_Size += 3;
-//		Inventory.reserve(Max_Inventory_Size);
-//		cout << "인벤토리를 확장되었습니다. 현재 인벤토리 사이즈 : " << Inventory.size() << endl;
-//		break;
-//	case 2:
-//		Max_Inventory_Size += 5;
-//		Inventory.reserve(Max_Inventory_Size);
-//		cout << "인벤토리를 확장되었습니다. 현재 인벤토리 사이즈 : " << Inventory.size() << endl;
-//		break;
-//	default:
-//		cout << "인벤토리를 최대 확장했습니다!" << endl;
-//		break;
 //	}
 //}
 
