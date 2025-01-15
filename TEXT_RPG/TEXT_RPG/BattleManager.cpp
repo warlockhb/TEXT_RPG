@@ -72,10 +72,10 @@ void BattleManager::AttackCharacter(Monster& Monster)
 {
     cout << "---- 몬스터가 플레이어를 공격합니다.----\n" << endl;
     int Damage = Monster.GetPower();
-    cout << "---- 데미지 : " << Damage << " ----\n" << endl;
+    //cout << "---- 데미지 : " << Damage << " ----\n" << endl;
     Character::GetInstance()->TakeDamage(Damage);
-    int Health = Character::GetInstance()->GetHealth();
-    cout << "캐릭터 남은 체력 : " << Health << "\n" << endl;
+    int Health = Character::GetInstance()->GetCurrentHealth();
+    //cout << "캐릭터 남은 체력 : " << Health << "\n" << endl;
 
     if (IsDead(Health))
     {
@@ -144,9 +144,18 @@ void BattleManager::ManualBattle()
 
 void BattleManager::EndBattle(bool IsPlayerWin)
 {
-    _MonsterManager->HuntComplete(_Monster);
+    _MonsterManager->DeleteMonster(_Monster, IsPlayerWin);
     
     IsBattleEnd = true;
+
+    if (IsPlayerWin)
+    {
+        // 플레이어 승리
+    }
+    else
+    {
+        // 플레이어 패배
+    }
     cout << "---- 전투 종료 ----" << endl;
 }
 
