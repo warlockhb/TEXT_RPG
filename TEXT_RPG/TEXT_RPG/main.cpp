@@ -1,9 +1,13 @@
-#include <iostream>
-
-#include "BattleManager.h"
 #include "GameManager.h"
-void main()
+int main()
 {
-    BattleManager *battleManager = new BattleManager();
-    battleManager->StartBattle();
+    GameManager game;
+    game.StartGame();
+
+    bool GameEnd = true;
+    while (GameEnd)
+    {
+        GameEnd = game.ShowMenu();
+    }
+    return 0;
 }

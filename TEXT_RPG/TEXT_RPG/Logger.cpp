@@ -71,5 +71,7 @@ void Logger::ShowSummary() const {
     }
 
     // 총 골드 획득
-    std::cout << "총 골드 획득: " << TotalGoldAcquired << "골드" << std::endl;
+    std::cout << "총 골드 획득: " << TotalGoldAcquired << "골드";
+    std::cin.get();
+    std::cin.get();
 }
