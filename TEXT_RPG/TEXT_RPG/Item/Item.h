@@ -3,7 +3,7 @@
 #include <string>
 
 #include "ItemType.h"
-#include "StatModifier.h"
+#include "../Stat.h"
 #include "../Character.h"
 using namespace std;
 

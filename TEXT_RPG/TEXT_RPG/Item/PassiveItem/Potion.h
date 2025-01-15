@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "PassiveItem.h"
 
 class PotionHPSmall: public PassiveItem

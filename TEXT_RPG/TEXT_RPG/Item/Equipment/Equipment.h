@@ -4,9 +4,22 @@
 
 class Character;
 
+enum class EEquipmentSlotType
+{
+    HEAD = 0,
+    BODY = 1,
+    ARMS = 2,
+    FEET = 3,
+};
+
 class Equipment : public Item
 {
+private:
+    
+    EEquipmentSlotType SlotType;
+    
 public:
-    void Equip(Character* Character);
-    void Unequip(Character* Character);
+    Equipment(EEquipmentSlotType SlotType) : SlotType(SlotType) {}
+    
+    int GetSlotType() const { return static_cast<int>(SlotType); }
 };

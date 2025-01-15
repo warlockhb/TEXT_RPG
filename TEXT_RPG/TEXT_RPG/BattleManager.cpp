@@ -1,4 +1,4 @@
-#include "BattleManager.h"
+﻿#include "BattleManager.h"
 #include "MonsterManager.h"
 #include "Character.h"
 #include <cstdlib>
