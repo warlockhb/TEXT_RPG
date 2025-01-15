@@ -8,7 +8,6 @@
 using namespace std;
 
 
-
 class PassiveItem;
 class Character;
 
@@ -21,23 +20,16 @@ private:
 
 	size_t Max_Inventory_size = 7;
 	vector<PassiveItem*> ItemsInventory;
-
-	Stat TotalStaticStat;
-	Stat TotalEveryTurnStat;
-	Stat TotalStackStat;
-	
-	// 멤버 메서드
-	void UpdateStaticStat();
-	void UpdateEveryTurnStat();
-	void UpdateStackStat();
-
+	StatManager ApplyStats;
 
 public:
-	Inventory(Character* Ower) : Owner(Ower), ItemsInventory(Max_Inventory_size) {}
+	Inventory(Character* Ower) :
+		Owner(Ower),
+		ItemsInventory(Max_Inventory_size),
+		ApplyStats(Ower) {}
+	
 	~Inventory();
 
-	void Apply();
-	
 	void DisplayInventory();
 
 	void AddItem(PassiveItem* item);
