@@ -163,7 +163,6 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterManager.h" />
     <ClInclude Include="Shop.h" />
-    <ClInclude Include="Stat.cpp" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="Village.h" />
     <ClInclude Include="NormalMonster.h" />
