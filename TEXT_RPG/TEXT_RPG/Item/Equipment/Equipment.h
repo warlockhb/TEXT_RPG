@@ -4,22 +4,23 @@
 
 class Character;
 
-enum class EEquipmentSlotType
+enum EEquipmentSlotType
 {
     HEAD = 0,
     BODY = 1,
-    ARMS = 2,
-    FEET = 3,
+    ARM = 2,
+    FOOT = 3,
+    WEAPON =4
 };
 
 class Equipment : public Item
 {
-private:
+protected:
     
     EEquipmentSlotType SlotType;
     
 public:
-    Equipment(EEquipmentSlotType SlotType) : SlotType(SlotType) {}
+    Equipment() = default;
     
     int GetSlotType() const { return static_cast<int>(SlotType); }
 };
