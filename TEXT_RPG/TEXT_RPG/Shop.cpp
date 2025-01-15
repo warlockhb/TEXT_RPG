@@ -38,7 +38,8 @@ void Shop::EnterShop(Character& character) {
 		switch (choice) {
 		case 1:
 			//상품 구매
-			/*BuyItem();*/
+			cout << " 상품 구매화면으로 이동합니다" << endl;
+			BuyItem(character);
 			break;
 		case 2:
 			//상품 판매
@@ -62,7 +63,7 @@ void Shop::BuyItem(Character& character)
 		cout << "---<< 구매 가능한 상품 >>---" << endl;
 		cout << " 1. 포션" << endl;
 		cout << " 2. 부적" << endl;
-		cout << " 3. 상점 나가기" << endl;
+		cout << " 3. 돌아가기" << endl;
 		cout << "----------------" << endl;
 		cout << "번호를 입력하세요: " << endl;
 
@@ -81,7 +82,6 @@ void Shop::BuyItem(Character& character)
 }
 void Shop::ShowItems(const std::map<int, PassiveItem*>& map_item)
 {
-	int cnt = 1;
 	cout << "--<<  구매 가능한 상품 목록  >>--" << endl;
 	for (auto& item : map_item)
 	{//출력예시 : - 100. 소형 포션 : 체력을 회복시켜준다 (30G)
@@ -108,33 +108,31 @@ void Shop::BuyLogic(Character& character, const std::map<int, PassiveItem*>& map
 			//0. 돌아가기 입력된 경우
 			return;
 		}
-		else if (map_item.find(selectedID) != map_item.end())
-		{
-			//아이템 아이디 올바르게 입력된 경우
-			PassiveItem* selectedItem = map_item.at(selectedID);
-			//item_price : 선택한 아이템 가격
-			int item_price = selectedItem->GetPrice();
-			if (character.GetGold() < item_price) //골드가 부족한 경우
-			{
-				cout << "골드가 부족합니다." << endl;
-				return;
-			}
-			else{//골드 충분한 경우
-				/*if(character.GetInventory()->GetItemInventorySize() == character.GetInventory()->GetMaxInventorySize()){ //인벤토리 자리 없는 경우
-				cout << "인벤토리가 꽉 찼습니다." << endl;
-				return;
-				}*/
-				
-				/*else {// 인벤토리 내 자리가 있는 경우
-				character.LoseGold(item_price);
-				character.GetInventory()->AddItem(selectedItem);
-				}*/
-			}
-		}
-		
-		else
+		if (map_item.find(selectedID) == map_item.end())
 		{
 			cout << "잘못 입력하셨습니다. 상품번호만 입력하세요." << endl;
+			continue;
+		}
+		
+		//아이템 아이디 올바르게 입력된 경우
+		PassiveItem* selectedItem = map_item.at(selectedID);
+		//item_price : 선택한 아이템 가격
+		int item_price = selectedItem->GetPrice();
+		
+		if (character.GetGold() < item_price) //골드가 부족한 경우
+		{
+			cout << "골드가 부족합니다." << endl;
+			return;
+		}
+		else{//골드 충분한 경우
+			if(character.GetInventory()->GetItemInventoryEmptySize() == 0){ //인벤토리 자리 없는 경우
+				cout << "인벤토리가 꽉 찼습니다." << endl;
+				return;
+			}
+			else {// 인벤토리 내 자리가 있고 gold도 충분한 경우
+			character.LoseGold(item_price);
+			character.GetInventory()->AddItem(selectedItem);
+			}
 		}
 	}
 }
@@ -167,7 +165,7 @@ void Shop::SellItem(Character& character) {
 			return;
 		}
 
-		PassiveItem* itemToSell = inventory->GetItem(choice - 1);
+		PassiveItem* itemToSell = inventory->GetItem(choice - 1);//주의(인덱스 오류)
 		if (itemToSell == nullptr) {
 			cout << "잘못된 번호입니다. 다시 입력하세요." << endl;
 			continue;
