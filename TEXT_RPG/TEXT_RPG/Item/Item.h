@@ -44,8 +44,7 @@ public:
 
     // 비교 연산자 : 캐릭터 HasItem에서 사용 가능
     bool operator==(const Item& other) const { return ID == other.ID;}
-
-
+    
     // Get
     int GetID() const { return ID; }
     string GetName() const { return Name; }
