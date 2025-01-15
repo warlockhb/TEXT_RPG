@@ -104,7 +104,7 @@ void Shop::BuyItem(Character& character) {
 				return;
 			}
 			else{//골드 충분한 경우
-				/*if(인벤토리.현재사이즈 == 인벤토리.maxsize){ //인벤토리 자리 없는 경우
+				/*if(character.GetInventory()->GetItemInventorySize() == character.GetInventory()->GetMaxInventorySize()){ //인벤토리 자리 없는 경우
 				cout << "인벤토리가 꽉 찼습니다." << endl;
 				return;
 				}*/
@@ -125,7 +125,35 @@ void Shop::BuyItem(Character& character) {
 
 
 void Shop::SellItem(Character& character) {
-	//수정
+	Inventory* inventory = character.GetInventory();
+
+	while (true)
+	{
+		inventory-> DisplayInventory();
+
+		string itemName;
+		cout << "판매할 아이템 이름을 입력하세요: ";
+		cin.ignore();
+		getline(cin, itemName);
+
+		PassiveItem* itemToSell = nullptr;
+		int itemPrice = 0;
+		for (int i = 0; i < inventory->GetItemInventorySize(); ++i)
+		{//입력된 아이템 이름으로 인벤토리에서 해당 아이템 검색 후 있다면 저장
+			PassiveItem* item = inventory->GetItem(i);
+			if (item != nullptr && item->GetName() == itemName) {
+				//
+				itemToSell = item;
+				itemPrice = item->GetPrice();
+				break;
+			}
+			else
+			{
+				cout << "해당 아이템은 인벤토리에 없습니다. 아이템 이름만 입력해주세요." << endl;
+			}
+	}
+	
+	}
 	//- 인벤토 리 불러와서 목록 전부 보여준 다음,
 	// 판매 원하는 물건을 인벤토리에서 삭제하고 해당 물건 60% 금액을 ++하기
 }
