@@ -134,11 +134,6 @@
     <ClCompile Include="Inn.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="Item\Equipment\Equipment.cpp" />
-    <ClCompile Include="Item\Item.cpp" />
-    <ClCompile Include="Item\PassiveItem\Amulet.cpp" />
-    <ClCompile Include="Item\PassiveItem\PassiveItem.cpp" />
-    <ClCompile Include="Item\PassiveItem\Potion.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
