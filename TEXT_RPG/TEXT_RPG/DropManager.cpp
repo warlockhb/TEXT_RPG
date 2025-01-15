@@ -12,6 +12,8 @@ DropManager::DropManager()
     _Items.push_back(new PotionHPSmall());
     _Items.push_back(new PotionHpMedium());
     _Items.push_back(new PotionHpLarge());
+
+    _Probability.push_back(0.1);
 }
 
 DropManager::~DropManager()
@@ -36,7 +38,7 @@ Item* DropManager::DropItem()
 
         if ( randomNum <= cumulativeRate )
         {
-            //item = new Item(_Items[i]);
+            item = new Item(*_Items[i]);
         }
     }
 
