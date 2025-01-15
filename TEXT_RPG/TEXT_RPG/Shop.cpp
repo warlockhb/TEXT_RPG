@@ -13,19 +13,14 @@ using namespace std;
 
 Shop::Shop()
 {
-	items[ID_POTION_HP_SMALL] = new PotionHPSmall();
-	items[ID_POTION_HP_MEDIUM] = new PotionHpMedium();
-	items[ID_POTION_HP_LARGE] = new PotionHpLarge();
+	potions[ID_POTION_HP_SMALL] = new PotionHPSmall();
+	potions[ID_POTION_HP_MEDIUM] = new PotionHpMedium();
+	potions[ID_POTION_HP_LARGE] = new PotionHpLarge();
 
-	items[ID_AMULET_OF_STRENGTH] = new AmuletOfStrngth();
-	//public으로 선언안됨 밑에 3개
-	/*items[ID_AMULET_OF_WISDOM] = new AmuletOfWisdom();
-	items[ID_AMULET_OF_VITALITY] = new AmuletOfVitality();
-	items[ID_AMULET_OF_FORTUNE] = new AmuletOfFortune();*/
-
-	/*items[] = new ();
-	items[] = new ();*/
-	//[물건복붙]추가 판매할 물건들(작성예정)
+	amulets[ID_AMULET_OF_STRENGTH] = new AmuletOfStrngth();
+	amulets[ID_AMULET_OF_WISDOM] = new AmuletOfWisdom();
+	amulets[ID_AMULET_OF_VITALITY] = new AmuletOfVitality();
+	amulets[ID_AMULET_OF_FORTUNE] = new AmuletOfFortune();
 }
 
 void Shop::EnterShop(Character& character) {
@@ -43,9 +38,7 @@ void Shop::EnterShop(Character& character) {
 		switch (choice) {
 		case 1:
 			//상품 구매
-			cout << " 상품 구매 화면으로 이동합니다" << endl;
-			ShowItems();
-			BuyItem(character);
+			/*BuyItem();*/
 			break;
 		case 2:
 			//상품 판매
@@ -61,12 +54,36 @@ void Shop::EnterShop(Character& character) {
 		}
 	}
 }
+void Shop::BuyItem(Character& character)
+{
+	while (true)
+	{
+		int choice;
+		cout << "---<< 구매 가능한 상품 >>---" << endl;
+		cout << " 1. 포션" << endl;
+		cout << " 2. 부적" << endl;
+		cout << " 3. 상점 나가기" << endl;
+		cout << "----------------" << endl;
+		cout << "번호를 입력하세요: " << endl;
 
-void Shop::ShowItems()
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			BuyLogic(character, potions);
+			break;
+		case 2:
+			BuyLogic(character, amulets);
+			break;
+		}
+	}
+
+}
+void Shop::ShowItems(const std::map<int, PassiveItem*>& map_item)
 {
 	int cnt = 1;
 	cout << "--<<  구매 가능한 상품 목록  >>--" << endl;
-	for (auto& item : items)
+	for (auto& item : map_item)
 	{//출력예시 : - 100. 소형 포션 : 체력을 회복시켜준다 (30G)
 		cout <<" - " <<item.first << ". "
 			 << item.second->GetName() << ": "
@@ -78,13 +95,12 @@ void Shop::ShowItems()
 
 }
 
-void Shop::BuyItem(Character& character) {
+void Shop::BuyLogic(Character& character, const std::map<int, PassiveItem*>& map_item) {
 	int selectedID;
 	while (true)
 	{
-		ShowItems();
+		ShowItems(map_item);
 		cout << "상품번호를 입력하세요: ";
-		//선택지 입력(예외처리필요)
 		cin >> selectedID;
 
 		if (selectedID == 0)
@@ -92,10 +108,10 @@ void Shop::BuyItem(Character& character) {
 			//0. 돌아가기 입력된 경우
 			return;
 		}
-		else if (items.find(selectedID) != items.end())
+		else if (map_item.find(selectedID) != map_item.end())
 		{
-			//아이템 아이디 입력된 경우
-			PassiveItem* selectedItem = items[selectedID];
+			//아이템 아이디 올바르게 입력된 경우
+			PassiveItem* selectedItem = map_item.at(selectedID);
 			//item_price : 선택한 아이템 가격
 			int item_price = selectedItem->GetPrice();
 			if (character.GetGold() < item_price) //골드가 부족한 경우
@@ -129,40 +145,54 @@ void Shop::SellItem(Character& character) {
 
 	while (true)
 	{
-		inventory-> DisplayInventory();
-
-		string itemName;
-		cout << "판매할 아이템 이름을 입력하세요: ";
-		cin.ignore();
-		getline(cin, itemName);
-
-		PassiveItem* itemToSell = nullptr;
-		int itemPrice = 0;
-		for (int i = 0; i < inventory->GetItemInventorySize(); ++i)
-		{//입력된 아이템 이름으로 인벤토리에서 해당 아이템 검색 후 있다면 저장
+		//인벤토리 목록 출력 코드
+		cout << "---<< 인벤토리 목록 >>---" << endl;
+		for (int i = 0; i < inventory->GetMaxItemInventorySize() - inventory->GetItemInventoryEmptySize(); ++i)
+		{
 			PassiveItem* item = inventory->GetItem(i);
-			if (item != nullptr && item->GetName() == itemName) {
-				//
-				itemToSell = item;
-				itemPrice = item->GetPrice();
-				break;
+			if (item)
+			{//출력 예시 : 1. 이름 : 설명 (가격: 10G)
+				cout << i + 1 << ". " << item->GetName() << ": "
+					 << item->GetDescription() << "(가격: " << item->GetPrice() << "G)" << endl;
 			}
-			else
-			{
-				cout << "해당 아이템은 인벤토리에 없습니다. 아이템 이름만 입력해주세요." << endl;
-			}
+		}
+		cout << "-------------------------" << endl;
+		cout << "판매할 아이템의 번호를 입력하세요 (0: 나가기): ";
+
+		int choice;
+		cin >> choice;
+
+		if (choice == 0)
+		{
+			return;
+		}
+
+		PassiveItem* itemToSell = inventory->GetItem(choice - 1);
+		if (itemToSell == nullptr) {
+			cout << "잘못된 번호입니다. 다시 입력하세요." << endl;
+			continue;
+		}
+
+		//판매
+		int itemPrice = itemToSell->GetPrice();
+		character.AddGold(itemPrice * 0.6);
+		inventory->RemoveItem(choice - 1);
+		cout << itemToSell->GetName() << " 아이템을 판매했습니다.(가격: " << itemPrice * 0.6 << "G)" << endl;
+		
+		
 	}
-	
-	}
-	//- 인벤토 리 불러와서 목록 전부 보여준 다음,
-	// 판매 원하는 물건을 인벤토리에서 삭제하고 해당 물건 60% 금액을 ++하기
+
 }
 
 
 Shop::~Shop()
 {
-	for (auto& item : items)
+	for (auto& amulet : amulets)
 	{
-		delete item.second;
+		delete amulet.second;
+	}
+	for (auto& potion : potions)
+	{
+		delete potion.second;
 	}
 }
