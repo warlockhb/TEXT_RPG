@@ -1,4 +1,4 @@
-#include "Inn.h"
+﻿#include "Inn.h"
 #include "Character.h"
 
 #include <iostream>

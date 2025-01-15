@@ -1,4 +1,4 @@
-﻿enum EPassiveItemType
+enum EPassiveItemType
 {
     // 100~199 : 포션
     ID_POTION_HP_SMALL = 100,         // 소형 포션

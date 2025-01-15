@@ -1,4 +1,4 @@
-﻿#include "BattleManager.h"
+#include "BattleManager.h"
 #include "MonsterManager.h"
 #include "Character.h"
 #include <cstdlib>
@@ -8,6 +8,7 @@ using namespace std;
 BattleManager::BattleManager()
 {
     IsBattleEnd = false;
+    _BattleState = EBS_INPROGRESS;
 }
 
 BattleManager::~BattleManager()
@@ -43,6 +44,11 @@ void BattleManager::StartBattle()
     }
 }
 
+EBattleState BattleManager::GetBattleState() const
+{
+    return _BattleState;
+}
+
 void BattleManager::AutoBattle()
 {
     _MonsterManager = new MonsterManager();
@@ -72,10 +78,10 @@ void BattleManager::AttackCharacter(Monster& Monster)
 {
     cout << "---- 몬스터가 플레이어를 공격합니다.----\n" << endl;
     int Damage = Monster.GetPower();
-    cout << "---- 데미지 : " << Damage << " ----\n" << endl;
+    //cout << "---- 데미지 : " << Damage << " ----\n" << endl;
     Character::GetInstance()->TakeDamage(Damage);
-    int Health = Character::GetInstance()->GetHealth();
-    cout << "캐릭터 남은 체력 : " << Health << "\n" << endl;
+    int Health = Character::GetInstance()->GetCurrentHealth();
+    //cout << "캐릭터 남은 체력 : " << Health << "\n" << endl;
 
     if (IsDead(Health))
     {
@@ -86,7 +92,7 @@ void BattleManager::AttackCharacter(Monster& Monster)
 void BattleManager::AttackMonster(Monster& Monster)
 {
     cout << "---- 플레이어가 몬스터를 공격합니다.----\n" << endl;
-    int Damage = Character::GetInstance()->GetAttack();
+    int Damage = Character::GetInstance()->GetCurrentAttack();
     cout << "---- 데미지 : " << Damage << " ----\n" << endl;
     Monster.TakeDamage(Damage);
     int Health = Monster.GetHp();
@@ -144,9 +150,19 @@ void BattleManager::ManualBattle()
 
 void BattleManager::EndBattle(bool IsPlayerWin)
 {
-    _MonsterManager->HuntComplete(_Monster);
+    _MonsterManager->DeleteMonster(_Monster, IsPlayerWin);
     
     IsBattleEnd = true;
+
+    if (IsPlayerWin)
+    {
+        // 플레이어 승리
+        _BattleState = EBS_PLAYER_WIN;
+    }
+    else
+    {
+        _BattleState = EBS_PLAYER_LOSE;
+    }
     cout << "---- 전투 종료 ----" << endl;
 }
 
