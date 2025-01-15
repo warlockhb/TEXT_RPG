@@ -1,5 +1,6 @@
-﻿#pragma once
+#pragma once
 #include "Monster.h"
+#include "Item/Item.h"
 #include <random>
 
 class MonsterManager
@@ -14,11 +15,11 @@ public:
 
 	Monster* CreateNormalMonster();
 	Monster* CreateBossMonster();
-	void DeleteMonster(Monster* _monster);
+	void DeleteMonster(Monster* _monster, bool _isSuccessful);
 
-	//string GetName();
-	//int GetHp();
-	//int GetPower();
-	//void TakeDamage(int _damage);
+	void HuntComplete(Monster* _monster);
+	void HuntFailed();
+
+	Item* DropItem();
+	int	DropGold();
 };
-
