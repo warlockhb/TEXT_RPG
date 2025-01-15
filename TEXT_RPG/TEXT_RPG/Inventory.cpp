@@ -107,6 +107,29 @@ void Inventory::Apply()
 
 void Inventory::DisplayInventory()
 {
+    std::cout << "==== Inventory ====" << std::endl;
+    // 인벤토리가 비었는지 확인
+    if (ItemsInventory.empty()) 
+    {
+        std::cout << "Inventory is empty." << std::endl;
+        return;
+    }
+
+    // 인벤토리 아이템 출력
+    for ( size_t i = 0; i < ItemsInventory.size(); ++i ) 
+    {
+        PassiveItem* item = ItemsInventory[i];
+        if (item != nullptr) 
+        {
+            // 아이템의 정보를 출력 (이름, 속성 등)
+            std::cout << i + 1 << ". " << item->GetName() << std::endl;
+        }
+        else 
+        {
+            std::cout << i + 1 << ". Empty Slot" << std::endl;
+        }
+    }
+    std::cout << "===================" << std::endl;
 }
 
 void Inventory::AddItem(PassiveItem* item)

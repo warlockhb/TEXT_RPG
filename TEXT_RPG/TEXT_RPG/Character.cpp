@@ -1,6 +1,7 @@
 ﻿#include "Character.h"
 #include <algorithm>
 #include <iostream>
+#include "Inventory.h"
 using namespace std;
 
 Character * Character::instance = nullptr;
@@ -19,6 +20,8 @@ Character::Character(string New_name)
 	this->CurrentMaxHealth = MaxHealth;
 	this->CurrentHealth = MaxHealth;
 	this->CurrentAttack = Attack;
+
+	inventory = new Inventory(this);
 }
 
 Character* Character::GetInstance(string New_name)
