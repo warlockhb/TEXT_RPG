@@ -9,9 +9,8 @@ public:
         ID = ID_POTION_HP_SMALL;
         Name = "소형 포션";
         Price = 30;
-        Description = "체력을 회복시켜준다.";
-        StaticStat.MaxHpMod = 100;
-        EveryTurnStat.HpMod = 20;
+        EveryTurnStat.HpMod = 10;
+        Description = "매 스테이지 마다 체력 " + to_string(EveryTurnStat.HpMod) + " 을 회복시켜준다.";
     }
 };
 
@@ -24,7 +23,8 @@ public:
         ID = ID_POTION_HP_MEDIUM;
         Name = "중형 포션";
         Price = 70;
-        Description = "체력을 회복시켜준다.";
+        EveryTurnStat.HpMod = 18;
+        Description = "매 스테이지 마다 체력 " + to_string(EveryTurnStat.HpMod) + " 을 회복시켜준다.";
     }
 };
 
@@ -36,6 +36,8 @@ public:
         ID = ID_POTION_HP_LARGE;
         Name = "대형 포션";
         Price = 120;
-        Description = "체력을 회복시켜준다.";
+        EveryTurnStat.HpMult = 0.05f;
+        EveryTurnStat.HpMod = 10;
+        Description = "매 스테이지 마다 체력 "+to_string(EveryTurnStat.HpMod)+"와 최대 체력의 " + to_string(EveryTurnStat.HpMult * 100) + "% 을 회복시켜준다.";
     }
 };
