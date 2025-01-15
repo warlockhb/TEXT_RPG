@@ -131,6 +131,7 @@
     <ClCompile Include="BossMonster.cpp" />
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="EquipmentSlot.cpp" />
     <ClCompile Include="Inn.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="BossMonster.h" />
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="EquipmentSlot.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Inn.h" />
     <ClInclude Include="Inventory.h" />
@@ -156,11 +158,13 @@
     <ClInclude Include="Item\PassiveItem\Amulet.h" />
     <ClInclude Include="Item\PassiveItem\PassiveItem.h" />
     <ClInclude Include="Item\PassiveItem\Potion.h" />
-    <ClInclude Include="Item\StatModifier.h" />
+    <ClInclude Include="Item\TestItem.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterManager.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="Stat.cpp" />
+    <ClInclude Include="Stat.h" />
     <ClInclude Include="Village.h" />
     <ClInclude Include="NormalMonster.h" />
   </ItemGroup>
