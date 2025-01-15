@@ -4,21 +4,34 @@
 #include "BossMonster.h"
 #include "NormalMonster.h"
 #include "Character.h"
+#include "./Item/Equipment/Equipment.h"
+#include "./Item/PassiveItem/PassiveItem.h"
+#include "Inventory.h"
+#include "EquipmentSlot.h"
 
 MonsterManager::MonsterManager()
-	: monster(nullptr)
-	, gen(std::random_device{}())
+	: _Monster(nullptr)
+	, gen(std::random_device{}( ))
+	, _DropManager(new DropManager())
 {
 }
 
 MonsterManager::~MonsterManager()
 {
+	if ( _Monster != nullptr )
+	{
+		delete _Monster;
+		_Monster = nullptr;
+	}
+
+	delete _DropManager;
+	_DropManager = nullptr;
 }
 
 Monster* MonsterManager::CreateNormalMonster()
 {
-	if (monster != nullptr)
-		return monster;
+	if (_Monster != nullptr)
+		return _Monster;
 
 	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 5
 	int randomNum = dist(gen);
@@ -42,72 +55,90 @@ Monster* MonsterManager::CreateNormalMonster()
 	int hp = Character::GetInstance()->GetLevel() * 100;
 	int power = Character::GetInstance()->GetLevel() * 10;
 
-	monster = new NormalMonster(monsterName, hp , power);
+	_Monster = new NormalMonster(monsterName, hp , power);
+	cout << monsterName << " 등장!!" << endl;
 
-	return monster;
+	return _Monster;
 }
 
 Monster* MonsterManager::CreateBossMonster()
 {
-	if (monster != nullptr)
-		return monster;
+	if (_Monster != nullptr)
+		return _Monster;
 
-	// 異붽���옉�뾽.
+	// Create BosslMonster.
 	string monsterName = "Boss Monster";
 	int hp = 10 * 500;
 	int power = 10 *20;
 
-	monster = new BossMonster(monsterName, hp , power);
+	_Monster = new BossMonster(monsterName, hp , power);
+	cout << monsterName << " 등장!!" << endl;
 
-	return monster;
+	return _Monster;
 }
 
-void MonsterManager::DeleteMonster(Monster* _monster)
+void MonsterManager::DeleteMonster(Monster* _monster, bool _isSuccessful)
 {
 	if (_monster == nullptr)
 		return;
 
-	// Item Drop
-	Item* item = DropItem();
-
-	if ( item != nullptr )
+	NormalMonster* normalMonster = dynamic_cast<NormalMonster*>( _monster );
+	if ( normalMonster != nullptr )
 	{
-		// Item을 Inventory에 넣어주기
+		if ( _isSuccessful )
+			HuntComplete(_monster);
+		else
+			HuntFailed(_monster);
 	}
-
-	// Drop Gold
-	int gold = DropGold();
-	Character::GetInstance()->SetPlusGold(gold);
-
-
-	// monster Recording
-	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
+	
+	BossMonster* bossMonster = dynamic_cast<BossMonster*>( _monster );
+	if ( bossMonster != nullptr )
+	{
+		if ( _isSuccessful )
+			HuntComplete(_monster);
+		else
+			HuntFailed(_monster);
+	}
 	
 	delete _monster;
 	_monster = nullptr;
 }
 
-Item* MonsterManager::DropItem()
+void MonsterManager::HuntComplete(Monster* _monster)
 {
-	std::uniform_int_distribution<> dist(0 , 4); // 0 ~ 4
-	int randomNum = dist(gen); 
-
-	// 20%
-	if ( randomNum == 4 )
+	// Item Drop
+	Item* item = _DropManager->DropItem();
+	
+	PassiveItem* passiveitem = dynamic_cast<PassiveItem*>(item);
+	if ( passiveitem != nullptr )
 	{
-		// Random.
-		// return Item;
+		cout << _monster->GetName() << "이(가) " << passiveitem->GetName() << "을(를) 드랍했습니다!" << endl;
+
+		PassiveItem* refPassiveItem = new PassiveItem(*passiveitem);
+		Character::GetInstance()->GetInventory()->AddItem(refPassiveItem);
+	}
+	Equipment* equipment = dynamic_cast<Equipment*>( item );
+	if ( equipment != nullptr )
+	{
+		cout << _monster->GetName() << "이(가) " << equipment->GetName() << "을(를) 드랍했습니다!" << endl;
+
+		Equipment* refEquipment = new Equipment(*equipment);
+		Character::GetInstance()->GetEquipmentSlot()->AddItem(refEquipment);
 	}
 
+	// Drop Gold
+	int gold = _DropManager->DropGold();
+	cout << _monster->GetName() << "이(가) " << gold << "gold를 드랍했습니다" << endl;
+	Character::GetInstance()->AddGold(gold);
 
-	return nullptr;
+	// monster Recording
+	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
 }
 
-int MonsterManager::DropGold()
+void MonsterManager::HuntFailed(Monster* _monster)
 {
-	std::uniform_int_distribution<> dist(1 , 5); // 0 ~ 4
-	int randomNum = dist(gen);
-	int gold = Character::GetInstance()->GetLevel() * randomNum;
+	// 사냥 실패
+	cout << _monster->GetName() << " 사냥에 실패하였습니다.."<< endl;
 
-	return gold;
 }
+

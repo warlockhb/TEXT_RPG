@@ -4,9 +4,23 @@
 
 class Character;
 
+enum EEquipmentSlotType
+{
+    HEAD = 0,
+    BODY = 1,
+    ARM = 2,
+    FOOT = 3,
+    WEAPON =4
+};
+
 class Equipment : public Item
 {
+protected:
+    
+    EEquipmentSlotType SlotType;
+    
 public:
-    void Equip(Character* Character);
-    void Unequip(Character* Character);
+    Equipment() = default;
+    
+    int GetSlotType() const { return static_cast<int>(SlotType); }
 };

@@ -1,4 +1,4 @@
-#include "Inn.h"
+﻿#include "Inn.h"
 #include "Character.h"
 
 #include <iostream>
@@ -21,7 +21,7 @@ void Inn::EnterInn(Character& character) {
 		cin >> choice;
 
 		if (choice == "y"){
-			if (character.Getgold() < INN_COST) {
+			if (character.GetGold() < INN_COST) {
 				//골드가 부족한 경우 -> 마을로 복귀
 				cout << "골드가 부족하여 마을로 돌아갑니다." << endl;
 				return;
@@ -50,9 +50,9 @@ void Inn::EnterInn(Character& character) {
 
 void Inn::UseInn(Character& character) {
 	//10골드 차감
-	character.SetMinusGold(INN_COST);
+	character.LoseGold(INN_COST);
 
 	//플레이어 체력 회복
 	int recover = character.GetMaxHealth() - character.GetHealth();
-	character.SetPlusHp(recover);
+	character.AddGold(recover);
 }
