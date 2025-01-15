@@ -4,7 +4,7 @@
 
 class Character;
 
-enum class EEquipmentSlotType
+enum EEquipmentSlotType
 {
     HEAD = 0,
     BODY = 1,
@@ -15,12 +15,12 @@ enum class EEquipmentSlotType
 
 class Equipment : public Item
 {
-private:
+protected:
     
     EEquipmentSlotType SlotType;
     
 public:
-    Equipment() {}
+    Equipment() = default;
     
     int GetSlotType() const { return static_cast<int>(SlotType); }
 };

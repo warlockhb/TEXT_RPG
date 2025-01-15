@@ -27,6 +27,7 @@ protected:
 public:
     Item() = default;
     // 복사 생성자
+
     Item(const Item& other)
     {
         ID = other.ID;
@@ -38,9 +39,9 @@ public:
         StackStat = other.StackStat;
         DynamicStack = other.DynamicStack;
     }
-    
-    ~Item() = default;
-    
+
+    virtual ~Item() = default;
+
     // 비교 연산자 : 캐릭터 HasItem에서 사용 가능
     bool operator==(const Item& other) const { return ID == other.ID;}
 

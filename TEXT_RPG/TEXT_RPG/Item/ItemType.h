@@ -1,3 +1,5 @@
+
+
 enum EPassiveItemType
 {
     // 100~199 : 포션
