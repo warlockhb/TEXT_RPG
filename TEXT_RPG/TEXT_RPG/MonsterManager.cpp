@@ -7,6 +7,7 @@
 #include "./Item/Equipment/Equipment.h"
 #include "./Item/PassiveItem/PassiveItem.h"
 #include "Inventory.h"
+#include "EquipmentSlot.h"
 
 MonsterManager::MonsterManager()
 	: _Monster(nullptr)
@@ -122,9 +123,7 @@ void MonsterManager::HuntComplete(Monster* _monster)
 		cout << _monster->GetName() << "이(가) " << equipment->GetName() << "을(를) 드랍했습니다!" << endl;
 
 		Equipment* refEquipment = new Equipment(*equipment);
-
-		// Add EquipmentSlot
-		// Character::GetInstance()->GetInventory()->AddItem(passiveitem)
+		Character::GetInstance()->GetEquipmentSlot()->AddItem(refEquipment);
 	}
 
 	// Drop Gold
