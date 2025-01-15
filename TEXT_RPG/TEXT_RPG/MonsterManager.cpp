@@ -88,7 +88,7 @@ void MonsterManager::HuntComplete(Monster* _monster)
 
 	// Drop Gold
 	int gold = DropGold();
-	Character::GetInstance()->SetPlusGold(gold);
+	Character::GetInstance()->AddGold(gold);
 
 	// monster Recording
 	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
