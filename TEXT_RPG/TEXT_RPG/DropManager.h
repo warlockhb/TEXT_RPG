@@ -9,9 +9,9 @@ class DropManager
 {
 private:
 	vector<Item*> _Items;
-	vector<float> _Probability;
+	vector<int> _Probability;
 	std::mt19937 gen;		// random engine
-
+	int _TotalProbability;
 public:
 	DropManager();
 	~DropManager();
