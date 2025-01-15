@@ -34,6 +34,8 @@ protected:
     StatModifier Stage;
 
 
+    
+
 public:
     Item() = default;
     ~Item() = default;
