@@ -154,7 +154,12 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Inn.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item\Equipment\Armor.h" />
+    <ClInclude Include="Item\Equipment\Boots.h" />
     <ClInclude Include="Item\Equipment\Equipment.h" />
+    <ClInclude Include="Item\Equipment\Guard.h" />
+    <ClInclude Include="Item\Equipment\Head.h" />
+    <ClInclude Include="Item\Equipment\Weapon.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Item\ItemType.h" />
     <ClInclude Include="Item\PassiveItem\Amulet.h" />
