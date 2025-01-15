@@ -224,9 +224,8 @@ void Character::SetCurrentHealth(int health)
 
 void Character::SetCurrentMaxHealth(int maxhealth)
 {
-	maxhealth = min(maxhealth, MaxHealth);
-	maxhealth = max(maxhealth, 1);
-	CurrentMaxHealth = maxhealth;
+	maxhealth = max(1, maxhealth);
+	CurrentMaxHealth = max(maxhealth, MaxHealth);
 }
 
 void Character::SetCurrentAttack(int atk)
@@ -256,7 +255,7 @@ void Character::TakeDamage(int damage)
 	}
 
 	SetCurrentHealth(max(CurrentHealth - damage, 0));
-	cout << "캐릭터 피격! 대미지 : " << damage << "현재 체력 : " << GetCurrentHealth() << endl;
+	cout << "캐릭터 피격! 대미지 : " << damage << " 현재 체력 : " << GetCurrentHealth() << endl;
 
 	if (CurrentHealth <= 0)
 	{

@@ -17,9 +17,12 @@ protected:
     int Price = 0;
     string Description = "";
     
-    StatModifier StaticStat;
-    StatModifier DynamicStat;
+    StatModifier StaticStat = StatModifier();
+    StatModifier EveryTurnStat = StatModifier();
+    StatModifier StackStat = StatModifier();
     int DynamicStack = 0;
+
+    
 
 public:
     Item() = default;
@@ -34,9 +37,12 @@ public:
     int GetPrice() const { return Price; }
     string GetDescription() const { return Description; }
 
-    StatModifier GetStaticStat() { return StaticStat; }
-    StatModifier GetDynamicStat() { return DynamicStat * DynamicStack; }
+    StatModifier GetStaticStat() const { return StaticStat; }
+    StatModifier GetEveryTurnStat() const { return EveryTurnStat; };
+    StatModifier GetStackStat() const { StatModifier temp = StackStat; temp *= DynamicStack; return temp; }
+
+    int GetStack() const { return DynamicStack; }
 
     // Set
-    void UpdateDynamic(int value) {}
+    void UpdateStack(int value) {DynamicStack += value; }
 };

@@ -31,18 +31,24 @@ private:
 	size_t Max_Inventory_size = 7;
 	vector<PassiveItem*> ItemsInventory;
 
-	Stat TotalStat;
+	Stat TotalStaticStat;
+	Stat TotalEveryTurnStat;
+	Stat TotalStackStat;
 	
 	// 멤버 메서드
-	void Update();
+	void UpdateStaticStat();
+	void UpdateEveryTurnStat();
+	void UpdateStackStat();
 
 
 public:
 	Inventory(Character* Ower) : Owner(Ower), ItemsInventory(Max_Inventory_size) {}
 	~Inventory();
+
+	void Apply();
 	
 	void DisplayInventory();
-	
+
 	void AddItem(PassiveItem* item);
 	void RemoveItem(PassiveItem* item);
 	void RemoveItem(int index);
