@@ -1,12 +1,12 @@
 ﻿#pragma once
 #include "Character.h"
-
+#include "BattleManager.h"
 class GameManager
 {
 public:
 	void StartGame();
 	void GenerateCharacter();
-	void ShowMenu();
+	bool ShowMenu();
 private:
 	Character* MyCharacter = nullptr;
 };

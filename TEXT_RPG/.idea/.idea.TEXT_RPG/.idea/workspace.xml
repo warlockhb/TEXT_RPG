@@ -9,8 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a5776393-79d0-4eda-aeec-612b5d6108f9" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TEXT_RPG/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TEXT_RPG/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TEXT_RPG/BattleManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TEXT_RPG/BattleManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TEXT_RPG/GameManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TEXT_RPG/GameManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TEXT_RPG/GameManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/TEXT_RPG/GameManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TEXT_RPG/Logger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TEXT_RPG/Logger.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TEXT_RPG/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TEXT_RPG/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +54,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://35" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../Team/TEXT_RPG/TEXT_RPG/Logger.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../Team/TEXT_RPG/TEXT_RPG/Logger.h" root0="FORCE_HIGHLIGHTING" />
   </component>

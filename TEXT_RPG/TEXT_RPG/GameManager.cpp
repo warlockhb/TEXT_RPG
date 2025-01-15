@@ -1,4 +1,4 @@
-#include "GameManager.h"
+﻿#include "GameManager.h"
 #include "Logger.h"
 #include "BattleManager.h"
 #include "Character.h"
@@ -15,14 +15,14 @@ void GameManager::StartGame()
 }
 void GameManager::GenerateCharacter()
 {
-	cout << "캐릭터 이름을 입력하시오:";
+	cout << "캐릭터 이름을 고르세요 :";
 	string name;
 	cin >> name;
 	MyCharacter = Character::GetInstance(name);
 	Logger::GetInstance().LogEvent("캐릭터가 생성되었습니다: " + name);
 }
 
-void GameManager::ShowMenu()
+bool GameManager::ShowMenu()
 {
 	::cout << "\n----- 메인 메뉴 -----" << endl;
 	::cout << "1. 전투 시작" << endl;
@@ -37,15 +37,26 @@ void GameManager::ShowMenu()
 	switch (choice)
 	{
 	case 1:
-		;
+		{
+			BattleManager* battleManager = new BattleManager();
+			battleManager->StartBattle();
+			delete battleManager;
+		}
 		break;
 	case 2:
+		MyCharacter->DisPlayStatus();
 		break;
 	case 3:
+		Logger::GetInstance().ShowLogs();
 		break;
 	case 4:
+		Logger::GetInstance().ShowSummary();
 		break;
 	case 5:
+		cout << "게임을 종료합니다." << endl;
+		Logger::GetInstance().ShowSummary();
+		return false;
 		break;
 	}
+	return true;
 }
