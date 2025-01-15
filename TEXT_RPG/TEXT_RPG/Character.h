@@ -4,6 +4,7 @@
 using namespace std;
 
 class Inventory;
+class EquipmentSlot;
 
 class Character
 {
@@ -26,6 +27,7 @@ private:
 	int CurrentAttack;
 
 	Inventory* inventory;
+	EquipmentSlot* equipmentSlot;
 
 	Character(string New_name);
 	~Character();
@@ -37,14 +39,10 @@ public:
 	static Character * GetInstance(string New_name = "");
 
 	Inventory* GetInventory();
+	EquipmentSlot* GetEquipmentSlot();
 
 	//아이템사용&추가&제거
 	//void UseItem(int index);
-
-	//스킬사용&추가&제거
-	//void SkillUse(int index);
-	//void AddSkill(Equipment* skill);
-	//void RemoveSkill(Equipment* skill);
 	
 	//Get
 	string GetName() const;
