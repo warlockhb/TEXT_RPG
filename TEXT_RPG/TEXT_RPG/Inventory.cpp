@@ -109,7 +109,7 @@ void Inventory::DisplayInventory()
 
 void Inventory::AddItem(PassiveItem* item)
 {
-    ItemsInventory.push_back(item);
+    ItemsInventory.insert(ItemsInventory.begin(), item);
     
     Apply();
 }
