@@ -11,7 +11,7 @@ using namespace std;
 
 Shop::Shop()
 {
-	items[ID_POTION_HP_SMALL] = new PotionHPSmal();
+	items[ID_POTION_HP_SMALL] = new PotionHPSmall();
 	items[ID_POTION_HP_MEDIUM] = new PotionHpMedium();
 	items[ID_POTION_HP_LARGE] = new PotionHpLarge();
 
@@ -88,9 +88,9 @@ void Shop::BuyItem(Character& character) {
 			Item* selectedItem = items[selectedID];
 			//item_price : 선택한 아이템 가격
 			int item_price = selectedItem->GetPrice();
-			if (character.Getgold() >= item_price) //수정 : 자리 없는 경우 거부해야함
+			if (character.GetGold() >= item_price) //수정 : 자리 없는 경우 거부해야함
 			{
-				character.SetMinusGold(item_price);
+				character.LoseGold(item_price);
 				//인벤토리에 해당 아이템 삽입
 			}
 			else

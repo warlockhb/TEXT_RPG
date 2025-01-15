@@ -73,7 +73,7 @@ void BattleManager::AttackCharacter(Monster& Monster)
     cout << "---- 몬스터가 플레이어를 공격합니다.----\n" << endl;
     int Damage = Monster.GetPower();
     cout << "---- 데미지 : " << Damage << " ----\n" << endl;
-    Character::GetInstance()->SetMinusHp(Damage);
+    Character::GetInstance()->TakeDamage(Damage);
     int Health = Character::GetInstance()->GetHealth();
     cout << "캐릭터 남은 체력 : " << Health << "\n" << endl;
 
