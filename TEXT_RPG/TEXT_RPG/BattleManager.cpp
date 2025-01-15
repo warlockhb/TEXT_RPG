@@ -1,6 +1,7 @@
 ﻿#include "BattleManager.h"
 #include "MonsterManager.h"
 #include "Character.h"
+#include "Inventory.h"
 #include <cstdlib>
 
 using namespace std;
@@ -132,6 +133,7 @@ void BattleManager::ManualBattle()
             case 2:
                 break;
             case 3:
+                Character::GetInstance()->GetInventory()->DisplayInventory();
                 break;
             default:
                 cout << "기본 공격" << endl;
