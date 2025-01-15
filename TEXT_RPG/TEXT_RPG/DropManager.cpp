@@ -61,7 +61,6 @@ Item* DropManager::DropItem()
     if ( randomNum != 5 )
         return nullptr;*/
 
-    Item* item = nullptr;
     std::uniform_real_distribution<> dist2(1 , _TotalProbability); 
     int randomNum = dist2(gen);
 
@@ -72,19 +71,11 @@ Item* DropManager::DropItem()
 
         if ( randomNum <= cumulativeRate )
         {
-            item = new Item(*_Items[i]);
+            return _Items[i];
         }
     }
 
-    
-    /*Item* newItem = new PotionHPSmall();
-
-    PassiveItem* passiveitem = dynamic_cast<PassiveItem*>( newItem );
-    PassiveItem* newpassiveitem = dynamic_cast<PassiveItem*>( item );
-    PassiveItem* newpassiveitem1 = dynamic_cast<PassiveItem*>( _Items[0] );*/
-
-
-    return item;
+    return nullptr;
 }
 
 int DropManager::DropGold()

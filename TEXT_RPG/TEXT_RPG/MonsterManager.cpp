@@ -108,20 +108,24 @@ void MonsterManager::HuntComplete(Monster* _monster)
 	// Item Drop
 	Item* item = _DropManager->DropItem();
 	
-	/*PassiveItem* passiveitem = dynamic_cast<PassiveItem*>(item);
+	PassiveItem* passiveitem = dynamic_cast<PassiveItem*>(item);
 	if ( passiveitem != nullptr )
 	{
 		cout << _monster->GetName() << "이(가) " << passiveitem->GetName() << "을(를) 드랍했습니다!" << endl;
 
-		Character::GetInstance()->GetInventory()->AddItem(passiveitem);
-	}*/
-	//Equipment* equipment = dynamic_cast<Equipment*>( item );
-	//if ( equipment != nullptr )
-	//{
-	//	cout << _monster->GetName() << "이(가) " << equipment->GetName() << "을(를) 드랍했습니다!" << endl;
-	//	// Add EquipmentSlot
-	//	// Character::GetInstance()->GetInventory()->AddItem(passiveitem)
-	//}
+		PassiveItem* refPassiveItem = new PassiveItem(*passiveitem);
+		Character::GetInstance()->GetInventory()->AddItem(refPassiveItem);
+	}
+	Equipment* equipment = dynamic_cast<Equipment*>( item );
+	if ( equipment != nullptr )
+	{
+		cout << _monster->GetName() << "이(가) " << equipment->GetName() << "을(를) 드랍했습니다!" << endl;
+
+		Equipment* refEquipment = new Equipment(*equipment);
+
+		// Add EquipmentSlot
+		// Character::GetInstance()->GetInventory()->AddItem(passiveitem)
+	}
 
 	// Drop Gold
 	int gold = _DropManager->DropGold();
