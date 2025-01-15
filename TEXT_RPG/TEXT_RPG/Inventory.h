@@ -47,6 +47,8 @@ public:
 	//인벤토리 크기 증가
 	void ExpandItemInventory();
 
+	//인벤토리 안에서 공백 체크
+	int GetItemInventoryEmptySize();
 	//인벤토리 크기 확인
-	int GetItemInventorySize();
+	int GetMaxItemInventorySize();
 };
