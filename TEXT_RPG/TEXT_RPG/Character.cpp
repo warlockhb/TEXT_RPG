@@ -2,12 +2,12 @@
 #include <algorithm>
 #include <iostream>
 #include "Inventory.h"
+#include "EquipmentSlot.h"
 using namespace std;
 
 Character * Character::instance = nullptr;
 
 Character::Character(string New_name)
-	: inventory()
 {
 	this->Name = New_name;
 	this->Level = 1;
@@ -22,6 +22,7 @@ Character::Character(string New_name)
 	this->CurrentAttack = Attack;
 
 	inventory = new Inventory(this);
+	equipmentSlot = new EquipmentSlot(this);
 }
 
 Character::~Character()
@@ -30,6 +31,12 @@ Character::~Character()
 	{
 		delete inventory;
 		inventory = nullptr;
+	}
+
+	if (equipmentSlot != nullptr)
+	{
+		delete equipmentSlot;
+		equipmentSlot = nullptr;
 	}
 }
 
@@ -48,6 +55,11 @@ Inventory* Character::GetInventory()
 	return inventory;
 }
 
+EquipmentSlot* Character::GetEquipmentSlot()
+{
+	return equipmentSlot;
+}
+
 
 //void Character::UseItem(int index)
 //{
@@ -63,42 +75,6 @@ Inventory* Character::GetInventory()
 //	//delete item;
 //	Inventory.erase(Inventory.begin() + index);
 //	cout << "아이템을 사용했습니다!" << endl;
-//}
-
-//void Character::SkillUse(int index)
-//{
-//	if (index < 0 || index >= Equipment_Inventory.size())
-//	{
-//		cout << "잘못 입력되었습니다." << endl;
-//	}
-//
-//	Equipment* skill = Equipment_Inventory[index];
-//
-//	delete skill;
-//	cout << "스킬을 사용했습니다!" << endl;
-//}
-//
-//void Character::AddSkill(Equipment* skill)
-//{
-//	if (Equipment_Inventory.size() < Max_Skill_Size)
-//	{
-//		Equipment_Inventory.push_back(skill);
-//		cout << "스킬이 추가되었습니다." << endl;
-//	}
-//	else
-//	{
-//		cout << "인벤토리가 가득차서, 스킬을 추가할 수 없습니다." << endl;
-//	}
-//}
-//
-//void Character::RemoveSkill(Equipment* skill)
-//{
-//	auto it = find(Equipment_Inventory.begin(), Equipment_Inventory.end(), skill);
-//
-//	if (it != Equipment_Inventory.end())
-//	{
-//		Equipment_Inventory.erase(it);
-//	}
 //}
 
 string Character::GetName() const

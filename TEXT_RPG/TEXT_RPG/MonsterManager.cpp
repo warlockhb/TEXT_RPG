@@ -4,6 +4,10 @@
 #include "BossMonster.h"
 #include "NormalMonster.h"
 #include "Character.h"
+#include "./Item/Equipment/Equipment.h"
+#include "./Item/PassiveItem/PassiveItem.h"
+#include "Inventory.h"
+#include "EquipmentSlot.h"
 
 MonsterManager::MonsterManager()
 	: _Monster(nullptr)
@@ -104,11 +108,22 @@ void MonsterManager::HuntComplete(Monster* _monster)
 {
 	// Item Drop
 	Item* item = _DropManager->DropItem();
-
-	if ( item != nullptr )
+	
+	PassiveItem* passiveitem = dynamic_cast<PassiveItem*>(item);
+	if ( passiveitem != nullptr )
 	{
-		cout << _monster->GetName() << "이(가) " << item->GetName() << "을(를) 드랍했습니다!" << endl;
-		// Item을 Inventory에 넣어주기
+		cout << _monster->GetName() << "이(가) " << passiveitem->GetName() << "을(를) 드랍했습니다!" << endl;
+
+		PassiveItem* refPassiveItem = new PassiveItem(*passiveitem);
+		Character::GetInstance()->GetInventory()->AddItem(refPassiveItem);
+	}
+	Equipment* equipment = dynamic_cast<Equipment*>( item );
+	if ( equipment != nullptr )
+	{
+		cout << _monster->GetName() << "이(가) " << equipment->GetName() << "을(를) 드랍했습니다!" << endl;
+
+		Equipment* refEquipment = new Equipment(*equipment);
+		Character::GetInstance()->GetEquipmentSlot()->AddItem(refEquipment);
 	}
 
 	// Drop Gold

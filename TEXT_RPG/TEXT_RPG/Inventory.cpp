@@ -127,12 +127,26 @@ void Inventory::ExpandItemInventory()
     }
 
     ExpandCount++;
-    cout << "현재 인벤토리 사이즈 : " << GetItemInventorySize() << endl;
+    cout << "현재 인벤토리 사이즈 : " << GetMaxItemInventorySize() << endl;
 }
 
-int Inventory::GetItemInventorySize()
+int Inventory::GetItemInventoryEmptySize()
+{
+    int index = 0;
+    for (int i = 0; i < ItemsInventory.size(); i++)
+    {
+        if (ItemsInventory[i] == nullptr)
+        {
+            index++;
+        }
+    }
+    return index;
+}
+
+int Inventory::GetMaxItemInventorySize()
 {
     return ItemsInventory.size();
 }
+
 
 

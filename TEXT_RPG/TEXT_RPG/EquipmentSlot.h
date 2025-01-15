@@ -14,7 +14,7 @@ private:
     Character* Owner;
 
     size_t Max_Storage_size = 5;
-    size_t Max_Apply_size = 4;
+    size_t Max_Apply_size = 5;
     vector<Equipment*> StorageSlots;
     vector<Equipment*> ApplySlots;
 
