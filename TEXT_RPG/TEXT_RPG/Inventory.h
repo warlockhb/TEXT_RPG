@@ -22,6 +22,9 @@ private:
 	vector<PassiveItem*> ItemsInventory;
 	StatManager ApplyStats;
 
+	int ExpandCount = 0;
+	const int MaxExpandCount = 2;
+	
 public:
 	Inventory(Character* Ower) :
 		Owner(Ower),
@@ -51,4 +54,9 @@ public:
 	int GetItemInventoryEmptySize();
 	//인벤토리 크기 확인
 	int GetMaxItemInventorySize();
+
+	//인벤토리 확장 횟수 값
+	int GetExpandCount();
+	//인벤토리 확장 최대 값.
+	int GetMaxExpandCount();
 };

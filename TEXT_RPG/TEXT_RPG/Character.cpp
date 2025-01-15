@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Inventory.h"
 #include "EquipmentSlot.h"
+#include "Monster.h"
 using namespace std;
 
 Character * Character::instance = nullptr;
@@ -47,6 +48,10 @@ Character* Character::GetInstance(string New_name)
 	{
 		instance = new Character(New_name);
 	}
+	else if (!New_name.empty() && instance->Name.empty())
+	{
+		instance->Name = New_name;
+	}
 	return instance;
 }
 
@@ -59,23 +64,6 @@ EquipmentSlot* Character::GetEquipmentSlot()
 {
 	return equipmentSlot;
 }
-
-
-//void Character::UseItem(int index)
-//{
-//	if (index < 0 || index >= Inventory.size())
-//	{
-//		cout << "잘못 입력되었습니다." << endl;
-//	}
-//
-//	PassiveItem* item = Inventory[index];
-//	//아이템 사용
-//	//item->use(this)?
-//
-//	//delete item;
-//	Inventory.erase(Inventory.begin() + index);
-//	cout << "아이템을 사용했습니다!" << endl;
-//}
 
 string Character::GetName() const
 {
@@ -205,7 +193,7 @@ void Character::TakeDamage(int damage)
 
 	if (CurrentHealth <= 0)
 	{
-		PlayerDie();
+		SetCurrentHealth(0);
 	}
 }
 
@@ -229,10 +217,11 @@ void Character::AllRecoverHealth()
 
 void Character::PlayerDie()
 {
-	cout << "캐릭터 사망. 게임 오버" << endl;
 	cout << "===========================" << endl;
+	cout << "캐릭터 사망. 게임 오버" << endl;
 	cout << "캐릭터 이름 : " << Name << endl;
 	cout << "최종 레벨 : " << Level << endl;
+	cout << "보유 골드 : " << Gold << endl;
 	cout << "===========================" << endl;
 }
 
@@ -258,13 +247,15 @@ void Character::LevelUp()
 
 	{
 		this->Level++;
+		int temp = GetCurrentHealth() - GetMaxHealth();
+		int temp2 = GetCurrentAttack() - GetAttack();
 		this->MaxHealth += Level * 20;
 		this->Health = MaxHealth;
 		this->Attack += Level * 5;
 		this->Exp = 0;
-		this->CurrentMaxHealth = MaxHealth;
-		this->CurrentHealth = MaxHealth;
-		this->CurrentAttack = Attack;
+		this->CurrentMaxHealth = MaxHealth + temp;
+		this->CurrentHealth = CurrentMaxHealth;
+		this->CurrentAttack = Attack + temp2;
 		cout << "레벨 업!" << endl;
 	}
 	if (Level >= 10)
