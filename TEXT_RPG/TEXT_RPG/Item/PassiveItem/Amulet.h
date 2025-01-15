@@ -16,6 +16,7 @@ public:
 
 class AmuletOfWisdom : public PassiveItem
 {
+public:
     AmuletOfWisdom()
     {
         ID = ID_AMULET_OF_WISDOM;
@@ -28,6 +29,7 @@ class AmuletOfWisdom : public PassiveItem
 
 class AmuletOfVitality : public PassiveItem
 {
+public:
     AmuletOfVitality()
     {
         ID = ID_AMULET_OF_VITALITY;
@@ -40,6 +42,7 @@ class AmuletOfVitality : public PassiveItem
 
 class AmuletOfFortune : public PassiveItem
 {
+public:
     AmuletOfFortune()
     {
         ID = ID_AMULET_OF_FORTUNE;
