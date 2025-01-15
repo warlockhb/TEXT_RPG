@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+#include "Inventory.h"
+
 using namespace std;
 
 Shop::Shop()
@@ -15,6 +17,14 @@ Shop::Shop()
 	items[ID_POTION_HP_MEDIUM] = new PotionHpMedium();
 	items[ID_POTION_HP_LARGE] = new PotionHpLarge();
 
+	items[ID_AMULET_OF_STRENGTH] = new AmuletOfStrngth();
+	//public으로 선언안됨 밑에 3개
+	/*items[ID_AMULET_OF_WISDOM] = new AmuletOfWisdom();
+	items[ID_AMULET_OF_VITALITY] = new AmuletOfVitality();
+	items[ID_AMULET_OF_FORTUNE] = new AmuletOfFortune();*/
+
+	/*items[] = new ();
+	items[] = new ();*/
 	//[물건복붙]추가 판매할 물건들(작성예정)
 }
 
@@ -85,20 +95,27 @@ void Shop::BuyItem(Character& character) {
 		else if (items.find(selectedID) != items.end())
 		{
 			//아이템 아이디 입력된 경우
-			Item* selectedItem = items[selectedID];
+			PassiveItem* selectedItem = items[selectedID];
 			//item_price : 선택한 아이템 가격
 			int item_price = selectedItem->GetPrice();
-			if (character.GetGold() >= item_price) //수정 : 자리 없는 경우 거부해야함
+			if (character.GetGold() < item_price) //골드가 부족한 경우
 			{
-				character.LoseGold(item_price);
-				//인벤토리에 해당 아이템 삽입
-			}
-			else
-			{//골드가 부족한 경우
 				cout << "골드가 부족합니다." << endl;
+				return;
 			}
-			
+			else{//골드 충분한 경우
+				/*if(인벤토리.현재사이즈 == 인벤토리.maxsize){ //인벤토리 자리 없는 경우
+				cout << "인벤토리가 꽉 찼습니다." << endl;
+				return;
+				}*/
+				
+				/*else {// 인벤토리 내 자리가 있는 경우
+				character.LoseGold(item_price);
+				character.GetInventory()->AddItem(selectedItem);
+				}*/
+			}
 		}
+		
 		else
 		{
 			cout << "잘못 입력하셨습니다. 상품번호만 입력하세요." << endl;
@@ -109,7 +126,7 @@ void Shop::BuyItem(Character& character) {
 
 void Shop::SellItem(Character& character) {
 	//수정
-	//- 인벤토리 불러와서 목록 전부 보여준 다음,
+	//- 인벤토 리 불러와서 목록 전부 보여준 다음,
 	// 판매 원하는 물건을 인벤토리에서 삭제하고 해당 물건 60% 금액을 ++하기
 }
 
