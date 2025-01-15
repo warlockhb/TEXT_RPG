@@ -22,6 +22,8 @@ protected:
     StatModifier StackStat = StatModifier();
     int DynamicStack = 0;
 
+    
+
 public:
     Item() = default;
     ~Item() = default;
