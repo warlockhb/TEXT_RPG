@@ -6,19 +6,28 @@
 #include "Character.h"
 
 MonsterManager::MonsterManager()
-	: monster(nullptr)
-	, gen(std::random_device{}())
+	: _Monster(nullptr)
+	, gen(std::random_device{}( ))
+	, _DropManager(new DropManager())
 {
 }
 
 MonsterManager::~MonsterManager()
 {
+	if ( _Monster != nullptr )
+	{
+		delete _Monster;
+		_Monster = nullptr;
+	}
+
+	delete _DropManager;
+	_DropManager = nullptr;
 }
 
 Monster* MonsterManager::CreateNormalMonster()
 {
-	if (monster != nullptr)
-		return monster;
+	if (_Monster != nullptr)
+		return _Monster;
 
 	std::uniform_int_distribution<> dist(0, 5); // 0 ~ 5
 	int randomNum = dist(gen);
@@ -42,24 +51,24 @@ Monster* MonsterManager::CreateNormalMonster()
 	int hp = Character::GetInstance()->GetLevel() * 100;
 	int power = Character::GetInstance()->GetLevel() * 10;
 
-	monster = new NormalMonster(monsterName, hp , power);
+	_Monster = new NormalMonster(monsterName, hp , power);
 
-	return monster;
+	return _Monster;
 }
 
 Monster* MonsterManager::CreateBossMonster()
 {
-	if (monster != nullptr)
-		return monster;
+	if (_Monster != nullptr)
+		return _Monster;
 
-	// 異붽���옉�뾽.
+	// Create BosslMonster.
 	string monsterName = "Boss Monster";
 	int hp = 10 * 500;
 	int power = 10 *20;
 
-	monster = new BossMonster(monsterName, hp , power);
+	_Monster = new BossMonster(monsterName, hp , power);
 
-	return monster;
+	return _Monster;
 }
 
 void MonsterManager::DeleteMonster(Monster* _monster, bool _isSuccessful)
@@ -92,7 +101,7 @@ void MonsterManager::DeleteMonster(Monster* _monster, bool _isSuccessful)
 void MonsterManager::HuntComplete(Monster* _monster)
 {
 	// Item Drop
-	Item* item = DropItem();
+	Item* item = _DropManager->DropItem();
 
 	if ( item != nullptr )
 	{
@@ -100,7 +109,7 @@ void MonsterManager::HuntComplete(Monster* _monster)
 	}
 
 	// Drop Gold
-	int gold = DropGold();
+	int gold = _DropManager->DropGold();
 	Character::GetInstance()->AddGold(gold);
 
 	// monster Recording
@@ -112,27 +121,3 @@ void MonsterManager::HuntFailed()
 	// 사냥 실패
 }
 
-Item* MonsterManager::DropItem()
-{
-	std::uniform_int_distribution<> dist(0 , 4); // 0 ~ 4
-	int randomNum = dist(gen); 
-
-	// 20%
-	if ( randomNum == 4 )
-	{
-		// Random.
-		// return Item;
-	}
-
-
-	return nullptr;
-}
-
-int MonsterManager::DropGold()
-{
-	std::uniform_int_distribution<> dist(1 , 5); // 0 ~ 4
-	int randomNum = dist(gen);
-	int gold = Character::GetInstance()->GetLevel() * randomNum;
-
-	return gold;
-}

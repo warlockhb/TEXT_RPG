@@ -1,13 +1,15 @@
 #pragma once
 #include "Monster.h"
-#include "Item/Item.h"
-#include <random>
+#include "DropManager.h"
+
 
 class MonsterManager
 {
 private:
-	Monster* monster;
+	Monster* _Monster;
+	DropManager* _DropManager;
 	std::mt19937 gen;		// random engine
+
 
 public:
 	MonsterManager();
@@ -19,7 +21,4 @@ public:
 
 	void HuntComplete(Monster* _monster);
 	void HuntFailed();
-
-	Item* DropItem();
-	int	DropGold();
 };

@@ -2,21 +2,21 @@
 #include "Item/Item.h"
 #include <vector>
 #include <iostream>
+#include <random>
+
 
 class DropManager
 {
 private:
-	vector<Item*> items;
+	vector<Item*> _Items;
+	vector<float> _Probability;
+	std::mt19937 gen;		// random engine
 
+public:
 	DropManager();
 	~DropManager();
 
-public:
-	DropManager(const DropManager&) = delete;
-	DropManager* operator= (const DropManager) = delete;
-
-	
-
-
+	Item* DropItem();
+	int DropGold();
 };
 
