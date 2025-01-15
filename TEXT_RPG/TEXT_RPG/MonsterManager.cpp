@@ -1,4 +1,4 @@
-﻿#include "MonsterManager.h"
+#include "MonsterManager.h"
 #include "Logger.h"
 #include "Calculator.h"
 #include "BossMonster.h"
@@ -100,8 +100,8 @@ void MonsterManager::DeleteMonster(Monster* _monster, bool _isSuccessful)
 			HuntFailed(_monster);
 	}
 	
-	delete _monster;
-	_monster = nullptr;
+	delete _Monster;
+	_Monster = nullptr;
 }
 
 void MonsterManager::HuntComplete(Monster* _monster)
