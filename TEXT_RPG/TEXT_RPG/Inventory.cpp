@@ -1,5 +1,7 @@
 #include "Inventory.h"
 
+#include <iostream>
+
 
 void Inventory::UpdateStaticStat()
 {
@@ -109,8 +111,24 @@ void Inventory::DisplayInventory()
 
 void Inventory::AddItem(PassiveItem* item)
 {
-    ItemsInventory.insert(ItemsInventory.begin(), item);
+    for (size_t i = 0; i < ItemsInventory.size(); i++)
+    {
+        if (ItemsInventory[i] == nullptr)
+        {
+            ItemsInventory[i] = item;
+            Apply();
+            return;
+        }
+    }
     
+    if (ItemsInventory.size() < Max_Inventory_size)
+    {
+        ItemsInventory.insert(ItemsInventory.begin(), item);
+    }
+    else
+    {
+        cout << "인벤토리가 가득 차서 아이템을 추가할 수 없습니다." << endl;
+    }
     Apply();
 }
 
