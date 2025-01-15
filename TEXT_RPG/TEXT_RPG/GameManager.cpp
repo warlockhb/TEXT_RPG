@@ -3,6 +3,8 @@
 #include "BattleManager.h"
 #include "Character.h"
 #include "Village.h"
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 using namespace std;
 
@@ -33,14 +35,20 @@ bool GameManager::ShowMenu()
 	::cout << "5. 종료" << endl;
 	::cout << "선택: ";
 	int choice;
+	
 	cin >> choice;
 	Village village;
 	switch (choice)
 	{
 	case 1:
-		battleManager->StartBattle();
-		village.ShowChoice(*MyCharacter);
-		break;
+		{
+			battleManager->StartBattle();
+			int getexp = std::rand() % 41 + 30;
+			MyCharacter->GainExp(getexp);
+			MyCharacter->LevelUp();
+			village.ShowChoice(*MyCharacter);
+			break;
+		}
 	case 2:
 		MyCharacter->DisPlayStatus();
 		break;
