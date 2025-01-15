@@ -150,53 +150,6 @@ void BattleManager::AttackMonster(Monster& Monster)
     }
 }
 
-<<<<<<< HEAD
-void BattleManager::ManualBattle()
-{
-   _MonsterManager = new MonsterManager();
-    //Todo : 보스몬스터 조건
-    _Monster = Character::GetInstance()->GetLevel() == 10
-                           ? _MonsterManager->CreateBossMonster()
-                           : _MonsterManager->CreateNormalMonster();
-
-    int TurnCount = 0;
-    while (!IsBattleEnd)
-    {
-        if (TurnCount % 2 == 0)
-        {
-            int choice = 0;
-
-            cout << "1. 기본공격 ____ 2. 스킬사용 ____ 3. 아이템 사용 ";
-            cin >> choice;
-
-            switch (choice)
-            {
-            case 1:
-                cout << "기본 공격" << endl;
-                AttackMonster(*_Monster);
-                break;
-            case 2:
-                break;
-            case 3:
-                Character::GetInstance()->GetInventory()->DisplayInventory();
-                break;
-            default:
-                cout << "기본 공격" << endl;
-                AttackMonster(*_Monster);
-                break;
-            }
-        }
-        else
-        {
-            AttackCharacter(*_Monster);
-        }
-        
-        TurnCount++;
-    }
-}
-
-=======
->>>>>>> main
 void BattleManager::EndBattle(bool IsPlayerWin)
 {
     _MonsterManager->DeleteMonster(_Monster, IsPlayerWin);
