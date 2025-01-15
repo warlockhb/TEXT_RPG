@@ -10,7 +10,7 @@ public:
         Name = "힘의 부적";
         Price = 200;
         StackStat.AttackMod = 2;
-        Description = "매 스테이지 마다 스택 1이 쌓이며, 스택 당 공격력" + to_string(StackStat.AttackMod) + "이 증가한다.";
+        Description = "매 스테이지 마다 스택 1이 쌓이며, 스택 당 공격력 " + to_string(StackStat.AttackMod) + "만큼 증가한다.";
     }
 };
 
