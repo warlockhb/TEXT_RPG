@@ -105,6 +105,27 @@ void EquipmentSlot::ChangeItem(int ApplySlot, int StorageSlot)
     SlotStats.Apply(ApplySlots);
 }
 
+Equipment* EquipmentSlot::GetItem(int Slot, int Index)
+{
+    if (Slot < 0 || Slot >= 1) return nullptr;
+
+    if (Slot == 0)
+    {
+        if (Index < 0 || Index >= StorageSlots.size()) return nullptr;
+        if (StorageSlots[Index] == nullptr) return nullptr;
+        
+        return ApplySlots[Index];
+    }
+    else if (Slot == 1)
+    {
+        if (Index < 0 || Index >= ApplySlots.size()) return nullptr;
+        if (ApplySlots[Index] == nullptr) return nullptr;
+        
+        return StorageSlots[Index];
+    }
+    
+}
+
 void EquipmentSlot::UpdateStage()
 {
     for (auto item : ApplySlots)
