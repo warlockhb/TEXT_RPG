@@ -4,12 +4,22 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 
+enum EBattleState
+{
+	EBS_NONE = 0,
+	EBS_INPROGRESS = 1,
+	EBS_PLAYER_WIN = 2,
+	EBS_PLAYER_LOSE = 3,
+};
+
 class BattleManager
 {
 public:
 	BattleManager();
 	~BattleManager();
 	void StartBattle();
+
+	EBattleState GetBattleState() const;
 private:
 	void AttackCharacter(Monster& Monster);
 	void AttackMonster(Monster& Monster);
@@ -22,6 +32,7 @@ private:
 	Monster* _Monster;
 	
 	bool IsBattleEnd;
+	EBattleState _BattleState;
 };
 
 #endif

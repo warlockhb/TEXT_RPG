@@ -8,6 +8,7 @@ using namespace std;
 BattleManager::BattleManager()
 {
     IsBattleEnd = false;
+    _BattleState = EBS_INPROGRESS;
 }
 
 BattleManager::~BattleManager()
@@ -41,6 +42,11 @@ void BattleManager::StartBattle()
         cout << "그냥 자동전투하세요.";
         break;
     }
+}
+
+EBattleState BattleManager::GetBattleState() const
+{
+    return _BattleState;
 }
 
 void BattleManager::AutoBattle()
@@ -86,7 +92,7 @@ void BattleManager::AttackCharacter(Monster& Monster)
 void BattleManager::AttackMonster(Monster& Monster)
 {
     cout << "---- 플레이어가 몬스터를 공격합니다.----\n" << endl;
-    int Damage = Character::GetInstance()->GetAttack();
+    int Damage = Character::GetInstance()->GetCurrentAttack();
     cout << "---- 데미지 : " << Damage << " ----\n" << endl;
     Monster.TakeDamage(Damage);
     int Health = Monster.GetHp();
@@ -151,10 +157,11 @@ void BattleManager::EndBattle(bool IsPlayerWin)
     if (IsPlayerWin)
     {
         // 플레이어 승리
+        _BattleState = EBS_PLAYER_WIN;
     }
     else
     {
-        // 플레이어 패배
+        _BattleState = EBS_PLAYER_LOSE;
     }
     cout << "---- 전투 종료 ----" << endl;
 }
