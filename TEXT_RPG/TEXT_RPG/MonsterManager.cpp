@@ -67,11 +67,24 @@ void MonsterManager::DeleteMonster(Monster* _monster, bool _isSuccessful)
 	if (_monster == nullptr)
 		return;
 
-	if ( _isSuccessful )
-		HuntComplete(_monster);
-	else
-		HuntFailed();
-
+	NormalMonster* normalMonster = dynamic_cast<NormalMonster*>( _monster );
+	if ( normalMonster != nullptr )
+	{
+		if ( _isSuccessful )
+			HuntComplete(_monster);
+		else
+			HuntFailed();
+	}
+	
+	BossMonster* bossMonster = dynamic_cast<BossMonster*>( _monster );
+	if ( bossMonster != nullptr )
+	{
+		if ( _isSuccessful )
+			HuntComplete(_monster);
+		else
+			HuntFailed();
+	}
+	
 	delete _monster;
 	_monster = nullptr;
 }
