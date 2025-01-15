@@ -21,10 +21,8 @@ BattleManager::~BattleManager()
 
 void BattleManager::StartBattle()
 {
-    //Todo : 자동공격 & 수동공격
     cout << "1. 자동 전투 ___ 2. 수동 전투" << endl;
-
-    //cout << "---- 자동 전투 시작 ----" << endl;
+    
     int BattleType = 1;
     cin >> BattleType;
     cout << endl;
@@ -90,7 +88,7 @@ void BattleManager::ManualBattle()
         {
             int choice = 0;
 
-            cout << "1. 기본공격 ____ 2. 스킬사용 " /*"____ 3. 아이템 사용 "*/;
+            cout << "1. 기본공격" /*____ 2. 스킬사용 ____ 3. 아이템 사용 "*/;
             cin >> choice;
 
             switch (choice)
@@ -99,9 +97,11 @@ void BattleManager::ManualBattle()
                 cout << "기본 공격" << endl;
                 AttackMonster(*_Monster);
                 break;
-            case 2:
-                break;
+            // case 2:
+            // Todo: 스킬사용 
+            //     break;
             // case 3:
+            //Todo : 아이템 사용
             //     Character::GetInstance()->GetInventory()->DisplayInventory();
             //     break;
             default:
@@ -123,10 +123,8 @@ void BattleManager::AttackCharacter(Monster& Monster)
 {
     cout << "---- 몬스터가 플레이어를 공격합니다.----\n" << endl;
     int Damage = Monster.GetPower();
-    //cout << "---- 데미지 : " << Damage << " ----\n" << endl;
     Character::GetInstance()->TakeDamage(Damage);
     int Health = Character::GetInstance()->GetCurrentHealth();
-    //cout << "캐릭터 남은 체력 : " << Health << "\n" << endl;
 
     if (IsDead(Health))
     {
@@ -158,7 +156,6 @@ void BattleManager::EndBattle(bool IsPlayerWin)
 
     if (IsPlayerWin)
     {
-        // 플레이어 승리
         _BattleState = EBS_PLAYER_WIN;
         Character::GetInstance()->GetInventory()->UpdateStage();
     }
