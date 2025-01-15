@@ -9,7 +9,7 @@ struct StatModifier
     int AttackMod = 0;
     int GoldMod = 0;
     
-    int HpMult = 0.0f;;    
+    float HpMult = 0.0f;    
     float MaxHpMult = 0.0f;
     float AttackMult = 0.0f;
 
