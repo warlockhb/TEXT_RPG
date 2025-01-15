@@ -20,5 +20,5 @@ public:
 	void DeleteMonster(Monster* _monster, bool _isSuccessful);
 
 	void HuntComplete(Monster* _monster);
-	void HuntFailed();
+	void HuntFailed(Monster* _monster);
 };

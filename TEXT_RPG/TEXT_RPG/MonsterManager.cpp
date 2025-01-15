@@ -52,6 +52,7 @@ Monster* MonsterManager::CreateNormalMonster()
 	int power = Character::GetInstance()->GetLevel() * 10;
 
 	_Monster = new NormalMonster(monsterName, hp , power);
+	cout << monsterName << " 등장!!" << endl;
 
 	return _Monster;
 }
@@ -67,6 +68,7 @@ Monster* MonsterManager::CreateBossMonster()
 	int power = 10 *20;
 
 	_Monster = new BossMonster(monsterName, hp , power);
+	cout << monsterName << " 등장!!" << endl;
 
 	return _Monster;
 }
@@ -82,7 +84,7 @@ void MonsterManager::DeleteMonster(Monster* _monster, bool _isSuccessful)
 		if ( _isSuccessful )
 			HuntComplete(_monster);
 		else
-			HuntFailed();
+			HuntFailed(_monster);
 	}
 	
 	BossMonster* bossMonster = dynamic_cast<BossMonster*>( _monster );
@@ -91,7 +93,7 @@ void MonsterManager::DeleteMonster(Monster* _monster, bool _isSuccessful)
 		if ( _isSuccessful )
 			HuntComplete(_monster);
 		else
-			HuntFailed();
+			HuntFailed(_monster);
 	}
 	
 	delete _monster;
@@ -105,19 +107,23 @@ void MonsterManager::HuntComplete(Monster* _monster)
 
 	if ( item != nullptr )
 	{
+		cout << _monster->GetName() << "이(가) " << item->GetName() << "을(를) 드랍했습니다!" << endl;
 		// Item을 Inventory에 넣어주기
 	}
 
 	// Drop Gold
 	int gold = _DropManager->DropGold();
+	cout << _monster->GetName() << "이(가) " << gold << "gold를 드랍했습니다" << endl;
 	Character::GetInstance()->AddGold(gold);
 
 	// monster Recording
 	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
 }
 
-void MonsterManager::HuntFailed()
+void MonsterManager::HuntFailed(Monster* _monster)
 {
 	// 사냥 실패
+	cout << _monster->GetName() << " 사냥에 실패하였습니다.."<< endl;
+
 }
 
