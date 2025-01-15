@@ -13,6 +13,7 @@ void Village::ShowChoice(Character& character) {
 	int choice;
 	
 	while (true) {
+		cout << endl;
 		cout << "---<<  선택지  >>---" << endl;
 		cout << " 1. 여관" << endl;
 		cout << " 2. 상점" << endl;
@@ -33,17 +34,18 @@ void Village::ShowChoice(Character& character) {
 		
 		switch (choice) {
 		case 1:
-			cout << "여관에 입장중" << endl;
+			cout << endl;
+			cout << "여관에 입장중.." << endl;
 			inn.EnterInn(character);//체력 힐, 골드 여부
 			break;
 
 		case 2:
-			cout << "상점에 입장중" << endl;
+			cout << "상점에 입장중.." << endl;
 			shop.EnterShop(character);//인벤토리, 골드
 			break;
 
 		case 3:
-			cout << "마을에서 나가는 중" << endl;
+			cout << "마을에서 나가는 중.." << endl;
 			return;
 
 		default:

@@ -12,6 +12,7 @@ void Inn::EnterInn(Character& character) {
 
 	while (true)
 	{
+		cout << endl;
 		cout << "여관에 입장했습니다" << endl;
 		cout << "---<<  여관  >>---" << endl;
 		cout << "-  이용료  : 10G -" << endl;
@@ -50,9 +51,8 @@ void Inn::EnterInn(Character& character) {
 
 void Inn::UseInn(Character& character) {
 	//10골드 차감
-	character.LoseGold(INN_COST);
-
+	cout << "여관 이용 완료! 체력이 최대치로 회복되었습니다." << endl;
 	//플레이어 체력 회복
-	int recover = character.GetMaxHealth() - character.GetHealth();
-	character.AddGold(recover);
+	character.SetHealth(character.GetMaxHealth());
+	character.LoseGold(INN_COST);
 }

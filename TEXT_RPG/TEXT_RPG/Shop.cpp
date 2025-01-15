@@ -25,29 +25,40 @@ Shop::Shop()
 
 void Shop::EnterShop(Character& character) {
 	int choice;
+	cout << endl;
 	cout << "상점에 입장했습니다." << endl;
 	while (true) {
-		cout << "---<< 상점 >>---" << endl;
+		cout << endl;
+		cout << "---<< 상점 메인 >>---" << endl;
 		cout << " 1. 상품 구매" << endl;
 		cout << " 2. 상품 판매" << endl;
 		cout << " 3. 상점 나가기" << endl;
-		cout << "----------------" << endl;
-		cout << "번호를 입력하세요: " << endl;
+		cout << "--------------------" << endl;
+		cout << "번호를 입력하세요: " ;
 		cin >> choice;
 
+		//choice 예외 처리
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "잘못된 입력입니다. 숫자를 입력하세요." << endl;
+			continue;
+		}
+		
 		switch (choice) {
 		case 1:
 			//상품 구매
-			cout << " 상품 구매화면으로 이동합니다" << endl;
+			cout << " 상품 구매화면으로 이동중.." << endl;//이거 지우시죠
 			BuyItem(character);
 			break;
 		case 2:
 			//상품 판매
-			cout << " 상품 판매화면으로 이동합니다" << endl;
+			cout << " 상품 판매화면으로 이동중.." << endl; //이거 지우시죠
 			SellItem(character);
 			break;
 		case 3:
-			cout << " 상점 나가는 중" << endl;
+			cout << " 상점 나가는 중.." << endl;
 			return;
 		default:
 			cout << "잘못 입력하셨습니다. 1~3까지의 번호만 입력하세요" << endl;
@@ -60,14 +71,25 @@ void Shop::BuyItem(Character& character)
 	while (true)
 	{
 		int choice;
+		cout << endl;
 		cout << "---<< 구매 가능한 상품 >>---" << endl;
 		cout << " 1. 포션" << endl;
 		cout << " 2. 부적" << endl;
 		cout << " 3. 돌아가기" << endl;
-		cout << "----------------" << endl;
-		cout << "번호를 입력하세요: " << endl;
+		cout << "--------------------------" << endl;
+		cout << "번호를 입력하세요: ";
 
 		cin >> choice;
+
+		//choice 예외 처리
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "잘못된 입력입니다. 숫자를 입력하세요." << endl;
+			continue;
+		}
+		
 		switch (choice)
 		{
 		case 1:
@@ -76,12 +98,16 @@ void Shop::BuyItem(Character& character)
 		case 2:
 			BuyLogic(character, amulets);
 			break;
+		case 3:
+			cout << "상점 메인으로 돌아갑니다. " << endl;
+			return;
 		}
 	}
 
 }
 void Shop::ShowItems(const std::map<int, PassiveItem*>& map_item)
 {
+	cout << endl;
 	cout << "--<<  구매 가능한 상품 목록  >>--" << endl;
 	for (auto& item : map_item)
 	{//출력예시 : - 100. 소형 포션 : 체력을 회복시켜준다 (30G)
@@ -91,7 +117,9 @@ void Shop::ShowItems(const std::map<int, PassiveItem*>& map_item)
 			 <<item.second->GetPrice() << "G)" << endl;
 	}
 	cout << " - 0. 돌아가기" << endl;
-	cout << "----------------" << endl;
+	cout << "------------------------------" << endl;
+	cout << endl;
+	
 
 }
 
@@ -103,6 +131,15 @@ void Shop::BuyLogic(Character& character, const std::map<int, PassiveItem*>& map
 		cout << "상품번호를 입력하세요: ";
 		cin >> selectedID;
 
+		//choice 예외 처리
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "잘못된 입력입니다. 숫자를 입력하세요." << endl;
+			continue;
+		}
+		
 		if (selectedID == 0)
 		{
 			//0. 돌아가기 입력된 경우
@@ -130,31 +167,48 @@ void Shop::BuyLogic(Character& character, const std::map<int, PassiveItem*>& map
 				return;
 			}
 			else {// 인벤토리 내 자리가 있고 gold도 충분한 경우
+			cout <<"{"<< selectedItem->GetName() << "} 아이템을 구매했습니다.(가격: " << selectedItem->GetPrice() << "G)" << endl;
 			character.LoseGold(item_price);
 			character.GetInventory()->AddItem(selectedItem);
+			
 			}
 		}
 	}
 }
 
 
-void Shop::SellItem(Character& character) {
+void Shop::SellItem(Character& character)
+{
 	Inventory* inventory = character.GetInventory();
-
-	while (true)
-	{
-		//인벤토리 목록 출력 코드
-		cout << "---<< 인벤토리 목록 >>---" << endl;
-		for (int i = 0; i < inventory->GetMaxItemInventorySize() - inventory->GetItemInventoryEmptySize(); ++i)
+	
+	while (true){
+	
+		if (inventory->GetItemInventoryEmptySize() == inventory->GetMaxItemInventorySize())
 		{
-			PassiveItem* item = inventory->GetItem(i);
-			if (item)
-			{//출력 예시 : 1. 이름 : 설명 (가격: 10G)
-				cout << i + 1 << ". " << item->GetName() << ": "
-					 << item->GetDescription() << "(가격: " << item->GetPrice() << "G)" << endl;
-			}
+			cout << "인벤토리 목록이 비어있습니다." << endl;
+			cout << "판매할 상품이 없으므로, 상점 메인으로 돌아갑니다. " << endl;
+			return;
 		}
-		cout << "-------------------------" << endl;
+		//인벤토리 목록 출력 코드
+		cout << endl;
+		cout << "---<< 인벤토리 목록 >>---" << endl;
+		for (int i = 0; i < inventory->GetMaxItemInventorySize(); ++i)
+		{
+			if (inventory->GetItem(i) == nullptr)
+			{
+				cout << i + 1 << ". 빈슬롯" << endl;
+			}
+			else
+			{
+				PassiveItem* item = inventory->GetItem(i);
+				//출력 예시 : 1. 이름 : 설명 (가격: 10G)
+				cout << i + 1 << ". " << item->GetName() << ": "
+					<< item->GetDescription() << "(가격: " << item->GetPrice() << "G)" << endl;
+			}
+			
+			
+		}
+		cout << "-----------------------" << endl;
 		cout << "판매할 아이템의 번호를 입력하세요 (0: 나가기): ";
 
 		int choice;
@@ -173,15 +227,14 @@ void Shop::SellItem(Character& character) {
 
 		//판매
 		int itemPrice = itemToSell->GetPrice();
+		cout << itemToSell->GetName() << " 아이템을 판매했습니다.(가격: " << itemPrice * 0.6 << "G)" << endl;
 		character.AddGold(itemPrice * 0.6);
 		inventory->RemoveItem(choice - 1);
-		cout << itemToSell->GetName() << " 아이템을 판매했습니다.(가격: " << itemPrice * 0.6 << "G)" << endl;
+		
 		
 		
 	}
-
 }
-
 
 Shop::~Shop()
 {
