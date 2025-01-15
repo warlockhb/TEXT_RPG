@@ -28,6 +28,7 @@ private:
 	Inventory* inventory;
 
 	Character(string New_name);
+	~Character();
 
 	Character(const Character&) = delete;
 	Character& operator = (const Character&) = delete;
@@ -39,17 +40,12 @@ public:
 
 	//아이템사용&추가&제거
 	//void UseItem(int index);
-	//void AddItem(PassiveItem* item);
-	//void RemoveItem(PassiveItem* item);
 
 	//스킬사용&추가&제거
 	//void SkillUse(int index);
 	//void AddSkill(Equipment* skill);
 	//void RemoveSkill(Equipment* skill);
-
-	//인벤토리 추가
-	//void ByeInventory(int buycount);
-
+	
 	//Get
 	string GetName() const;
 	int GetLevel() const;

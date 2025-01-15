@@ -60,4 +60,10 @@ public:
 
 	//TODO: 디스플레이 함수 구현 해야함.
 	void DisplayItemStat(int index);
+
+	//인벤토리 크기 증가
+	void ExpandItemInventory();
+
+	//인벤토리 크기 확인
+	int GetItemInventorySize();
 };

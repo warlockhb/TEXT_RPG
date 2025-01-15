@@ -1,4 +1,4 @@
-#include "Inventory.h"
+﻿#include "Inventory.h"
 
 #include <iostream>
 
@@ -112,6 +112,29 @@ void Inventory::Apply()
 
 void Inventory::DisplayInventory()
 {
+    std::cout << "==== Inventory ====" << std::endl;
+    // 인벤토리가 비었는지 확인
+    if (ItemsInventory.empty()) 
+    {
+        std::cout << "Inventory is empty." << std::endl;
+        return;
+    }
+
+    // 인벤토리 아이템 출력
+    for ( size_t i = 0; i < ItemsInventory.size(); ++i ) 
+    {
+        PassiveItem* item = ItemsInventory[i];
+        if (item != nullptr) 
+        {
+            // 아이템의 정보를 출력 (이름, 속성 등)
+            std::cout << i + 1 << ". " << item->GetName() << std::endl;
+        }
+        else 
+        {
+            std::cout << i + 1 << ". Empty Slot" << std::endl;
+        }
+    }
+    std::cout << "===================" << std::endl;
 }
 
 void Inventory::AddItem(PassiveItem* item)
@@ -125,15 +148,12 @@ void Inventory::AddItem(PassiveItem* item)
             return;
         }
     }
-    
-    if (ItemsInventory.size() < Max_Inventory_size)
+
+    if (ItemsInventory.size() >= Max_Inventory_size)
     {
-        ItemsInventory.insert(ItemsInventory.begin(), item);
+        cout << "아이템 보관함이 가득차서, 아이템을 담을 수 없습니다." << endl;
     }
-    else
-    {
-        cout << "인벤토리가 가득 차서 아이템을 추가할 수 없습니다." << endl;
-    }
+
     Apply();
 }
 
@@ -185,4 +205,35 @@ void Inventory::UpdateStage()
 void Inventory::DisplayItemStat(int index)
 {
 }
+
+void Inventory::ExpandItemInventory()
+{
+    static int ExpandCount = 0;
+    const int MaxExpandCount = 2;
+
+    if (ExpandCount >= MaxExpandCount)
+    {
+        cout << "인벤토리 크기 최대 확장되어 더이상 확장 불가." << endl;
+    }
+    switch (ExpandCount)
+    {
+    case 0:
+        ItemsInventory.resize(ItemsInventory.size() + 3);
+        break;
+    case 1:
+        ItemsInventory.resize(ItemsInventory.size() + 5);
+        break;
+    default:
+        break;
+    }
+
+    ExpandCount++;
+    cout << "현재 인벤토리 사이즈 : " << GetItemInventorySize() << endl;
+}
+
+int Inventory::GetItemInventorySize()
+{
+    return ItemsInventory.size();
+}
+
 
