@@ -1,9 +1,14 @@
-#include <iostream>
-
-#include "BattleManager.h"
 #include "GameManager.h"
-void main()
+int main()
 {
-    BattleManager *battleManager = new BattleManager();
-    battleManager->StartBattle();
+    GameManager game;
+    game.StartGame();
+
+    std::srand(static_cast<unsigned>(std::time(0))); // 시드 설정
+    bool GameEnd = true;
+    while (GameEnd)
+    {
+        GameEnd = game.ShowMenu();
+    }
+    return 0;
 }

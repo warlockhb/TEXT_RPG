@@ -21,6 +21,7 @@ BattleManager::~BattleManager()
 
 void BattleManager::StartBattle()
 {
+    IsBattleEnd = false;
     cout << "1. 자동 전투 ___ 2. 수동 전투" << endl;
     
     int BattleType = 1;
