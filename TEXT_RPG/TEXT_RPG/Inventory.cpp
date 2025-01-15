@@ -39,12 +39,12 @@ void Inventory::UpdateStackStat()
             
             // 모디
             // 현재 체력 비례는 제외
-            Stat.MaxHealth += StackStat.MaxHpMod * Stack;
-            Stat.Attack += StackStat.AttackMod * Stack;
+            Stat.MaxHealth += StackStat.MaxHpMod;
+            Stat.Attack += StackStat.AttackMod;
 
             // 멀티
-            Stat.MaxHealth += static_cast<int>(Owner->GetMaxHealth() * StackStat.MaxHpMult) * Stack;
-            Stat.Attack += static_cast<int>(Owner->GetAttack() * StackStat.AttackMult) * Stack;
+            Stat.MaxHealth += static_cast<int>(Owner->GetMaxHealth() * StackStat.MaxHpMult);
+            Stat.Attack += static_cast<int>(Owner->GetAttack() * StackStat.AttackMult);
         }
     }
     TotalStackStat = Stat;
@@ -98,6 +98,9 @@ Inventory::~Inventory()
 
 void Inventory::Apply()
 {
+    Owner->SetCurrentMaxHealth(Owner->GetMaxHealth());
+    Owner->SetCurrentAttack(Owner->GetAttack());
+    
     UpdateStaticStat();
     UpdateStackStat();
 
