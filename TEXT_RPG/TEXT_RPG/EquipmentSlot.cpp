@@ -9,7 +9,7 @@ void EquipmentSlot::AddItem(Equipment* Item)
     if (!Item) return;
     
     // 보관함이 가득차지 않았다면,
-    if (StorageSlots.size() < Max_Storage_size)
+    if (count(StorageSlots.begin(), StorageSlots.end(), nullptr) > 0)   
     {
         for (size_t i = 0; i < StorageSlots.size(); i++)
         {
@@ -73,7 +73,7 @@ void EquipmentSlot::Unequip(int ApplySlot)
     Equipment* Item = ApplySlots[ApplySlot];
 
     // 보관함이 가득차지 않았다면
-    if (StorageSlots.size() < Max_Storage_size)
+    if (count(StorageSlots.begin(), StorageSlots.end(), nullptr) > 0)   
     {
         // 먼저 발견한 보관함 빈칸에 삽입
         for (size_t i = 0; i < StorageSlots.size(); i++)

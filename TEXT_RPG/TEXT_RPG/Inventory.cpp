@@ -49,7 +49,7 @@ void Inventory::AddItem(PassiveItem* item)
         }
     }
 
-    if (ItemsInventory.size() >= Max_Inventory_size)
+    if (count(ItemsInventory.begin(), ItemsInventory.end(), nullptr) > 0)   
     {
         cout << "아이템 보관함이 가득차서, 아이템을 담을 수 없습니다." << endl;
     }
