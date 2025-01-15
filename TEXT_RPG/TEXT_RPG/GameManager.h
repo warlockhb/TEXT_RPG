@@ -9,5 +9,6 @@ public:
 	bool ShowMenu();
 private:
 	Character* MyCharacter = nullptr;
+	BattleManager* battleManager = new BattleManager();
 };
 

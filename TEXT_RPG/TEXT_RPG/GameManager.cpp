@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "BattleManager.h"
 #include "Character.h"
+#include "Village.h"
 #include <iostream>
 using namespace std;
 
@@ -33,15 +34,12 @@ bool GameManager::ShowMenu()
 	::cout << "선택: ";
 	int choice;
 	cin >> choice;
-
+	Village village;
 	switch (choice)
 	{
 	case 1:
-		{
-			BattleManager* battleManager = new BattleManager();
-			battleManager->StartBattle();
-			delete battleManager;
-		}
+		battleManager->StartBattle();
+		village.ShowChoice(*MyCharacter);
 		break;
 	case 2:
 		MyCharacter->DisPlayStatus();
