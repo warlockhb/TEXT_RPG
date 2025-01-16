@@ -1,4 +1,4 @@
-﻿#include "DropManager.h"
+#include "DropManager.h"
 #include "./Item/PassiveItem/Potion.h"
 #include "./Item/Equipment/Equipment.h"
 #include "./Item/PassiveItem/Amulet.h"
@@ -122,7 +122,7 @@ Item* DropManager::DropItem()
 
 int DropManager::DropGold()
 {
-    std::uniform_int_distribution<> dist(1 , 5); // 0 ~ 4
+    std::uniform_int_distribution<> dist(50 , 100); // 0 ~ 4
     int randomNum = dist(gen);
     int gold = Character::GetInstance()->GetLevel() * randomNum;
 
