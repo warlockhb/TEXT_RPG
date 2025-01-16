@@ -63,7 +63,7 @@ void Shop::EnterShop(Character& character) {
 		cout << endl;
 		cout << "---<< 상점 메인 >>---" << endl;
 		cout << " 1. 상품 구매" << endl;
-		cout << " 2. 상품 판매" << endl;
+		cout << " 2. 상품 판매(패시브)" << endl;
 		cout << " 3. 상점 나가기" << endl;
 		cout << "--------------------" << endl;
 		cout << "번호를 입력하세요: " ;
@@ -143,16 +143,16 @@ void Shop::BuyItem(Character& character)
 			BuyLogic(character, armors);
 			break;
 		case 4:
-			BuyLogic(character, armors);
+			BuyLogic(character, boots);
 			break;
 		case 5:
-			BuyLogic(character, armors);
+			BuyLogic(character, guards);
 			break;
 		case 6:
-			BuyLogic(character, armors);
+			BuyLogic(character, heads);
 			break;
 		case 7:
-			BuyLogic(character, armors);
+			BuyLogic(character, weapons);
 			break;
 		case 8:
 			BuyExpandInventory(character);
@@ -315,7 +315,9 @@ void Shop::BuyLogic(Character& character, const std::map<int, Equipment*>& map_i
 			{// 인벤토리 내 자리가 있고 gold도 충분한 경우
 				cout <<"{"<< selectedItem->GetName() << "} 장비를 구매했습니다.(가격: " << selectedItem->GetPrice() << "G)" << endl;
 				character.LoseGold(item_price);
-				character.GetEquipmentSlot()->AddItem(selectedItem);
+				
+				Equipment* newEquipment = new Equipment(*selectedItem);
+				character.GetEquipmentSlot()->AddItem(newEquipment);
 			
 			}
 		}
