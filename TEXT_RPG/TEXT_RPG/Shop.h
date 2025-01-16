@@ -31,6 +31,8 @@ public:
 	//Equipment용
 	void ShowItems(const std::map<int, Equipment*>& map_item);
 	void BuyLogic(Character& character, const std::map<int, Equipment*>& map_item);
+
+	void BuyExpandInventory(Character& character);
 	
 	void BuyItem(Character& character);
 	void SellItem(Character& character);

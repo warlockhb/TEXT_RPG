@@ -104,18 +104,18 @@ void Shop::BuyItem(Character& character)
 		int choice;
 		cout << endl;
 		cout << "---<< 구매 가능한 상품 >>---" << endl;
+		cout << endl;
 		cout << " *[ 패시브 ]*" << endl;
-		cout << " 1. 포션" << endl;
-		cout << " 2. 부적" << endl;
+		cout << " 1. 포션          2. 부적"<< endl;
 		cout << endl;
 		cout << " *[ 장비 ]*" << endl;
-		cout << " 3. 갑옷" << endl;
-		cout << " 4. 부츠" << endl;
-		cout << " 5. 방어구" << endl;
-		cout << " 6. 투구" << endl;
+		cout << " 3. 갑옷          4. 부츠" << endl;
+		cout << " 5. 방어구        6. 투구" << endl;
 		cout << " 7. 무기" << endl;
 		cout << endl;
-		cout << " 8. 돌아가기" << endl;
+		cout << " *[ 기타 ]*" << endl;
+		cout << " 8. 인벤토리 확장" << endl;
+		cout << " 9. 돌아가기" << endl;
 		cout << "--------------------------" << endl;
 		cout << "번호를 입력하세요: ";
 
@@ -154,6 +154,9 @@ void Shop::BuyItem(Character& character)
 			BuyLogic(character, armors);
 			break;
 		case 8:
+			BuyExpandInventory(character);
+			return;
+		case 9:
 			cout << "상점 메인으로 돌아갑니다. " << endl;
 			return;
 		default:
@@ -372,6 +375,60 @@ void Shop::SellItem(Character& character)
 		
 		
 	}
+}
+
+void Shop::BuyExpandInventory(Character& character)
+{
+	Inventory* inventory = character.GetInventory();
+	string choice = "";
+	const int EXPAND_COST = 1000;
+	int before_buying_expand = 0;
+	int after_buying_expand = 0;
+	while(true){ 
+		cout << endl;
+		cout << " ---- << 인벤토리 슬롯 확장 아이템 >> ----" << endl;
+		cout << "-  인벤토리 슬롯 추가(최대 2번 구매 가능) -" << endl;
+		cout << "-  가 격 : 1000G                         -" << endl;
+		cout << "------------------------------------------" << endl;
+		cout << "구매하시겠습니까?(y/n): ";
+		cin >> choice;
+
+		if (choice == "y"){
+			if (character.GetGold() < EXPAND_COST) {
+				//골드가 부족한 경우 -> 이전 화면으로
+				cout << "골드가 부족하여 구매할 수 없습니다." << endl;
+				return;
+			}
+			else {
+				//골드가 충분한 경우 구매
+				before_buying_expand = inventory->GetMaxItemInventorySize();
+				inventory->ExpandItemInventory();
+				after_buying_expand = inventory->GetMaxItemInventorySize();
+				if (before_buying_expand != after_buying_expand)
+				{//인벤토리 확장 아이템 구매 전과 구매 후 인벤토리 크기가 차이난다면 골드 차감
+					cout << "인벤토리 확장 아이템을 성공적으로 구매하셨습니다" << endl;
+					character.LoseGold(EXPAND_COST);
+				}
+				else
+				{
+					cout << "더이상 인벤토리를 확장할 수 없습니다."<<endl;
+					cout << "이전 화면으로 돌아갑니다."<<endl;
+				}
+				return;
+			}
+		}
+		else if (choice == "n"){
+			//구매X 선택한 경우 -> 이전 화면으로
+			cout << "구매를 거부했습니다. 이전 화면으로 돌아갑니다." << endl;
+			return;
+		}
+		else{
+			//값을 잘못 입력한 경우 BuyExpandInventory() 재호출
+			cout << "y 또는 n만 입력해주세요." << endl;
+		}
+	
+	}
+	
 }
 
 Shop::~Shop()
