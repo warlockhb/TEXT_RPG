@@ -1,4 +1,4 @@
-﻿#include "MonsterManager.h"
+#include "MonsterManager.h"
 #include "Logger.h"
 #include "Calculator.h"
 #include "BossMonster.h"
@@ -130,6 +130,7 @@ void MonsterManager::HuntComplete(Monster* _monster)
 	int gold = _DropManager->DropGold();
 	cout << _monster->GetName() << "이(가) " << gold << "gold를 드랍했습니다" << endl;
 	Character::GetInstance()->AddGold(gold);
+	Logger::GetInstance().AddGold(gold);
 
 	// monster Recording
 	Logger::GetInstance().RecordMonsterDefeated(_monster->GetName());
