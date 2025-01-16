@@ -38,7 +38,7 @@ public:
         SlotType = ARM;
         ID = ID_ARM_MITHRIL_GUARD;
         Name = "미스릴 팔목보호대";
-        Price = 600;
+        Price = 1500;
         StaticStat.AttackMult = 0.25f;
         Description = "기본 공격력의 " + to_string(StaticStat.AttackMult) + "% 얻는다.";
     }
@@ -52,9 +52,9 @@ public:
         SlotType = ARM;
         ID = ID_ARM_DRAGON_GUARD;
         Name = "드래곤 팔목보호대";
-        Price = 1500;
-        StaticStat.AttackMult = 0.25f;
-        EveryTurnStat.GoldMod = 20;
+        Price = 3500;
+        StaticStat.AttackMult = 0.30f;
+        EveryTurnStat.GoldMod = 500;
         Description = "기본 공격력의 " + to_string(StaticStat.AttackMult) + "% 얻는다. 매 스테이지 마다 골드" + to_string(EveryTurnStat.GoldMod) + " 얻는다.";
     }
 };

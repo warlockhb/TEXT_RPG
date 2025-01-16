@@ -37,8 +37,8 @@ public:
         SlotType = BODY;
         ID = ID_BODY_PLATE_ARMOR;
         Name = "플레이트 깁옷";
-        Price = 500;
-        StaticStat.MaxHpMult = 0.15f;
+        Price = 1500;
+        StaticStat.MaxHpMult = 0.22f;
         Description = "기본 최대 체력의 " + to_string(StaticStat.MaxHpMult) + "% 얻는다.";
     }
 };
@@ -51,8 +51,8 @@ public:
         SlotType = BODY;
         ID = ID_BODY_DRAGON_ARMOR;
         Name = "드래곤 갑옷";
-        Price = 1000;
-        StaticStat.MaxHpMult = 0.20f;
+        Price = 4000;
+        StaticStat.MaxHpMult = 0.25f;
         EveryTurnStat.HpMult = 0.02f;
         Description = "기본 최대 체력의 " + to_string(StaticStat.MaxHpMult) + "% 얻는다. 매 스테이지 마다 체력 " + to_string(EveryTurnStat.HpMult) + "% 회복한다.";
     }

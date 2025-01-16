@@ -25,7 +25,7 @@ public:
         ID = ID_FOOT_IRON_BOOTS;
         Name = "철 부츠";
         Price = 150;
-        StaticStat.MaxHpMod = 25;
+        StaticStat.MaxHpMod = 40;
         Description = "최대 체력 " + to_string(StaticStat.MaxHpMod) + " 을 얻는다.";
     }
 };
@@ -38,9 +38,9 @@ public:
         SlotType = FOOT;
         ID = ID_FOOT_SWIFT_BOOTS;
         Name = "신속의 부츠";
-        Price = 300;
+        Price = 1300;
         StaticStat.MaxHpMult = -0.1f;
-        EveryTurnStat.ExpMod = 100;
+        EveryTurnStat.ExpMod = 30;
         Description = "기본 최대 체력을 "+ to_string(StaticStat.MaxHpMod) + "% 잃고, 매 스테이지 마다 " + to_string(EveryTurnStat.ExpMod) + " 을 얻는다.";
     }
 };
@@ -53,7 +53,7 @@ public:
         SlotType = FOOT;
         ID = ID_FOOT_DRAGON_BOOTS;
         Name = "드래곤 부츠";
-        Price = 600;
+        Price = 3000;
         StaticStat.MaxHpMult = 0.2f;
         Description = "기본 최대 체력을 "+ to_string(StaticStat.MaxHpMod) + "% 얻는다.";
     }
