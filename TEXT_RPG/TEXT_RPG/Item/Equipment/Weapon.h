@@ -12,7 +12,7 @@ public:
         Name = "롱소드";
         Price = 300;
         StaticStat.AttackMod = 10;
-        StackStat.AttackMod = 1; 
+        StackStat.AttackMod = 30; 
         Description = "공격력 " + to_string(StaticStat.AttackMod) + " 을 얻는다. 매 스테이지 마다 1 스택을 얻는다. 스택 당 공격력 " + to_string(StackStat.AttackMod) + "을 얻는다.";
     }
 };
@@ -26,8 +26,8 @@ public:
         ID = ID_WEAPON_BATTLE_AXE;
         Name = "전투도끼";
         Price = 300;
-        StaticStat.AttackMod = 70;
-        StackStat.MaxHpMod = -2;
+        StaticStat.AttackMult = 1.0f;
+        StackStat.MaxHpMod = -20;
         Description = "공격력 " + to_string(StaticStat.AttackMod) + "을 얻는다. 매 스테이지 마다 1 스택을 얻는다. 스택 당 최대 체력 " + to_string(StackStat.MaxHpMod ) + "을 잃는다.";
     }
 };
@@ -42,7 +42,7 @@ public:
         Name = "장궁";
         Price = 300;
         StaticStat.AttackMult = 0.2f;
-        EveryTurnStat.AttackMult = 0.05f;
+        EveryTurnStat.AttackMult = 0.1f;
         Description = "공격력 " + to_string(StaticStat.AttackMult) + "을 얻는다. 매 스테이지 마다 기본 공격력의 " + to_string(StackStat.MaxHpMod ) + "만큼 영구히 증가한다.";
     }
 };
