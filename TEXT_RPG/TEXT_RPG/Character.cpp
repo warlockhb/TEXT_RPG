@@ -172,8 +172,8 @@ void Character::DisPlayStatus()
 	cout << "=============================" << endl;
 	cout << "이름 : " << Name << endl;
 	cout << "레벨 : " << Level << endl;
-	cout << "체력 : " << Health << "/" << MaxHealth << endl;
-	cout << "공격력 : " << Attack << endl;
+	cout << "체력 : " << CurrentHealth << "/" << CurrentMaxHealth << endl;
+	cout << "공격력 : " << CurrentAttack << endl;
 	cout << "현재 경험치 : " << Exp << endl;
 	cout << "다음 레벨까지의 경험치 : " << MaxExp - Exp << endl;
 	cout << "보유 골드 : " << Gold << endl;
@@ -242,8 +242,8 @@ void Character::LevelUp()
 
 	{
 		this->Level++;
-		int temp = GetCurrentHealth() - GetMaxHealth();
-		int temp2 = GetCurrentAttack() - GetAttack();
+		int temp = CurrentMaxHealth - MaxHealth;
+		int temp2 = CurrentAttack - Attack;
 		this->MaxHealth += Level * 20;
 		this->Health = MaxHealth;
 		this->Attack += Level * 5;
