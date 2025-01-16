@@ -2,7 +2,6 @@
 #include "Logger.h"
 #include "BattleManager.h"
 #include "Character.h"
-#include "Village.h"
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -37,7 +36,6 @@ bool GameManager::ShowMenu()
 	int choice;
 	
 	cin >> choice;
-	Village village;
 	switch (choice)
 	{
 	case 1:
