@@ -12,7 +12,7 @@ Character::Character(string New_name)
 {
 	this->Name = New_name;
 	this->Level = 1;
-	this->MaxHealth = 100;
+	this->MaxHealth = 200;
 	this->Health = MaxHealth;
 	this->Attack = 30;
 	this->Exp = 0;
