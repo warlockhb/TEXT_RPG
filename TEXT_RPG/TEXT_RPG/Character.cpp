@@ -178,6 +178,11 @@ void Character::DisPlayStatus()
 	cout << "다음 레벨까지의 경험치 : " << MaxExp - Exp << endl;
 	cout << "보유 골드 : " << Gold << endl;
 	cout << "=============================" << endl;
+
+	if (GetInventory() != nullptr)
+	{
+		GetInventory()->DisplayInventory();
+	}
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	cout << "계속 하려면 엔터를 누르세요......." << endl;
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
