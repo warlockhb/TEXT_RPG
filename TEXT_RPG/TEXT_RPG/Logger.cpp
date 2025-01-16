@@ -1,5 +1,6 @@
 ﻿// src/Logger.cpp
 #include "Logger.h"
+#include <limits>
 #include <iostream>
 
 // GetInstance 메서드 구현
@@ -38,6 +39,9 @@ void Logger::ShowLogs() const {
     for (const auto& Entry : Logs) {
         std::cout << Entry << std::endl;
     }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "계속 하려면 엔터를 누르세요.....";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 // ShowSummary 메서드 구현
@@ -71,5 +75,9 @@ void Logger::ShowSummary() const {
     }
 
     // 총 골드 획득
+    std::string temp;
     std::cout << "총 골드 획득: " << TotalGoldAcquired << "골드" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "계속 하려면 엔터를 누르세요.....";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

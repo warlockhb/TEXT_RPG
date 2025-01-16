@@ -47,4 +47,9 @@ public:
 
     //TODO: 디스플레이 함수 구현 해야함.
     void DisplayItemStat(int Slot);
+
+    //사이즈 반환 함수 추가
+    
+    int GetEquipmentEmptySize();
+    int GetMaxEquipmentSlotSize();
 };

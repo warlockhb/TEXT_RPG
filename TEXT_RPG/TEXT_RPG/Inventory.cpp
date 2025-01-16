@@ -49,7 +49,7 @@ void Inventory::AddItem(PassiveItem* item)
         }
     }
 
-    if (ItemsInventory.size() >= Max_Inventory_size)
+    if (count(ItemsInventory.begin(), ItemsInventory.end(), nullptr) > 0)   
     {
         cout << "아이템 보관함이 가득차서, 아이템을 담을 수 없습니다." << endl;
     }
@@ -107,14 +107,11 @@ void Inventory::DisplayItemStat(int index)
 
 void Inventory::ExpandItemInventory()
 {
-    static int ExpandCount = 0;
-    const int MaxExpandCount = 2;
-
-    if (ExpandCount >= MaxExpandCount)
+    if (GetExpandCount() >= GetMaxExpandCount())
     {
         cout << "인벤토리 크기 최대 확장되어 더이상 확장 불가." << endl;
     }
-    switch (ExpandCount)
+    switch (GetExpandCount())
     {
     case 0:
         ItemsInventory.resize(ItemsInventory.size() + 3);
@@ -147,6 +144,18 @@ int Inventory::GetMaxItemInventorySize()
 {
     return ItemsInventory.size();
 }
+
+int Inventory::GetExpandCount()
+{
+    return ExpandCount;
+}
+
+int Inventory::GetMaxExpandCount()
+{
+    return MaxExpandCount;
+}
+
+
 
 
 
