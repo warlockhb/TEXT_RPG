@@ -308,12 +308,12 @@ void Shop::BuyLogic(Character& character, const std::map<int, Equipment*>& map_i
 			//골드 충분한 경우
 			if(character.GetEquipmentSlot()->GetEquipmentEmptySize() == 0)
 			{ //인벤토리 자리 없는 경우
-				cout << "인벤토리가 꽉 찼습니다." << endl;
+				cout << "장비 슬롯이 꽉 찼습니다." << endl;
 				return;
 			}
 			else
 			{// 인벤토리 내 자리가 있고 gold도 충분한 경우
-				cout <<"{"<< selectedItem->GetName() << "} 아이템을 구매했습니다.(가격: " << selectedItem->GetPrice() << "G)" << endl;
+				cout <<"{"<< selectedItem->GetName() << "} 장비를 구매했습니다.(가격: " << selectedItem->GetPrice() << "G)" << endl;
 				character.LoseGold(item_price);
 				character.GetEquipmentSlot()->AddItem(selectedItem);
 			
