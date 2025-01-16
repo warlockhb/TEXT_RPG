@@ -1,4 +1,5 @@
 ﻿#include "Character.h"
+#include "EquipmentSlot.h"
 #include "Shop.h"
 #include "./Item/PassiveItem/Potion.h"
 #include "./Item/Equipment/Equipment.h"
@@ -302,17 +303,22 @@ void Shop::BuyLogic(Character& character, const std::map<int, Equipment*>& map_i
 			return;
 		}
 		//이 부분 Equipment의 size 반환하는 함수 필요
-		/*else{//골드 충분한 경우
-			if(character.->//GetItemInventoryEmptySize() == 0){ //인벤토리 자리 없는 경우
+		else
+		{
+			//골드 충분한 경우
+			if(character.GetEquipmentSlot()->GetEquipmentEmptySize() == 0)
+			{ //인벤토리 자리 없는 경우
 				cout << "인벤토리가 꽉 찼습니다." << endl;
 				return;
 			}
-			else {// 인벤토리 내 자리가 있고 gold도 충분한 경우
+			else
+			{// 인벤토리 내 자리가 있고 gold도 충분한 경우
 				cout <<"{"<< selectedItem->GetName() << "} 아이템을 구매했습니다.(가격: " << selectedItem->GetPrice() << "G)" << endl;
 				character.LoseGold(item_price);
-				character.GetInventory()->AddItem(selectedItem);
+				character.GetEquipmentSlot()->AddItem(selectedItem);
 			
-			}*/
+			}
+		}
 	}
 }
 
