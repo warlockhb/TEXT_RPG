@@ -22,5 +22,5 @@ protected:
 public:
     Equipment() = default;
     
-    int GetSlotType() const { return static_cast<int>(SlotType); }
+    EEquipmentSlotType GetSlotType() const { return SlotType; }
 };
