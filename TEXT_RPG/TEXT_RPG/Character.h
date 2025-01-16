@@ -85,5 +85,15 @@ public:
 	void AddGold(int plusgold);
 	//골드 감소
 	void LoseGold(int minusgold);
+	//인벤토리 확인 함수
+	void DisPlayInventory();
+	//장비함 확인 함수
+	void DisPlayEquipmentSlot();
+	//장비 교체
+	void ChangeEquipment();
+	//장비 해제
+	void UnEquipment();
+	//장비 착용
+	void Equipment();
 };
 
