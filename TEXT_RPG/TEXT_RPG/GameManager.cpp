@@ -29,10 +29,11 @@ bool GameManager::ShowMenu()
 {
 	::cout << "\n----- 메인 메뉴 -----" << endl;
 	::cout << "1. 전투 시작" << endl;
-	::cout << "2. 캐릭터 상태 확인" << endl;
-	::cout << "3. 게임 로그 보기" << endl;
-	::cout << "4. 게임 요약 보기" << endl;
-	::cout << "5. 종료" << endl;
+	::cout << "2. 마을방문" << endl;
+	::cout << "3. 캐릭터 상태 확인" << endl;
+	::cout << "4. 게임 로그 보기" << endl;
+	::cout << "5. 게임 요약 보기" << endl;
+	::cout << "6. 종료" << endl;
 	::cout << "선택: ";
 	int choice;
 	
@@ -59,19 +60,23 @@ bool GameManager::ShowMenu()
 			break;
 		}
 	case 2:
+		village.ShowChoice(*MyCharacter);
 		MyCharacter->DisPlayStatus();
 		break;
 	case 3:
+		MyCharacter->DisPlayStatus();
+	case 4:
 		Logger::GetInstance().ShowLogs();
 		break;
-	case 4:
-		Logger::GetInstance().ShowSummary();
-		break;
 	case 5:
-		cout << "게임을 종료합니다." << endl;
 		Logger::GetInstance().ShowSummary();
-		return false;
 		break;
-	}
+	
+	case 6:
+		cout << "게임을 종료합니다." << endl;
+	Logger::GetInstance().ShowSummary();
+	return false;
+	break;
+}
 	return true;
 }
