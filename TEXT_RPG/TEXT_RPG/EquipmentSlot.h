@@ -29,12 +29,12 @@ public:
 
 
     // 보관함 슬롯 함수
-    // void DisplayStorage();
+    void DisplayStorage();
     void AddItem(Equipment* Item);
     void RemoveItem(int StorageSlot);
 
     // 착용 슬롯 함수
-    // void DisplayApply();
+    void DisplayApply();
     void Equip(int StorageSlot);
     void Unequip(int ApplySlot);
     void ChangeItem(int ApplySlot, int StorageSlot);
@@ -49,7 +49,16 @@ public:
     void DisplayItemStat(int Slot);
 
     //사이즈 반환 함수 추가
-    
+
+    //장비 보관함의 빈칸 확인
     int GetEquipmentEmptySize();
     int GetMaxEquipmentSlotSize();
+
+    //착용 장비 보관함의 빈칸 확인
+    int GetEquipmentApplySlotEmptySize();
+
+    //해당 보관함의 빈칸 확인
+    bool CheckStorageSlot(int Slot);
+    //해당 착용 슬롯의 빈칸 확인
+    bool CheckApplySlot(int Slot);
 };

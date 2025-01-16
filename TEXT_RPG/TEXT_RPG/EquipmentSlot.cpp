@@ -3,6 +3,58 @@
 #include <iostream>
 
 
+void EquipmentSlot::DisplayStorage()
+{
+    cout << "==== 장비 보관함 슬롯 ====" << endl;
+
+    if (StorageSlots.empty())
+    {
+        cout << "Storage is empty" << endl;
+        return;
+    }
+
+    for (size_t i = 0; i < StorageSlots.size(); i++)
+    {
+        Equipment* equipment = StorageSlots[i];
+        if (equipment != nullptr)
+        {
+            cout << i + 1 << ". " << equipment->GetName() << endl;
+        }
+        else
+        {
+            cout << i + 1 << ". Empty Slot" << endl;
+        }
+    }
+
+    cout << "====================" << endl;
+}
+
+void EquipmentSlot::DisplayApply()
+{
+    cout << "==== 장비 착용 슬롯 ====" << endl;
+
+    if (ApplySlots.empty())
+    {
+        cout << "ApplySlots is empty" << endl;
+        return;
+    }
+
+    for (size_t i = 0; i < ApplySlots.size(); i++)
+    {
+        Equipment* equipment = ApplySlots[i];
+        if (equipment != nullptr)
+        {
+            cout << i + 1 << ". " << equipment->GetName() << endl;
+        }
+        else
+        {
+            cout << i + 1 << ". Empty Slot" << endl;
+        }
+    }
+
+    cout << "====================" << endl;
+}
+
 void EquipmentSlot::AddItem(Equipment* Item)
 {
     // 아이템 인지 확인
@@ -45,7 +97,6 @@ void EquipmentSlot::Equip(int StorageSlot)
 
     // 아이템의 슬롯 타입 가지고 오기
     int SlotType = StorageSlots[StorageSlot]->GetSlotType();
-    if (SlotType < 0 || SlotType >= 4) return;
 
     // 슬롯 타입으로 장착 슬롯 접근
     // 이미 존재한다면?
@@ -159,5 +210,38 @@ int EquipmentSlot::GetEquipmentEmptySize()
 int EquipmentSlot::GetMaxEquipmentSlotSize()
 {
     return StorageSlots.size();
+}
+
+int EquipmentSlot::GetEquipmentApplySlotEmptySize()
+{
+    int index = 0;
+    for (int i = 0; i < ApplySlots.size(); i++)
+    {
+        if (ApplySlots[i] == nullptr)
+        {
+            index++;
+        }
+    }
+    return index;
+}
+
+bool EquipmentSlot::CheckStorageSlot(int Slot)
+{
+    bool check = false;
+    if (StorageSlots[Slot] != nullptr)
+    {
+        check = true;
+    }
+    return check;
+}
+
+bool EquipmentSlot::CheckApplySlot(int Slot)
+{
+    bool check = false;
+    if (ApplySlots[Slot] != nullptr)
+    {
+        check = true;
+    }
+    return check;
 }
 
