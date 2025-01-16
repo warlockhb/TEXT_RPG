@@ -8,6 +8,8 @@
 #include "./Item/PassiveItem/PassiveItem.h"
 #include "Inventory.h"
 #include "EquipmentSlot.h"
+#include <cmath>
+
 
 MonsterManager::MonsterManager()
 	: _Monster(nullptr)
@@ -52,8 +54,17 @@ Monster* MonsterManager::CreateNormalMonster()
 		monsterName = "Zombie";
 
 	// Create NormalMonster
-	int hp = Character::GetInstance()->GetLevel() * 30;
-	int power = Character::GetInstance()->GetLevel() * 10;
+	std::uniform_int_distribution<> dist1(20 , 30); 
+	int randomHp = dist1(gen);
+
+	std::uniform_int_distribution<> dist2(5 , 10); 
+	int randomAtk = dist2(gen);
+
+	int playerLv = Character::GetInstance()->GetLevel();
+	int ratio = pow(playerLv , 1.2);
+
+	int hp = randomNum * ratio;
+	int power = randomAtk * ratio;
 
 	_Monster = new NormalMonster(monsterName, hp , power);
 	cout << monsterName << " 등장!!" << endl;
@@ -68,8 +79,8 @@ Monster* MonsterManager::CreateBossMonster()
 
 	// Create BosslMonster.
 	string monsterName = "Boss Monster";
-	int hp = 10 * 500;
-	int power = 10 *20;
+	int hp = 10 * 300;
+	int power = 10 *10;
 
 	_Monster = new BossMonster(monsterName, hp , power);
 	cout << monsterName << " 등장!!" << endl;
@@ -140,6 +151,5 @@ void MonsterManager::HuntFailed(Monster* _monster)
 {
 	// 사냥 실패
 	cout << _monster->GetName() << " 사냥에 실패하였습니다.."<< endl;
-
 }
 
