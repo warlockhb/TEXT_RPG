@@ -178,6 +178,9 @@ void Character::DisPlayStatus()
 	cout << "다음 레벨까지의 경험치 : " << MaxExp - Exp << endl;
 	cout << "보유 골드 : " << Gold << endl;
 	cout << "=============================" << endl;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cout << "계속 하려면 엔터를 누르세요......." << endl;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
 void Character::TakeDamage(int damage)
@@ -227,17 +230,9 @@ void Character::PlayerDie()
 
 void Character::GainExp(int plusexp)
 {
-	if (Level < 10)
+	if (Level <= 10)
 	{
-		if (Exp < MaxExp)
-		{
-			Exp += plusexp;
-		}
-		else
-		{
-			LevelUp();
-			Exp += plusexp;
-		}
+		Exp += plusexp;
 	}
 }
 
@@ -252,7 +247,8 @@ void Character::LevelUp()
 		this->MaxHealth += Level * 20;
 		this->Health = MaxHealth;
 		this->Attack += Level * 5;
-		this->Exp = 0;
+		int temp3 = Exp - MaxExp;
+		this->Exp = temp3;
 		this->CurrentMaxHealth = MaxHealth + temp;
 		this->CurrentHealth = CurrentMaxHealth;
 		this->CurrentAttack = Attack + temp2;
@@ -261,6 +257,10 @@ void Character::LevelUp()
 	if (Level >= 10)
 	{
 		cout << "최대 레벨!" << endl;
+		if(Exp >= MaxExp)
+		{
+			Exp = MaxExp;
+		}
 	}
 }
 
