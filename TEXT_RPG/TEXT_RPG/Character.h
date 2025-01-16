@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-// #include "Inventory.h"
 using namespace std;
 
 class Inventory;
@@ -40,32 +39,31 @@ public:
 
 	Inventory* GetInventory();
 	EquipmentSlot* GetEquipmentSlot();
-
-	//아이템사용&추가&제거
-	//void UseItem(int index);
 	
 	//Get
-	string GetName() const;
-	int GetLevel() const;
-	int GetHealth() const;
-	int GetMaxHealth() const;
-	int GetAttack() const;
-	int GetExp() const;
-	int GetGold() const;
-	int GetCurrentHealth() const;
-	int GetCurrentMaxHealth() const;
-	int GetCurrentAttack() const;
+	//캐릭터의 Base 스텟과 CurrentHealth의 차이점
+	//캐릭터가 버프를 받을때 변해야되는 수치때문에 currentHealth를 사용해주시는게 좋습니다.
+	string GetName() const; //캐릭터 이름
+	int GetLevel() const; //캐릭터 레벨
+	int GetHealth() const; //캐릭터 Base 체력
+	int GetMaxHealth() const; //캐릭터 Base 최대체력
+	int GetAttack() const; //캐릭터 Base 공격력
+	int GetExp() const; //캐릭터 경험치
+	int GetGold() const; //캐릭터 골드
+	int GetCurrentHealth() const; //캐릭터의 현재 체력 -> 이 함수를 사용하시는게 좋습니다.
+	int GetCurrentMaxHealth() const; //캐릭터의 현재 최대 체력
+	int GetCurrentAttack() const; //캐릭터의 현재 공격력
 	
 	//Set
-	void SetHealth(int health);
-	void SetMaxHealth(int maxhealth);
-	void SetAttack(int attack);
-	void SetExp(int exp);
-	void SetMaxExp(int maxexp);
-	void SetGold(int gold);
-	void SetCurrentHealth(int health);
-	void SetCurrentMaxHealth(int maxhealth);
-	void SetCurrentAttack(int atk);
+	void SetHealth(int health); //캐릭터의 Base체력
+	void SetMaxHealth(int maxhealth); //캐릭터의 Base 최대 체력
+	void SetAttack(int attack); // 캐릭터의 Base 공격력
+	void SetExp(int exp); // 캐릭터의 경험치
+	void SetMaxExp(int maxexp); // 캐릭터의 최대 경험치 (딱히 건들일 일은 없는거 같습니다.)
+	void SetGold(int gold); // 캐릭터의 골드
+	void SetCurrentHealth(int health); // 캐릭터의 현재 체력
+	void SetCurrentMaxHealth(int maxhealth); // 캐릭터의 현재 최대 체력
+	void SetCurrentAttack(int atk); // 캐릭터의 현재 공격력
 
 
 	//기능구현
