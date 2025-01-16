@@ -1,4 +1,4 @@
-#include "MonsterManager.h"
+﻿#include "MonsterManager.h"
 #include "Logger.h"
 #include "Calculator.h"
 #include "BossMonster.h"
@@ -52,7 +52,7 @@ Monster* MonsterManager::CreateNormalMonster()
 		monsterName = "Zombie";
 
 	// Create NormalMonster
-	int hp = Character::GetInstance()->GetLevel() * 100;
+	int hp = Character::GetInstance()->GetLevel() * 30;
 	int power = Character::GetInstance()->GetLevel() * 10;
 
 	_Monster = new NormalMonster(monsterName, hp , power);

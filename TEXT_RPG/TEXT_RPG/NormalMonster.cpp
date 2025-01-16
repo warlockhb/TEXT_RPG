@@ -1,4 +1,4 @@
-#include "NormalMonster.h"
+﻿#include "NormalMonster.h"
 
 NormalMonster::NormalMonster(string _name, int _hp, int _power)
 	:Monster(_name, _hp, _power)
