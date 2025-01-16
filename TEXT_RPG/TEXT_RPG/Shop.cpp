@@ -1,9 +1,15 @@
 ﻿#include "Character.h"
+#include "EquipmentSlot.h"
 #include "Shop.h"
 #include "./Item/PassiveItem/Potion.h"
 #include "./Item/Equipment/Equipment.h"
 #include "./Item/PassiveItem/Amulet.h"
 #include "./Item/PassiveItem/PassiveItem.h"
+#include "./Item/Equipment/Armor.h"
+#include "./Item/Equipment/Boots.h"
+#include "./Item/Equipment/Guard.h"
+#include "./Item/Equipment/Head.h"
+#include "./Item/Equipment/Weapon.h"
 
 #include <iostream>
 
@@ -21,6 +27,32 @@ Shop::Shop()
 	amulets[ID_AMULET_OF_WISDOM] = new AmuletOfWisdom();
 	amulets[ID_AMULET_OF_VITALITY] = new AmuletOfVitality();
 	amulets[ID_AMULET_OF_FORTUNE] = new AmuletOfFortune();
+
+
+	armors[ID_BODY_LEATHER_ARMOR] = new BodyLeatherCap();
+	armors[ID_BODY_CHAIN_ARMOR] = new BodyChainArmor();
+	armors[ID_BODY_PLATE_ARMOR] = new BodyPlateArmor();
+	armors[ID_BODY_DRAGON_ARMOR] = new BodyDragonArmor();
+
+	boots[ID_FOOT_LEATHER_BOOTS] = new FootLeatherBoots();
+	boots[ID_FOOT_IRON_BOOTS] = new FootIronBoots();
+	boots[ID_FOOT_SWIFT_BOOTS] = new FootSwiftBoots();
+	boots[ID_FOOT_DRAGON_BOOTS] = new FootDragonBoots();
+
+	guards[ID_ARM_LEATHER_GUARD] = new ArmLeatherGuard();
+	guards[ID_ARM_IRON_GUARD] = new ArmIronGuard();
+	guards[ID_ARM_MITHRIL_GUARD] = new ArmMithrilGuard();
+	guards[ID_ARM_DRAGON_GUARD] = new ArmDragonGuard();
+
+	heads[ID_HEAD_LEATHER_HELMLET] = new HeadLeatherCap();
+	heads[ID_HEAD_IRON_HELMLET] = new HeadIronHelmet();
+	heads[ID_HEAD_KNIGHT_HELMLET] = new HeadKnightHelmet();
+	heads[ID_HEAD_DRAGON_HELMLET] = new HeadDragonHelmet();
+	
+	weapons[ID_WEAPON_LONG_SWORD] = new WeaponLongSword();
+	weapons[ID_WEAPON_BATTLE_AXE] = new WeaponBattleAxe();
+	weapons[ID_WEAPON_LONG_BOW] = new WeaponLongBow();
+	weapons[ID_WEAPON_MAGIC_STAFF] = new WeaponMagicStaff();
 }
 
 void Shop::EnterShop(Character& character) {
@@ -73,9 +105,18 @@ void Shop::BuyItem(Character& character)
 		int choice;
 		cout << endl;
 		cout << "---<< 구매 가능한 상품 >>---" << endl;
-		cout << " 1. 포션" << endl;
-		cout << " 2. 부적" << endl;
-		cout << " 3. 돌아가기" << endl;
+		cout << endl;
+		cout << " *[ 패시브 ]*" << endl;
+		cout << " 1. 포션          2. 부적"<< endl;
+		cout << endl;
+		cout << " *[ 장비 ]*" << endl;
+		cout << " 3. 갑옷          4. 부츠" << endl;
+		cout << " 5. 방어구        6. 투구" << endl;
+		cout << " 7. 무기" << endl;
+		cout << endl;
+		cout << " *[ 기타 ]*" << endl;
+		cout << " 8. 인벤토리 확장" << endl;
+		cout << " 9. 돌아가기" << endl;
 		cout << "--------------------------" << endl;
 		cout << "번호를 입력하세요: ";
 
@@ -99,12 +140,36 @@ void Shop::BuyItem(Character& character)
 			BuyLogic(character, amulets);
 			break;
 		case 3:
+			BuyLogic(character, armors);
+			break;
+		case 4:
+			BuyLogic(character, armors);
+			break;
+		case 5:
+			BuyLogic(character, armors);
+			break;
+		case 6:
+			BuyLogic(character, armors);
+			break;
+		case 7:
+			BuyLogic(character, armors);
+			break;
+		case 8:
+			BuyExpandInventory(character);
+			return;
+		case 9:
 			cout << "상점 메인으로 돌아갑니다. " << endl;
 			return;
+		default:
+			cout << "1부터 8까지의 숫자만 입력해주세요" << endl;
+			break;
 		}
+		
 	}
 
 }
+
+//PassiveItem - ShowItems
 void Shop::ShowItems(const std::map<int, PassiveItem*>& map_item)
 {
 	cout << endl;
@@ -123,6 +188,7 @@ void Shop::ShowItems(const std::map<int, PassiveItem*>& map_item)
 
 }
 
+//PassiveItem - BuyLogic
 void Shop::BuyLogic(Character& character, const std::map<int, PassiveItem*>& map_item) {
 	int selectedID;
 	while (true)
@@ -175,6 +241,87 @@ void Shop::BuyLogic(Character& character, const std::map<int, PassiveItem*>& map
 		}
 	}
 }
+
+//Equipment - ShowItems
+void Shop::ShowItems(const std::map<int, Equipment*>& map_item)
+{
+	cout << endl;
+	cout << "--<<  구매 가능한 상품 목록  >>--" << endl;
+	for (auto& item : map_item)
+	{//출력예시 : - 100. 소형 포션 : 체력을 회복시켜준다 (30G)
+		cout <<" - " <<item.first << ". "
+			 << item.second->GetName() << ": "
+			 <<item.second->GetDescription() << " ("
+			 <<item.second->GetPrice() << "G)" << endl;
+	}
+	cout << " - 0. 돌아가기" << endl;
+	cout << "------------------------------" << endl;
+	cout << endl;
+	
+
+}
+
+
+
+//Equipment - BuyLogic
+void Shop::BuyLogic(Character& character, const std::map<int, Equipment*>& map_item) {
+	int selectedID;
+	while (true)
+	{
+		ShowItems(map_item);
+		cout << "상품번호를 입력하세요: ";
+		cin >> selectedID;
+
+		//choice 예외 처리
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "잘못된 입력입니다. 숫자를 입력하세요." << endl;
+			continue;
+		}
+		
+		if (selectedID == 0)
+		{
+			//0. 돌아가기 입력된 경우
+			return;
+		}
+		if (map_item.find(selectedID) == map_item.end())
+		{
+			cout << "잘못 입력하셨습니다. 상품번호만 입력하세요." << endl;
+			continue;
+		}
+		
+		//아이템 아이디 올바르게 입력된 경우
+		Equipment* selectedItem = map_item.at(selectedID);
+		//item_price : 선택한 아이템 가격
+		int item_price = selectedItem->GetPrice();
+		
+		if (character.GetGold() < item_price) //골드가 부족한 경우
+		{
+			cout << "골드가 부족합니다." << endl;
+			return;
+		}
+		//이 부분 Equipment의 size 반환하는 함수 필요
+		else
+		{
+			//골드 충분한 경우
+			if(character.GetEquipmentSlot()->GetEquipmentEmptySize() == 0)
+			{ //인벤토리 자리 없는 경우
+				cout << "장비 슬롯이 꽉 찼습니다." << endl;
+				return;
+			}
+			else
+			{// 인벤토리 내 자리가 있고 gold도 충분한 경우
+				cout <<"{"<< selectedItem->GetName() << "} 장비를 구매했습니다.(가격: " << selectedItem->GetPrice() << "G)" << endl;
+				character.LoseGold(item_price);
+				character.GetEquipmentSlot()->AddItem(selectedItem);
+			
+			}
+		}
+	}
+}
+
 
 
 void Shop::SellItem(Character& character)
@@ -234,6 +381,60 @@ void Shop::SellItem(Character& character)
 		
 		
 	}
+}
+
+void Shop::BuyExpandInventory(Character& character)
+{
+	Inventory* inventory = character.GetInventory();
+	string choice = "";
+	const int EXPAND_COST = 1000;
+	int before_buying_expand = 0;
+	int after_buying_expand = 0;
+	while(true){ 
+		cout << endl;
+		cout << " ---- << 인벤토리 슬롯 확장 아이템 >> ----" << endl;
+		cout << "-  인벤토리 슬롯 추가(최대 2번 구매 가능) -" << endl;
+		cout << "-  가 격 : 1000G                         -" << endl;
+		cout << "------------------------------------------" << endl;
+		cout << "구매하시겠습니까?(y/n): ";
+		cin >> choice;
+
+		if (choice == "y"){
+			if (character.GetGold() < EXPAND_COST) {
+				//골드가 부족한 경우 -> 이전 화면으로
+				cout << "골드가 부족하여 구매할 수 없습니다." << endl;
+				return;
+			}
+			else {
+				//골드가 충분한 경우 구매
+				before_buying_expand = inventory->GetMaxItemInventorySize();
+				inventory->ExpandItemInventory();
+				after_buying_expand = inventory->GetMaxItemInventorySize();
+				if (before_buying_expand != after_buying_expand)
+				{//인벤토리 확장 아이템 구매 전과 구매 후 인벤토리 크기가 차이난다면 골드 차감
+					cout << "인벤토리 확장 아이템을 성공적으로 구매하셨습니다" << endl;
+					character.LoseGold(EXPAND_COST);
+				}
+				else
+				{
+					cout << "더이상 인벤토리를 확장할 수 없습니다."<<endl;
+					cout << "이전 화면으로 돌아갑니다."<<endl;
+				}
+				return;
+			}
+		}
+		else if (choice == "n"){
+			//구매X 선택한 경우 -> 이전 화면으로
+			cout << "구매를 거부했습니다. 이전 화면으로 돌아갑니다." << endl;
+			return;
+		}
+		else{
+			//값을 잘못 입력한 경우 BuyExpandInventory() 재호출
+			cout << "y 또는 n만 입력해주세요." << endl;
+		}
+	
+	}
+	
 }
 
 Shop::~Shop()

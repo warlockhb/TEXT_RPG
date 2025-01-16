@@ -141,5 +141,23 @@ void EquipmentSlot::DisplayItemStat(int Slot)
 {
 }
 
+//추가
+int EquipmentSlot::GetEquipmentEmptySize()
+{
+    int index = 0;
+    for (int i = 0; i < StorageSlots.size(); i++)
+    {
+        if (StorageSlots[i] == nullptr)
+        {
+            index++;
+        }
+    }
+    return index;
+}
 
+
+int EquipmentSlot::GetMaxEquipmentSlotSize()
+{
+    return StorageSlots.size();
+}
 
