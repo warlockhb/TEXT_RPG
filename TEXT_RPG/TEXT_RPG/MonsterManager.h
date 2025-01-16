@@ -1,7 +1,8 @@
-﻿#pragma once
+#pragma once
 #include "Monster.h"
 #include "DropManager.h"
 
+using namespace std;
 
 class MonsterManager
 {
