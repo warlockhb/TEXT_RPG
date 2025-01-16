@@ -71,14 +71,9 @@ void Inventory::RemoveItem(PassiveItem* item)
 void Inventory::RemoveItem(int index)
 {
     // 검사
-    if (index < 0 || index >= ItemsInventory.size()) return;
+    if (ItemsInventory[index] == nullptr) return;
     
-    // 벡터에서 제거
-    auto it = ItemsInventory.begin() + index;
-    if (it != ItemsInventory.end())
-    {
-        ItemsInventory.erase(it);
-    }
+    ItemsInventory[index] = nullptr;
     ApplyStats.Apply(ItemsInventory);
 }
 
