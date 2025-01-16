@@ -45,7 +45,7 @@ bool GameManager::ShowMenu()
 			battleManager->StartBattle();
 			if (battleManager->GetBattleState() == 2)
 			{
-				int getexp = std::rand() % 41 + 30;
+				int getexp = rand() % 31 + 20;
 				MyCharacter->GainExp(getexp);
 				MyCharacter->LevelUp();
 				village.ShowChoice(*MyCharacter);
