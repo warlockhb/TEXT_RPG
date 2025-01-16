@@ -7,10 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5776393-79d0-4eda-aeec-612b5d6108f9" name="변경" comment="조선욱 : 업데이트">
+    <list default="true" id="a5776393-79d0-4eda-aeec-612b5d6108f9" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TEXT_RPG/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TEXT_RPG/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TEXT_RPG/GameManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TEXT_RPG/GameManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TEXT_RPG/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TEXT_RPG/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +34,7 @@
     </excluded-from-favorite>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$/.." value="GameManager" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -70,6 +68,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/include/memory" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Team/TEXT_RPG/TEXT_RPG/Logger.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Team/TEXT_RPG/TEXT_RPG/Logger.h" root0="FORCE_HIGHLIGHTING" />
+
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProjectColorInfo">{
