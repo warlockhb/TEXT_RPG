@@ -81,6 +81,7 @@ void EquipmentSlot::Unequip(int ApplySlot)
             if (StorageSlots[i] == nullptr)
             {
                 StorageSlots[i] = Item;
+                ApplySlots[ApplySlot] = nullptr;
                 SlotStats.Apply(ApplySlots);
                 return;
             }
