@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Character.h"
 #include "BattleManager.h"
+#include "Village.h"
 class GameManager
 {
 public:
@@ -10,5 +11,6 @@ public:
 private:
 	Character* MyCharacter = nullptr;
 	BattleManager* battleManager = new BattleManager();
+	Village village;
 };
 
