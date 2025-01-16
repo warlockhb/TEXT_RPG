@@ -43,10 +43,19 @@ bool GameManager::ShowMenu()
 	case 1:
 		{
 			battleManager->StartBattle();
-			int getexp = std::rand() % 41 + 30;
-			MyCharacter->GainExp(getexp);
-			MyCharacter->LevelUp();
-			village.ShowChoice(*MyCharacter);
+			if (battleManager->GetBattleState() == 2)
+			{
+				int getexp = std::rand() % 41 + 30;
+				MyCharacter->GainExp(getexp);
+				MyCharacter->LevelUp();
+				village.ShowChoice(*MyCharacter);
+			}
+			else if (battleManager->GetBattleState() == 3)
+			{
+				Logger::GetInstance().ShowSummary();
+				return false;
+			}
+			
 			break;
 		}
 	case 2:
