@@ -31,10 +31,10 @@ void EquipmentSlot::AddItem(Equipment* Item)
 void EquipmentSlot::RemoveItem(int StorageSlot)
 {
     // 검사
-    if (StorageSlot < 0 || StorageSlot >= StorageSlots.size()) return;
-
-    // 벡터에서 제거
-    StorageSlots.erase(StorageSlots.begin() + StorageSlot);
+    if (StorageSlots[StorageSlot] == nullptr) return;
+    
+    StorageSlots[StorageSlot] = nullptr;
+    
     SlotStats.Apply(ApplySlots);
 }
 
