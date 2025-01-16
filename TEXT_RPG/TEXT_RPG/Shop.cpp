@@ -233,9 +233,10 @@ void Shop::BuyLogic(Character& character, const std::map<int, PassiveItem*>& map
 				return;
 			}
 			else {// 인벤토리 내 자리가 있고 gold도 충분한 경우
-			cout <<"{"<< selectedItem->GetName() << "} 아이템을 구매했습니다.(가격: " << selectedItem->GetPrice() << "G)" << endl;
-			character.LoseGold(item_price);
-			character.GetInventory()->AddItem(selectedItem);
+				cout <<"{"<< selectedItem->GetName() << "} 아이템을 구매했습니다.(가격: " << selectedItem->GetPrice() << "G)" << endl;
+				character.LoseGold(item_price);
+				PassiveItem* newItem = new PassiveItem(*selectedItem);
+				character.GetInventory()->AddItem(selectedItem);
 			
 			}
 		}
