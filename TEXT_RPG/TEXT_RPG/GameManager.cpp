@@ -4,7 +4,10 @@
 #include "Character.h"
 #include <cstdlib>
 #include <ctime>
+#include "EquipmentSlot.h"
 #include <iostream>
+
+#include "Inventory.h"
 using namespace std;
 
 
@@ -26,13 +29,15 @@ void GameManager::GenerateCharacter()
 
 bool GameManager::ShowMenu()
 {
-	::cout << "\n----- 메인 메뉴 -----" << endl;
-	::cout << "1. 전투 시작" << endl;
-	::cout << "2. 캐릭터 상태 확인" << endl;
-	::cout << "3. 게임 로그 보기" << endl;
-	::cout << "4. 게임 요약 보기" << endl;
-	::cout << "5. 종료" << endl;
-	::cout << "선택: ";
+	cout << "\n----- 메인 메뉴 -----" << endl;
+	cout << "1. 전투 시작" << endl;
+	cout << "2. 캐릭터 상태 확인" << endl;
+	cout << "3. 인벤토리 확인" << endl;
+	cout << "4. 장비 확인" << endl;
+	cout << "5. 게임 로그 보기" << endl;
+	cout << "6. 게임 요약 보기" << endl;
+	cout << "7. 종료" << endl;
+	cout << "선택: ";
 	int choice;
 	
 	cin >> choice;
@@ -60,12 +65,18 @@ bool GameManager::ShowMenu()
 		MyCharacter->DisPlayStatus();
 		break;
 	case 3:
-		Logger::GetInstance().ShowLogs();
+		MyCharacter->GetInventory()->DisplayInventory();
 		break;
 	case 4:
-		Logger::GetInstance().ShowSummary();
+		MyCharacter->DisPlayEquipmentSlot();
 		break;
 	case 5:
+		Logger::GetInstance().ShowLogs();
+		break;
+	case 6:
+		Logger::GetInstance().ShowSummary();
+		break;
+	case 7:
 		cout << "게임을 종료합니다." << endl;
 		Logger::GetInstance().ShowSummary();
 		return false;
